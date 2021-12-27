@@ -1,0 +1,5 @@
+ INFO 2021-12-26 16:28:40 (WebSaleTypeRequestVOMapStructRun.java:18) - Account already register in blacklist {}WebSaleTypeDTO(id=2, name=Test)
+ INFO 2021-12-26 17:36:35 (WebSaleTypeRequestVOMapStructRun.java:19) - Account already register in blacklist {}WebSaleTypeDTO(id=2, name=Test)
+ INFO 2021-12-26 17:45:15 (WebSaleTypeRequestVOMapStructRun.java:19) - Account already register in blacklist {}WebSaleTypeDTO(super=CommonDTO(createOn=ondate, CreateBy=0, updateOn=null, updateBy=0), id=2, name=Test)
+ INFO 2021-12-26 17:46:20 (WebSaleTypeRequestVOMapStructRun.java:22) - Account already register in blacklist {}WebSaleTypeDTO(super=CommonDTO(createOn=ondate, CreateBy=0, updateOn=update, updateBy=1), id=2, name=Test)
+ INFO 2021-12-26 17:58:49 (WebSaleTypeRequestVOMapStructRun.java:19) - Account already register in blacklist {}WebSaleTypeDTO(super=CommonDTO(dateTime=26-12-2021 05:58:49, userId=1), id=2, name=Test)
