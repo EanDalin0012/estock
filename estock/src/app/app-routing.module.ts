@@ -16,7 +16,7 @@ const routes: Routes = [
     path: '', component: ELayoutComponent,
     children: [
       {
-        path: 'home',
+        path: '',
         loadChildren: () => import('./e-home/e-home.module').then(m => m.EHomeModule)
       }
     ]
@@ -43,11 +43,11 @@ const routes: Routes = [
   // { path: 'error500', component: Error500Component },
   // { path: 'error403', component: Error403Component },
   // { path: '**', component: Error404Component },
-  // {
-  //   path: '',
-  //   redirectTo: '/login',
-  //   pathMatch: 'full'
-  // }
+  {
+    path: '',
+    redirectTo: '/home/product-sale-type',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

@@ -1,1 +1,118 @@
-<p>product-sale-type works!</p>
+<!-- Page Content -->
+<div class="content container-fluid">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="page-title">{{'movieType.label.lstSubMovieType' | translate}}</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:">{{'common.label.setting' | translate}}</a></li>
+                <li class="breadcrumb-item active">{{'movieType.label.lstSubMovieType' | translate}}</li>
+            </ul>
+        </div>
+    </div>
+  </div>
+<!-- /Page Header -->
+
+    <!-- Search Filter -->
+    <div class="row filter-row">
+      <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" style="padding: 0;">
+        <button (click)="addMovieType()" class="btn btn-sm btn-primary float-left" type="button">
+          <i class="fa fa-plus-circle"></i>
+          {{'movieType.label.addSubMovieType' | translate}}
+        </button>
+      </div>
+
+      <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" style="padding: 0;">
+        <button (click)="addMovieType()" class="btn btn-sm btn-primary float-left" type="button">
+          <i class="fa fa-plus-circle"></i>
+          {{'movieType.label.addSubMovieType' | translate}}
+        </button>
+      </div>
+
+      <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12" style="padding: 0;">
+        <button (click)="addMovieType()" class="btn btn-sm btn-primary float-left" type="button">
+          <i class="fa fa-plus-circle"></i>
+          {{'movieType.label.addSubMovieType' | translate}}
+        </button>
+      </div>
+
+      <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+        <div class="form-group form-focus select-focus">
+            <select class="select form-control" (input)="searchProduct($event)">
+                <option value=""> -- Select -- </option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Software Tester">Software Tester</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="UI/UX Developer">UI/UX Developer</option>
+                <option value="Web Developer">Web Developer</option>
+                <option value="Team Leader">Team Leader</option>
+                <option value="Android Developer">Android Developer</option>
+
+                <option *ngFor="let item of products" [value]="item">{{item?.productName}}</option>
+            </select>
+            <label class="focus-label">Product</label>
+        </div>
+    </div>
+
+      <div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">
+        <div class="form-group form-focus">
+            <input type="text" class="form-control floating">
+            <label class="focus-label">Employee Name</label>
+        </div>
+      </div>
+
+    </div>
+<div class="row">
+  <!-- <div class="row col-md-12">
+    <div>
+      <button (click)="addMovieType()" class="btn btn-sm btn-primary float-left" type="button">
+        <i class="fa fa-plus-circle"></i>
+        {{'movieType.label.addSubMovieType' | translate}}
+      </button>
+      <button (click)="getSelectedRowData('edit')"  [disabled] = "disabled" class="btn btn-sm btn-primary float-left left-12" type="button">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        {{'common.button.edit' | translate}}
+      </button>
+      <button (click)="getSelectedRowData('delete')"  [disabled] = "disabled" class="btn btn-sm btn-primary float-left left-12" type="button">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+        {{'common.button.delete' | translate}}
+      </button>
+
+      <div style="width: 300px;" class="float-right">
+        <input type="text" class="form-control form-control-sm" (input)="searchChange($event)" placeholder="{{'common.label.searchNameThere' | translate}} ...">
+    </div>
+      <label class="col-form-label float-right" style="width: 80px;">{{'common.label.search' | translate}} :</label>
+
+    </div>
+
+  </div> -->
+
+
+  <div class="row col-md-12">
+    <ag-grid-angular
+    #agGrid
+    style="width: 100%; height: 500px;"
+    id="myGrid"
+    class="ag-theme-alpine"
+    [modules]="modules"
+    [columnDefs]="columnDefs"
+    [frameworkComponents]="frameworkComponents"
+    [defaultColDef]="defaultColDef"
+    [rowData]="rowData"
+    [rowSelection]="rowSelection"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+    [isRowSelectable]="isRowSelectable"
+    [pagination]="pagination"
+    [paginationPageSize]="paginationPageSize"
+    ></ag-grid-angular>
+  </div>
+
+</div>
+
+
+<!-- Add Modal -->
+
+</div>

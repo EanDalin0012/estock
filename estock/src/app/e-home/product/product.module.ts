@@ -1,3 +1,4 @@
+import { EProductRoutingModule } from './e-product-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditProductComponent } from './edit-product/edit-product.component';
@@ -11,7 +12,12 @@ import { CreateProductComponent } from './create-product/create-product.componen
     CreateProductComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    EProductRoutingModule
   ]
 })
-export class ProductModule { }
+export class ProductModule {
+  constructor() {
+    console.log('ProductModule');
+  }
+}
