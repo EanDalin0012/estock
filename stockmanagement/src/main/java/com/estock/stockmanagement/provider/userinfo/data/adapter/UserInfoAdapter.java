@@ -23,5 +23,7 @@ public class UserInfoAdapter {
 	private String phoneNumber;
 	private int resourceId;
 	private int roleId;
-	private int identifyInfoSesourceId;
+	private int identifyInfoId;
+	private String address;
+	private String othePhoneNumber;
 }

@@ -19,7 +19,6 @@ public class UserInfoAuthorityAdapter {
 	private boolean accountLocked;
 	private boolean credentialsExpired;
 	private boolean enabled;
-	private String password;
 	private String userName;
 	private String gender;
 	private String fullName;
