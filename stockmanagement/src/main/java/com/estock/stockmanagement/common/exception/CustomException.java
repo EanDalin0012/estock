@@ -13,6 +13,10 @@ public class CustomException extends Throwable{
         this.key = key;
         this.value = value;
     }
+    
+    public CustomException(String key) {
+        this.key = key;
+    }
 
     public CustomException(String key, Throwable throwable) {
         super(throwable);
