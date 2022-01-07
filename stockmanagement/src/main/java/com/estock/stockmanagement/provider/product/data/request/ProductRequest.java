@@ -1,6 +1,4 @@
-package com.estock.stockmanagement.provider.product.request;
-
-import com.estock.stockmanagement.provider.product.data.adapter.ProductAdapter;
+package com.estock.stockmanagement.provider.product.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

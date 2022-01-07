@@ -1,4 +1,4 @@
-package com.estock.stockmanagement.common.vo.response;
+package com.estock.stockmanagement.common.adapter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ResponseVO<T> {
+public class ResponseAdapter<T> {
 	private String code;
 	private String message;
 	private T data;

@@ -9,10 +9,8 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper=true)
-public class ProductAdapter extends CommonAdapter {
+@ToString
+public class UpdateStatusProductAdapter extends CommonAdapter {
 	private int id;
-	private String productName;
-	private int resourceId;
-	private String desc;
+	private String status;
 }
