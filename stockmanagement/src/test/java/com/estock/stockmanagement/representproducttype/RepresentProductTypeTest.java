@@ -13,7 +13,6 @@ import com.estock.stockmanagement.provider.representproducttype.data.request.Rep
 import com.estock.stockmanagement.provider.representproducttype.service.RepresentProductTypeService;
 import com.estock.stockmanagement.util.EUtil;
 
-
 @SpringBootTest
 public class RepresentProductTypeTest {
 	static Logger log = Logger.getLogger(RepresentProductTypeTest.class.getName());
