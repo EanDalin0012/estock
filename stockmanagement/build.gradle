@@ -60,6 +60,7 @@ dependencies {
 	implementation group: 'javax.xml', name: 'jaxb-impl', version: '2.1'
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.0'
 	
 	//annotationProcessor
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -67,9 +68,11 @@ dependencies {
 	annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
 	
 	// logging
-	implementation group: 'org.slf4j', name: 'slf4j-api'
-	implementation group: 'org.slf4j', name: 'jcl-over-slf4j'
-	testImplementation group: 'org.slf4j', name: 'slf4j-log4j12'
+	implementation 'org.apache.logging.log4j:log4j-api:2.16.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.16.0'
+    
+	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+	implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.30'
 	implementation group: 'log4j', name: 'log4j', version: '1.2.17'
 	
 	// INJECT

@@ -17,7 +17,7 @@
         <result property="name" column="authority_name"/>
     </resultMap>
     
-    <resultMap type="UserInfoAdapter" id="userAuthorities">
+    <resultMap type="UserInfoAdapter" id="userInfoAdapter">
         <id property="id" column="id"/>
         <result property="userName" column="user_name"/>
         <result property="accountExpired" column="account_expired"/>
@@ -32,7 +32,7 @@
         <result property="resourceId" column="resource_id"/>
     </resultMap>
     
-    <select id="loadUserAuthority" resultMap="loadUserByUserId">
+    <select id="loadUserAuthority" resultMap="userAuthorities">
         <![CDATA[
 			SELECT
 				 u.id
@@ -51,7 +51,7 @@
 	   ]]>
     </select>
     
-    <select id="loadUserByUserId" resultMap="loadUserByUserId">
+    <select id="loadUserByUserId" resultMap="userInfoAdapter">
         <![CDATA[
 			SELECT
 				 u.id
