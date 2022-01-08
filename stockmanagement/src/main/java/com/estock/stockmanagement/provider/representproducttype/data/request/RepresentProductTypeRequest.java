@@ -12,8 +12,7 @@ import lombok.ToString;
 public class RepresentProductTypeRequest {
 	private int productId;
 	private String saleTypeName; // Price, Silver, VIP Silver, Premuim
-	private double unitPrice;
-	private double totalPrice;
 	private int qty;
+	private double unitPrice;
 	//	Note: totalPirce = unitPrice*qty
 }

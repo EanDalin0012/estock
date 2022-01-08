@@ -48,7 +48,7 @@ public class SystemDateUtil {
 
         System.out.println(date);
         System.out.println(SystemDateUtil.getCurrentUtcTime());
-        System.out.println("getLocalDate :"+SystemDateUtil.getLocalDate("dd-MM-yyyy hh:mm:ss"));
+        System.out.println("getLocalDate :"+SystemDateUtil.getLocalDate("ddMMyyyyhhmmsss"));
 
     }
 }
