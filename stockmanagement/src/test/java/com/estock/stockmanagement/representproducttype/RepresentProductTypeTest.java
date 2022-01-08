@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.estock.stockmanagement.common.exception.CustomException;
 import com.estock.stockmanagement.common.util.GenerateRandomKeyUtil;
+import com.estock.stockmanagement.provider.representproducttype.data.adapter.RepresentProductTypeAdapter;
 import com.estock.stockmanagement.provider.representproducttype.data.request.RepresentProductTypeRequest;
 import com.estock.stockmanagement.provider.representproducttype.service.RepresentProductTypeService;
+import com.estock.stockmanagement.util.EUtil;
+
 
 @SpringBootTest
 public class RepresentProductTypeTest {
@@ -60,5 +63,28 @@ public class RepresentProductTypeTest {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Test
+	void inquiryById() {
+		try {
+			RepresentProductTypeAdapter adapter = this.representProductTypeService.inquiryById(1);
+			log.info(key +"=== Test() RepresentProductTypeAdapter Data :" +EUtil.toJSON(adapter));
+		}catch (Exception e) {
+			e.printStackTrace();
+		} catch (CustomException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void inquiryAll() {
+		try {
+			List<RepresentProductTypeAdapter> adapters = this.representProductTypeService.inquiryAll();
+			log.info(key +"List Of RepresentProductTypeAdapter Data :" +EUtil.toJSON(adapters));
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

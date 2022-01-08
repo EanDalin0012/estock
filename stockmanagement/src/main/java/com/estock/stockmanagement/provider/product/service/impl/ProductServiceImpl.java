@@ -3,7 +3,6 @@ package com.estock.stockmanagement.provider.product.service.impl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.estock.stockmanagement.common.constants.StatusCode;
 import com.estock.stockmanagement.common.exception.CustomException;
 import com.estock.stockmanagement.dao.product.ProductDAO;
@@ -25,12 +24,12 @@ public class ProductServiceImpl implements ProductService {
 	public int addNewProduct(ProductRequest productRequest) throws CustomException {
 		
 		if(productRequest.getName() == null || productRequest.getName() == "") {
-			throw new CustomException(ProductErrorCode.INVALID_PRODUCT_NAME.name(), "");
+			throw new CustomException(ProductErrorCode.INVALID_PRODUCT_NAME.name(), ProductErrorCode.INVALID_PRODUCT_NAME.getTextValue());
 		}
 		
 		ProductAdapter data = this.productDAO.inquiryProductByName(productRequest.getName());
 		if(data != null) {
-			throw new CustomException(ProductErrorCode.PRODUCT_NAME_EXETED.name(), "Product Name Exited");
+			throw new CustomException(ProductErrorCode.PRODUCT_NAME_EXETED.name(), ProductErrorCode.PRODUCT_NAME_EXETED.getTextValue());
 		}
 		
 		ProductAdapter productAdapter = ProductMapper.INSTANCE.productAdapter(productRequest);
@@ -47,11 +46,11 @@ public class ProductServiceImpl implements ProductService {
 	public int updateProduct(UpdateProductRequest updateProductRequest) throws CustomException {
 		
 		if(updateProductRequest.getId() <= 0) {
-			throw new CustomException(ProductErrorCode.INVALID_PRODUCT_ID.name(), "Invalid Product ID");
+			throw new CustomException(ProductErrorCode.INVALID_PRODUCT_ID.name(), ProductErrorCode.INVALID_PRODUCT_ID.getTextValue());
 		}
 		
 		if (updateProductRequest.getName() == null || updateProductRequest.getName() == "") {
-			throw new CustomException(ProductErrorCode.INVALID_PRODUCT_NAME.name(), "Invalid Product ID");
+			throw new CustomException(ProductErrorCode.INVALID_PRODUCT_NAME.name(), ProductErrorCode.INVALID_PRODUCT_NAME.getTextValue());
 		}
 		
 		ProductAdapter productAdapter = ProductMapper.INSTANCE.convertUpdateProduct(updateProductRequest);
@@ -64,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 	public int deleteProduct(int productId) throws CustomException {
 		try {
 			if(productId <= 0) {
-				throw new CustomException(ProductErrorCode.INVALID_PRODUCT_ID.name(), "Invalid Product Id");
+				throw new CustomException(ProductErrorCode.INVALID_PRODUCT_ID.name(), ProductErrorCode.INVALID_PRODUCT_ID.getTextValue());
 			}
 			
 			UpdateStatusProductAdapter statusProductAdapter = new UpdateStatusProductAdapter();
@@ -94,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductAdapter inquiryProductById(int productId) throws CustomException {
 		try {
 			if (productId <= 0) {
-				throw new CustomException(ProductErrorCode.INVALID_PRODUCT_ID.name(), "Invalid Product ID");
+				throw new CustomException(ProductErrorCode.INVALID_PRODUCT_ID.name(), ProductErrorCode.INVALID_PRODUCT_ID.getTextValue());
 			}
 			ProductAdapter productAdapter = this.inquiryProductById(productId);
 			return productAdapter;

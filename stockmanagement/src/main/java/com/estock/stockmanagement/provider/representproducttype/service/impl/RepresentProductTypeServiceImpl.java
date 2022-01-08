@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
+
+import com.estock.stockmanagement.common.constants.StatusCode;
 import com.estock.stockmanagement.common.exception.CustomException;
 import com.estock.stockmanagement.common.util.GenerateRandomKeyUtil;
 import com.estock.stockmanagement.dao.representtypeproduct.RepresentTypeProductDAO;
@@ -52,7 +54,7 @@ public class RepresentProductTypeServiceImpl implements RepresentProductTypeServ
 					adapter.setId(this.count());
 					adapter.setTotalPrice(totalPrice);
 					adapter.setUserId(userId);
-					
+					adapter.setStutas(StatusCode.INSERT.name());
 					log.info(key +"=== RepresentProductTypeAdapter Data :"+adapter.toString());
 					
 					save = this.representTypeProductDAO.addNewRepresentTypeProduct(adapter);
@@ -72,6 +74,33 @@ public class RepresentProductTypeServiceImpl implements RepresentProductTypeServ
 	
 	private int count() {
 		return this.representTypeProductDAO.countRepresentTypeProduct() + 1;
+	}
+
+	@Override
+	public RepresentProductTypeAdapter inquiryById(int id) throws CustomException {
+		try {
+			if(id <= 0) {
+				throw new CustomException(RepresentProductTypeErrorCode.INVALID_REPRESENT_PRODUCT_T_ID.name(), RepresentProductTypeErrorCode.INVALID_REPRESENT_PRODUCT_T_ID.getTextValue());
+			}
+			RepresentProductTypeAdapter adapter = this.representTypeProductDAO.inquiryById(id, StatusCode.DELETE.name());
+			return adapter;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public List<RepresentProductTypeAdapter> inquiryAll() {
+		try {
+			List<RepresentProductTypeAdapter> datas = this.representTypeProductDAO.inquiryAll(StatusCode.DELETE.name());
+			return datas;
+		}catch (Exception e) {
+			e.printStackTrace();
+			log.error(e);
+		}
+		return null;
 	}
 
 }

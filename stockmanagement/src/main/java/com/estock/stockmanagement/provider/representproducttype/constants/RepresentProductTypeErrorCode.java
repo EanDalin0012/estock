@@ -1,7 +1,7 @@
 package com.estock.stockmanagement.provider.representproducttype.constants;
 
 public enum RepresentProductTypeErrorCode {
-	
+	INVALID_REPRESENT_PRODUCT_T_ID("Invalid represent product type Id."),
 	INVALID_PRODUCT_ID("Invalid Product Id."),
 	INVALID_QTY("Quantity need over than zero."),
 	INVALID_UNIT_PRICE("Unit price need over than zero."),
