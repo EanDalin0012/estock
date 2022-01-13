@@ -1,4 +1,4 @@
-package com.estock.stockmanagement.provider.importstock.service.impl;
+package com.estock.stockmanagement.provider.importtostock.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +8,15 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import com.estock.stockmanagement.common.exception.CustomException;
 import com.estock.stockmanagement.dao.importstock.ImportStockDAO;
-import com.estock.stockmanagement.provider.importstock.constants.ImportStockErrorCode;
-import com.estock.stockmanagement.provider.importstock.data.adpter.ImportStockAdapter;
-import com.estock.stockmanagement.provider.importstock.data.request.ImportStockRequest;
-import com.estock.stockmanagement.provider.importstock.service.ImportStockService;
+import com.estock.stockmanagement.provider.importtostock.constants.ImportToStockErrorCode;
+import com.estock.stockmanagement.provider.importtostock.data.adpter.ImportToStockAdapter;
+import com.estock.stockmanagement.provider.importtostock.data.request.ImportToStockRequest;
+import com.estock.stockmanagement.provider.importtostock.service.ImportToStockService;
 import com.estock.stockmanagement.provider.representproducttype.data.adapter.RepresentProductTypeAdapter;
 import com.estock.stockmanagement.provider.representproducttype.service.RepresentProductTypeService;
 
 @Service
-public class ImportStockServiceImpl implements ImportStockService {
+public class ImportToStockServiceImpl implements ImportToStockService {
 
 	@Autowired
 	private RepresentProductTypeService representProductTypeService;
@@ -26,14 +26,14 @@ public class ImportStockServiceImpl implements ImportStockService {
 	private PlatformTransactionManager manager;
 	
 	@Override
-	public int addNewStock(List<ImportStockRequest> importStockRequests, int userId) throws CustomException {
+	public int addNewStock(List<ImportToStockRequest> importStockRequests, int userId) throws CustomException {
 		int save = 0;
 		TransactionStatus status = manager.getTransaction(new DefaultTransactionDefinition());
 		try {
-			for (ImportStockRequest importStockRequest : importStockRequests) {
+			for (ImportToStockRequest importStockRequest : importStockRequests) {
 				
 				if(importStockRequest.getRepresentProductTypeId() <= 0) {
-					throw new CustomException(ImportStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.name(), ImportStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.getTextValue());
+					throw new CustomException(ImportToStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.name(), ImportToStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.getTextValue());
 				}
 				
 				RepresentProductTypeAdapter representProductTypeAdapter= representProductTypeService.inquiryById(importStockRequest.getRepresentProductTypeId());
@@ -44,7 +44,7 @@ public class ImportStockServiceImpl implements ImportStockService {
 					double totalPrice = representProductTypeAdapter.getUnitPrice() * importStockRequest.getQty();
 					int totalQty = representProductTypeAdapter.getQty() + importStockRequest.getQty();
 					
-					ImportStockAdapter adapter = new ImportStockAdapter();
+					ImportToStockAdapter adapter = new ImportToStockAdapter();
 					adapter.setDesc(importStockRequest.getDesc());
 					adapter.setId(this.count());
 					adapter.setTotalPrice(representProductTypeTotalPrice + totalPrice);
@@ -56,7 +56,7 @@ public class ImportStockServiceImpl implements ImportStockService {
 					manager.commit(status);
 					return save;
 				} else {
-					throw new CustomException(ImportStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.name(), ImportStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.getTextValue());
+					throw new CustomException(ImportToStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.name(), ImportToStockErrorCode.INVALID_REPRESENT_PRODUCT_TYPE_ID.getTextValue());
 				}
 				
 				

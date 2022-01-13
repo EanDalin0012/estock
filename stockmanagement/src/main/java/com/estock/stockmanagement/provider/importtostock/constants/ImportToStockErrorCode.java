@@ -1,11 +1,11 @@
-package com.estock.stockmanagement.provider.importstock.constants;
+package com.estock.stockmanagement.provider.importtostock.constants;
 
-public enum ImportStockErrorCode {
+public enum ImportToStockErrorCode {
 	INVALID_REPRESENT_PRODUCT_TYPE_ID("Invalid represent product type id.");
 	
 	private String textValue;
 
-	private ImportStockErrorCode(String textValue) {
+	private ImportToStockErrorCode(String textValue) {
 		this.textValue = textValue;
 	}
 

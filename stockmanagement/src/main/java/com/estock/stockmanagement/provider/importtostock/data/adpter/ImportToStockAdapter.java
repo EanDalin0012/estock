@@ -1,4 +1,4 @@
-package com.estock.stockmanagement.provider.importstock.data.adpter;
+package com.estock.stockmanagement.provider.importtostock.data.adpter;
 
 import com.estock.stockmanagement.common.adapter.CommonAdapter;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class ImportStockAdapter extends CommonAdapter {
+public class ImportToStockAdapter extends CommonAdapter {
 	private int id;
 	private int representProductTypeId;
 	private int qty;

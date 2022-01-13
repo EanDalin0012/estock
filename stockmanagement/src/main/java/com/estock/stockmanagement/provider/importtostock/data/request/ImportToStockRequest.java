@@ -1,4 +1,4 @@
-package com.estock.stockmanagement.provider.importstock.data.request;
+package com.estock.stockmanagement.provider.importtostock.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ImportStockRequest {
+public class ImportToStockRequest {
 	private int representProductTypeId;
 	private int qty;
 	private String desc;
