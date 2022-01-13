@@ -16,6 +16,7 @@ public class ImportStockAdapter extends CommonAdapter {
 	private int id;
 	private int representProductTypeId;
 	private int qty;
+	private int totalQty;
 	private double totalPrice;
 	private String desc;
 }

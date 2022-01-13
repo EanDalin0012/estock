@@ -42,6 +42,7 @@ public class ImportStockServiceImpl implements ImportStockService {
 					
 					double representProductTypeTotalPrice = representProductTypeAdapter.getTotalPrice();
 					double totalPrice = representProductTypeAdapter.getUnitPrice() * importStockRequest.getQty();
+					int totalQty = representProductTypeAdapter.getQty() + importStockRequest.getQty();
 					
 					ImportStockAdapter adapter = new ImportStockAdapter();
 					adapter.setDesc(importStockRequest.getDesc());
@@ -49,6 +50,7 @@ public class ImportStockServiceImpl implements ImportStockService {
 					adapter.setTotalPrice(representProductTypeTotalPrice + totalPrice);
 					adapter.setRepresentProductTypeId(importStockRequest.getRepresentProductTypeId());
 					adapter.setUserId(userId);
+					adapter.setTotalQty(totalQty);
 					
 					save = importStockDAO.addNewStock(adapter);
 					manager.commit(status);

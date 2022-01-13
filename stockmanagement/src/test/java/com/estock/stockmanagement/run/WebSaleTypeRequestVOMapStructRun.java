@@ -1,8 +1,5 @@
 package com.estock.stockmanagement.run;
 
-import com.estock.stockmanagement.dto.web.WebSaleTypeDTO;
-import com.estock.stockmanagement.mapstruct.web.WebSaleTypeRequestVOMapStruct;
-//import com.estock.stockmanagement.vo.request.web.WebSaleTypeRequestVO;
 import org.apache.log4j.Logger;
 
 public class WebSaleTypeRequestVOMapStructRun {
