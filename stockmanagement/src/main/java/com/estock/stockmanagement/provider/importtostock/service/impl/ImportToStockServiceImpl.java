@@ -7,7 +7,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 import com.estock.stockmanagement.common.exception.CustomException;
-import com.estock.stockmanagement.dao.importstock.ImportStockDAO;
+import com.estock.stockmanagement.dao.importtostock.ImportToStockDAO;
 import com.estock.stockmanagement.provider.importtostock.constants.ImportToStockErrorCode;
 import com.estock.stockmanagement.provider.importtostock.data.adpter.ImportToStockAdapter;
 import com.estock.stockmanagement.provider.importtostock.data.request.ImportToStockRequest;
@@ -21,7 +21,7 @@ public class ImportToStockServiceImpl implements ImportToStockService {
 	@Autowired
 	private RepresentProductTypeService representProductTypeService;
 	@Autowired
-	private ImportStockDAO importStockDAO;
+	private ImportToStockDAO importStockDAO;
 	@Autowired
 	private PlatformTransactionManager manager;
 	
