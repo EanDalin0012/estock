@@ -2,17 +2,17 @@ package com.estock.stockmanagement.util;
 
 import java.io.IOException;
 import java.util.Map;
-
 import com.estock.stockmanagement.common.exception.CustomException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.core.io.Resource;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
+import org.json.XML;
 
 @Slf4j
-public class EUtil {
+public class Utility {
 	public static final ObjectMapper objectMapper = new ObjectMapper();
 	
 	public static String toJSON(Object object) {
@@ -79,4 +79,60 @@ public class EUtil {
 			throw new CustomException(ex.getMessage());
 		}
 	}
+	
+	 public static <T> T xmlToObject(String xml, TypeReference<T> clazz) throws Exception, CustomException {
+	        try {
+	            return readJSON(xmlToJson(xml), clazz);
+	        } catch (Exception ex) {
+	            log.error(ex.getMessage());
+	            throw ex;
+	        }
+	    }
+
+	    public static String objectToXml(Object object) throws Exception {
+	        try {
+	            return jsonToXml(toJSON(object));
+	        } catch (Exception ex) {
+	            log.error(ex.getMessage());
+	            throw ex;
+	        }
+	    }
+	    
+	    public static String xmlToJson(String xml) {
+	        JSONObject xmlJSONObj = XML.toJSONObject(xml);
+	        return xmlJSONObj.toString();
+	    }
+
+	    public static String jsonToXml(String json) {
+	        JSONObject jsonObject = new JSONObject(json);
+	        String xml = XML.toString(jsonObject);
+	        return xml;
+	    }
+	    
+	    
+	    public static void main(String[] args) {
+	    	try {
+	    		if("Successf".equalsIgnoreCase("SUCCESS")) {
+	    			log.info("msg :"+ true);
+	    		}
+	    		
+	    		String xml = "<TRANSACTION>\r\n" + 
+	    				"    <SN>764</SN>\r\n" + 
+	    				"    <SERVICETYPE>DDSO</SERVICETYPE>\r\n" + 
+	    				"    <SERVICESUBTYPE>DIRECTDB/STANDORDER</SERVICESUBTYPE>\r\n" + 
+	    				"    <SUBSERVICE>DIRECTDB/STANDORDER</SUBSERVICE>\r\n" + 
+	    				"    <SERVICENAME>xxx</SERVICENAME>\r\n" + 
+	    				"    <INITIATERWINGID>1000000034</INITIATERWINGID>\r\n" + 
+	    				"    <INITIATEEWINGID>00049019</INITIATEEWINGID>\r\n" + 
+	    				"    <CURRENCY>USD</CURRENCY>\r\n" + 
+	    				"    <AMOUNT>1</AMOUNT>\r\n" + 
+	    				"</TRANSACTION>";
+	    		
+	    		String data = Utility.xmlToJson(xml);
+	    		log.info("msg :"+data);
+	    		
+	    	}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 }

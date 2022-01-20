@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import com.estock.stockmanagement.provider.product.data.adapter.ProductAdapter;
 import com.estock.stockmanagement.provider.product.service.ProductService;
-import com.estock.stockmanagement.util.EUtil;
+import com.estock.stockmanagement.util.Utility;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
@@ -20,7 +20,7 @@ class StockmanagementApplicationTests {
 	void contextLoads() {
 		try {
 			List<ProductAdapter> data = this.productService.inquiryAllProduct();
-			log.info("Inquiry All Product Data :" + EUtil.toJSON(data));	
+			log.info("Inquiry All Product Data :" + Utility.toJSON(data));	
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -31,7 +31,7 @@ class StockmanagementApplicationTests {
 	void contextAddNewProduct() {
 		try {
 			List<ProductAdapter> data = this.productService.inquiryAllProduct();
-			log.info("Inquiry All Product Data :" + EUtil.toJSON(data));	
+			log.info("Inquiry All Product Data :" + Utility.toJSON(data));	
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

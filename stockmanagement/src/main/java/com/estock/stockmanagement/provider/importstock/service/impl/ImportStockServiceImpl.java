@@ -6,20 +6,20 @@ import org.springframework.stereotype.Service;
 import com.estock.stockmanagement.common.constants.ErrorCode;
 import com.estock.stockmanagement.common.constants.StatusCode;
 import com.estock.stockmanagement.common.exception.CustomException;
-import com.estock.stockmanagement.dao.importstock.ImportStockDAO;
+import com.estock.stockmanagement.dao.importtostock.ImportToStockDAO;
 import com.estock.stockmanagement.provider.importstock.constants.ImportStockErrorCode;
 import com.estock.stockmanagement.provider.importstock.data.adapter.ImportStockAdapter;
 import com.estock.stockmanagement.provider.importstock.data.request.ImportStockRequest;
 import com.estock.stockmanagement.provider.importstock.mapper.ImportStockMapper;
 import com.estock.stockmanagement.provider.importstock.service.ImportStockService;
-import com.estock.stockmanagement.util.EUtil;
+import com.estock.stockmanagement.util.Utility;
 
 @Service
 public class ImportStockServiceImpl implements ImportStockService {
 	private static Logger log = Logger.getLogger(ImportStockServiceImpl.class.getName());
 	
 	@Autowired
-	private ImportStockDAO importStockDAO;
+	private ImportToStockDAO importStockDAO;
 	
 	public ImportStockServiceImpl() {
 		
@@ -36,12 +36,12 @@ public class ImportStockServiceImpl implements ImportStockService {
 				throw new CustomException(ErrorCode.INVALID_USER_ID.name(), ErrorCode.INVALID_USER_ID.getTextValue());
 			}
 			
-			log.info("ImportStockRequest Data :"+EUtil.toJSON(request));
+			log.info("ImportStockRequest Data :"+Utility.toJSON(request));
 			ImportStockAdapter adapter = ImportStockMapper.INSTANCE.converter(request);
 			adapter.setId(this.countImportStock());
 			adapter.setUserId(userId);
 			adapter.setStutas(StatusCode.INSERT.name());
-			log.info("ImportStockAdapter Data :"+EUtil.toJSON(adapter));
+			log.info("ImportStockAdapter Data :"+Utility.toJSON(adapter));
 		
 			int save = this.importStockDAO.addNewStockName(adapter);
 			log.info("Save ImportStock Data :"+save);

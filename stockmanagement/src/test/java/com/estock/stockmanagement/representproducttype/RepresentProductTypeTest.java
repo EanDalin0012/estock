@@ -11,7 +11,7 @@ import com.estock.stockmanagement.common.util.GenerateRandomKeyUtil;
 import com.estock.stockmanagement.provider.representproducttype.data.adapter.RepresentProductTypeAdapter;
 import com.estock.stockmanagement.provider.representproducttype.data.request.RepresentProductTypeRequest;
 import com.estock.stockmanagement.provider.representproducttype.service.RepresentProductTypeService;
-import com.estock.stockmanagement.util.EUtil;
+import com.estock.stockmanagement.util.Utility;
 
 @SpringBootTest
 public class RepresentProductTypeTest {
@@ -68,7 +68,7 @@ public class RepresentProductTypeTest {
 	void inquiryById() {
 		try {
 			RepresentProductTypeAdapter adapter = this.representProductTypeService.inquiryById(1);
-			log.info(key +"=== Test() RepresentProductTypeAdapter Data :" +EUtil.toJSON(adapter));
+			log.info(key +"=== Test() RepresentProductTypeAdapter Data :" +Utility.toJSON(adapter));
 		}catch (Exception e) {
 			e.printStackTrace();
 		} catch (CustomException e) {
@@ -81,7 +81,7 @@ public class RepresentProductTypeTest {
 	void inquiryAll() {
 		try {
 			List<RepresentProductTypeAdapter> adapters = this.representProductTypeService.inquiryAll();
-			log.info(key +"List Of RepresentProductTypeAdapter Data :" +EUtil.toJSON(adapters));
+			log.info(key +"List Of RepresentProductTypeAdapter Data :" +Utility.toJSON(adapters));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
