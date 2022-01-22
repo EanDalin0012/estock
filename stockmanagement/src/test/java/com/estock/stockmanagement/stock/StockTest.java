@@ -1,6 +1,6 @@
 package com.estock.stockmanagement.stock;
 
-import com.estock.stockmanagement.common.exception.CustomExceptiondkaflkd;
+import com.estock.stockmanagement.common.exception.CustomException;
 import com.estock.stockmanagement.provider.stock.data.adapter.ProductInStockAdapter;
 import com.estock.stockmanagement.provider.stock.data.request.StockRequest;
 import com.estock.stockmanagement.provider.stock.service.StockService;
@@ -48,6 +48,7 @@ public class StockTest {
 
     @Test
     void inquiryProductInStockByProductID() {
+// hello
         try {
             List<ProductInStockAdapter> list = this.stockService.inquiryProductInStockByProductID(1, 2);
             log.info("inquiryProductInStock Test Data :"+ Utility.toJSON(list));

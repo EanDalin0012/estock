@@ -1,10 +1,8 @@
 package com.estock.stockmanagement.dao.representtypeproduct;
 
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import com.estock.stockmanagement.provider.representproducttype.data.adapter.RepresentProductTypeAdapter;
 
 @Mapper
