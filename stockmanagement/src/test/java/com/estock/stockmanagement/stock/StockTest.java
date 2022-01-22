@@ -35,6 +35,7 @@ public class StockTest {
     }
     @Test
     void inquiryProductInStock() {
+        // fdafajflk
         try {
             List<ProductInStockAdapter> list = this.stockService.inquiryProductInStock(1);
             log.info("inquiryProductInStock Test Data :"+ Utility.toJSON(list));
