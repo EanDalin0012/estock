@@ -63,9 +63,9 @@ public class ProductTest {
 	void contextAddNewProduct() {
 		try {
 			ProductRequest productRequest = new ProductRequest();
-			productRequest.setName("Pichy P-White");
+			productRequest.setName("Pichy P-White a");
 			productRequest.setResourceId(1);
-			productRequest.setDesc("Pichy P-White");
+			productRequest.setDesc("Pichy P-White a");
 			log.info("Add New Product =>" + Utility.toJSON(productRequest));
 			int addNewProduct = this.productService.addNewProduct(productRequest);
 			log.info("add new product :"+addNewProduct);
