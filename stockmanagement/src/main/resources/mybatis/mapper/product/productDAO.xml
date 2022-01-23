@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.estock.stockmanagement.dao.product.ProductDAO">
+
+    <resultMap type="ProductAdapter" id="productAdapters">
+        <id property="id" column="id"/>
+        <result property="productName" column="name"/>
+        <result property="desc" column="desc"/>
+        <result property="stutas" column="status"/>
+        <result property="resourceId" column="resource_id"/>
+    </resultMap>
+    
+    <resultMap type="ProductAdapter" id="productAdapter">
+        <id property="id" column="id"/>
+        <result property="productName" column="name"/>
+        <result property="desc" column="desc"/>
+        <result property="stutas" column="status"/>
+        <result property="resourceId" column="resource_id"/>
+    </resultMap>
+
+    <select id="inquiryAllProduct" resultMap="productAdapters">
+        <![CDATA[
+			SELECT 
+				id
+				, name
+				, "desc"
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+				, resource_id
+			FROM product;
+	   ]]>
+    </select>
+    
+    <select id="inquiryProductById" resultMap="productAdapter">
+        <![CDATA[
+			SELECT 
+				id
+				, name
+				, "desc"
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+				, resource_id
+			FROM product
+			WHERE id = #{id};
+	   ]]>
+    </select>
+    
+    <select id="inquiryProductByName" resultMap="productAdapter">
+        <![CDATA[
+			SELECT 
+				id
+				, name
+				, "desc"
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+				, resource_id
+			FROM product
+			WHERE name = #{productName};
+	   ]]>
+    </select>
+    
+    <select id="countProduct" resultType="java.lang.Integer">
+        <![CDATA[
+			select coalesce(MAX(id), 0) FROM  product;
+	   ]]>
+    </select>
+    
+    <insert id="addNewProduct">
+        <![CDATA[
+           INSERT INTO product
+		   	( id, "name", "desc", create_by, create_date, status, resource_id)
+		   VALUES
+		   	( #{id}, #{productName}, #{desc}, #{userId}, #{dateTime}, #{stutas}, #{resourceId});
+        ]]>
+    </insert>
+    
+    <update id="updateProduct">
+    	 <![CDATA[
+            UPDATE product
+			SET 
+				name= #{productName}
+				, "desc"= #{desc}
+				, modify_by=#{userId}
+				, modify_date=#{dateTime}
+				, status=#{stutas}
+				, resource_id=#{resourceId}
+			WHERE id = #{id};
+        ]]>
+    </update>
+    
+    <update id="deleteProduct">
+    	 <![CDATA[
+            UPDATE product
+			SET
+				status=#{stutas}
+				, modify_by=#{userId}
+				, modify_date=#{dateTime}
+			WHERE id = #{id};
+        ]]>
+    </update>
+
+</mapper>
