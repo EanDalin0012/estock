@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.api.stockmanagement.dao.oauth2.UserDAO">
+
+    <resultMap type="CustomerAdapter" id="customerAdapter">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="status" column="status"/>
+        <result property="gender" column="gender"/>
+        <result property="dateBirth" column="date_birth"/>
+        <result property="phoneNumber" column="phone"/>
+        <result property="email" column="email"/>
+        <result property="resourceID" column="resource_id"/>
+    </resultMap>
+
+    <select id="inquiryUserInfo" resultMap="customerAdapter">
+        <![CDATA[
+        SELECT
+            id
+             , name
+             , "desc"
+             , create_by
+             , create_date
+             , modify_by
+             , modify_date
+             , status
+             , resource_id
+        FROM product;
+        ]]>
+    </select>
+
+    <select id="inquiryUserInfoByUserName" resultMap="customerAdapter">
+        <![CDATA[
+			SELECT 
+				id
+				, name
+				, "desc"
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+				, resource_id
+			FROM product;
+	   ]]>
+    </select>
+    
+    <select id="inquiryUserInfoByID" resultMap="customerAdapter">
+        <![CDATA[
+			SELECT 
+				id
+				, name
+				, "desc"
+				, create_by
+				, create_date
+				, modify_by
+				, modify_date
+				, status
+				, resource_id
+			FROM product
+			WHERE id = #{id};
+	   ]]>
+    </select>
+    
+    <select id="count" resultType="java.lang.Integer">
+        <![CDATA[
+			select coalesce(MAX(id), 0) FROM  user_acc;
+	   ]]>
+    </select>
+    
+    <insert id="addNewUserInfo">
+        <![CDATA[
+        INSERT INTO user_acc
+        (
+         id
+         , account_expired
+         , account_locked
+         , credentials_expired
+         , enabled
+         , "password"
+         , user_name
+         , status
+         , create_date
+         , create_by
+         , modify_date, modify_by, first_name, gender, date_birth, resource_id, is_online, is_first_login, remark, address, identify_info_id, identify_info_resource_id, role_id, phone, last_name)
+        VALUES(0, false, false, false, false, '', '', '', '', 0, '', 0, '', '', '', 0, false, false, '', '', '', 0, 0, '', '');
+
+        ]]>
+    </insert>
+    
+    <update id="updateUserInfo">
+    	 <![CDATA[
+            UPDATE product
+			SET 
+				name= #{productName}
+				, "desc"= #{desc}
+				, modify_by=#{userId}
+				, modify_date=#{dateTime}
+				, status=#{stutas}
+				, resource_id=#{resourceId}
+			WHERE id = #{id};
+        ]]>
+    </update>
+    
+    <update id="deleteUserInfo">
+    	 <![CDATA[
+            UPDATE product
+			SET
+				status=#{stutas}
+				, modify_by=#{userId}
+				, modify_date=#{dateTime}
+			WHERE id = #{id};
+        ]]>
+    </update>
+
+</mapper>

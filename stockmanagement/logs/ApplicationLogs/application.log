@@ -1,0 +1,16 @@
+ INFO 2022-01-23 16:27:06 (CustomerServiceImpl.java:27) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:29:07 (CustomerServiceImpl.java:27) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:29:09 (CustomerServiceImpl.java:35) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:29:08","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":"096","resourceID":0,"desc":"test"}
+ INFO 2022-01-23 16:29:19 (CustomerServiceImpl.java:37) - Save :1
+ INFO 2022-01-23 16:34:00 (CustomerServiceImpl.java:27) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:34:07 (CustomerServiceImpl.java:36) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:34:02","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":"096","resourceID":0,"desc":"test"}
+ INFO 2022-01-23 16:39:03 (CustomerServiceImpl.java:27) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:39:08 (CustomerServiceImpl.java:36) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:39:05","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":null,"resourceID":0,"desc":"test"}
+ INFO 2022-01-23 16:44:12 (CustomerServiceImpl.java:28) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:44:21 (CustomerServiceImpl.java:37) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:44:20","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":null,"resourceID":0,"desc":"test"}
+ INFO 2022-01-23 16:45:13 (CustomerServiceImpl.java:28) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:45:30 (CustomerServiceImpl.java:37) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:45:29","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":null,"resourceID":0,"desc":"test"}
+ INFO 2022-01-23 16:50:08 (CustomerServiceImpl.java:28) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:50:08 (CustomerServiceImpl.java:37) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:50:08","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":null,"resourceID":0,"desc":"test"}
+ INFO 2022-01-23 16:53:11 (CustomerServiceImpl.java:28) - ======= Start Add New Customer ==============
+ INFO 2022-01-23 16:53:14 (CustomerServiceImpl.java:37) - Customer Info :{"userID":0,"dateTime":"23-01-2022 04:53:13","status":"INSERT","id":1,"customerName":"Ean Dalin","customerPhone":null,"resourceID":0,"desc":"test"}
