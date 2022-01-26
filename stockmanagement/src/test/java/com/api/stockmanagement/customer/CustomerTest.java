@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CustomerTest {
     @Autowired
     private CustomerService customerService;
+
     @Test
     void addNewCustomer() {
         try {

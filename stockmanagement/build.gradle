@@ -92,14 +92,20 @@ dependencies {
     testImplementation group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.8.1'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.1'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.1'
+
     // SPRING SECURITY
-    // implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.0'
-    // implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.6.0'
-    // implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.6.0'
+     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.0'
+     implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.6.0'
+     implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.6.0'
 
     // Spring Security Oauth2
-    // implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.5.0.RELEASE'
-    // implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.6.1'
+     implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.5.0.RELEASE'
+     implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.6.1'
+
+    // SPRING FRAMEWORK
+    implementation group: 'org.springframework', name: 'spring-jms', version: '5.3.14'
+    implementation group: 'org.springframework', name: 'spring-messaging', version: '5.3.14'
+    implementation group: 'org.springframework', name: 'spring-oxm', version: '5.3.15'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
