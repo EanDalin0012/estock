@@ -10,6 +10,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class AuthorityAdapter {
-    private Long id;
+    private int id;
     private String name;
 }

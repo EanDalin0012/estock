@@ -1,7 +1,7 @@
 package com.api.stockmanagement.provider.userdetails.service.impl;
 
 import com.api.stockmanagement.common.exception.CustomException;
-import com.api.stockmanagement.dao.userdetails.UserDetailsDAO;
+import com.api.stockmanagement.dao.userdetails.DetailUserDAO;
 import com.api.stockmanagement.provider.userdetails.constant.UserDetailConstant;
 import com.api.stockmanagement.provider.userdetails.data.adapter.AuthorityAdapter;
 import com.api.stockmanagement.provider.userdetails.data.adapter.UserAdapter;
@@ -23,7 +23,8 @@ public class UserDetailServiceImpl implements UserDetailsService, UserDetailServ
     private static Logger log = Logger.getLogger(UserDetailServiceImpl.class.getName());
 
     @Autowired
-    private UserDetailsDAO userDetailsDAO;
+    private DetailUserDAO userDetailsDAO;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
@@ -39,10 +40,17 @@ public class UserDetailServiceImpl implements UserDetailsService, UserDetailServ
                 });
             }
 
-            UserDetails user = new User(userAdapter.getUserName(), userAdapter.getPassword(), userAdapter.isEnabled(), userAdapter.isAccountExpired() , userAdapter.isCredentialsExpired(), userAdapter.isAccountLocked(), grantedAuthorities);
-            return user;
-        }catch (Exception e) {
+            UserDetails userDetails = User.builder()
+                    .username(userAdapter.getUserName())
+                    .password(userAdapter.getPassword())
+                    .authorities(grantedAuthorities)
+                    .build();
+            return userDetails;
 
+//            UserDetails user = new User(userAdapter.getUserName(), userAdapter.getPassword(),true, false , false, false, grantedAuthorities);
+//            return user;
+        }catch (Exception e) {
+            throw e;
         } catch (CustomException e) {
             e.printStackTrace();
         }
@@ -55,7 +63,8 @@ public class UserDetailServiceImpl implements UserDetailsService, UserDetailServ
             if (username.equals("") || username == null) {
                 throw new CustomException(UserDetailConstant.INVALID_USER_NAME.name(), UserDetailConstant.INVALID_USER_NAME.getDesc());
             }
-            UserAdapter userAdapter = this.userDetailsDAO.loadUserByUsername(username);
+            UserAdapter userAdapter = this.userDetailsDAO.inquiryUserByUsername(username);
+
             log.info("UserAdapter :"+ Utility.toJSON(userAdapter));
             if (userAdapter == null) {
                 throw new CustomException(UserDetailConstant.USER_NOT_FOUND.name(), UserDetailConstant.USER_NOT_FOUND.getDesc());

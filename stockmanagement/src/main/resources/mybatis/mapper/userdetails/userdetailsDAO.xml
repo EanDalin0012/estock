@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.api.stockmanagement.dao.userdetails.UserDetailsDAO">
+<mapper namespace="com.api.stockmanagement.dao.userdetails.DetailUserDAO">
 
     <resultMap type="UserAdapter" id="user">
         <id property="id" column="id"/>
@@ -18,7 +18,7 @@
         <result property="name" column="authority_name"/>
     </resultMap>
 
-    <select id="loadUserByUsername" resultMap="user">
+    <select id="inquiryUserByUsername" resultMap="user">
         <![CDATA[
             SELECT
                 us."id"
@@ -30,10 +30,10 @@
                  , us.enabled
                  , au."id"	as "authority_id"
                  , au."name" as "authority_name"
-            FROM "user" us
+            FROM user_ us
                      INNER JOIN users_authorities ua on us."id" = ua.user_id
                      INNER JOIN authority au on au."id" = ua.authority_id
-            WHERE us.user_name = 'admin@gmail.com';
+            WHERE us.user_name = #{userName};
         ]]>
     </select>
 

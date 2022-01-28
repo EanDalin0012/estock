@@ -12,7 +12,6 @@ import com.api.stockmanagement.util.Utility;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -23,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerDAO customerDAO;
 
     @Override
-    public int addNewCustomer(@Valid CustomerRequest customerRequest, int userID) throws CustomException {
+    public int addNewCustomer( CustomerRequest customerRequest, int userID) throws CustomException {
         log.info("======= Start Add New Customer ==============");
         try {
             if (customerRequest.getCustomerName().isEmpty()) {
