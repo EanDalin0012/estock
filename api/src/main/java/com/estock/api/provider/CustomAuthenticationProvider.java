@@ -1,11 +1,9 @@
 package com.estock.api.provider;
 
-import com.estock.api.common.exception.CustomException;
-import com.estock.api.dao.AuthenticationDAO;
 import com.estock.api.dto.AuthorityDTO;
-import com.estock.api.dto.DeviceInfoDTO;
 import com.estock.api.dto.UserDTO;
 import com.estock.api.event.DeviceLoginEvent;
+import com.estock.api.service.AuthenticationService;
 import com.estock.api.util.BCryptPwEncoder;
 import com.estock.api.util.Utility;
 import org.apache.log4j.Logger;
@@ -17,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.exceptions.ClientAuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedClientException;
 import org.springframework.stereotype.Component;
@@ -36,7 +33,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     private ApplicationEventPublisher eventPublisher;
 
     @Autowired
-    private AuthenticationDAO userDAO;
+    private AuthenticationService userDAO;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -62,7 +59,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             }
 
 
-            UserDTO userInfo = this.userDAO.getUserByName(userName);
+            UserDTO userInfo = this.userDAO.authenticate(userName);
             log.info("User Info object: "+ Utility.toJSON(userInfo));
 
             if (userInfo == null) {
