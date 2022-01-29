@@ -1,12 +1,16 @@
 package com.estock.api.provider;
 
+import com.estock.api.common.exception.CustomException;
 import com.estock.api.dao.AuthenticationDAO;
 import com.estock.api.dto.AuthorityDTO;
-import com.estock.api.dto.JsonObj;
+import com.estock.api.dto.DeviceInfoDTO;
 import com.estock.api.dto.UserDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.estock.api.event.DeviceLoginEvent;
+import com.estock.api.util.BCryptPwEncoder;
+import com.estock.api.util.Utility;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +22,7 @@ import org.springframework.security.oauth2.common.exceptions.ClientAuthenticatio
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedClientException;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,24 +32,17 @@ import java.util.Map;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     static Logger log = Logger.getLogger(CustomAuthenticationProvider.class.getName());
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    @Inject
+    private ApplicationEventPublisher eventPublisher;
 
     @Autowired
     private AuthenticationDAO userDAO;
 
-//    final DefaultAuthenticationProviderService userService;
-//
-//    public DefaultAuthenticationProvider(DefaultAuthenticationProviderService userService) {
-//        this.userService = userService;
-//    }
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         log.info("============== Start Authorization ===============");
-        ObjectMapper objectMapper = new ObjectMapper();
 
         try {
-            log.info("============== Authentication Data :"+objectMapper.writeValueAsString(authentication));
 //            String k = this.env.getProperty("security.key");
 //            String encodedBase64Key = Encr8yptionUtil.encodeKey(DemoProperties.secretKey);
 //            String userName         = EncryptionUtil.decrypt(authentication.getName(), encodedBase64Key);
@@ -57,18 +55,15 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             String userName         =authentication.getName();
             String password         = (String) authentication.getCredentials();
             Map<String, String> data = (Map<String, String>) authentication.getDetails();
-            String deviceInfo = data.get("deviceInfo");
-//            String deviceInfoDecrypt = EncryptionUtil.decrypt(deviceInfo, encodedBase64Key).toString();
-//
-//            JsonObject deviceInfoObj = new JsonObject();
+            String deviceInfo =  data.get("deviceInfo");
 
-//            if (deviceInfoDecrypt != null || deviceInfoDecrypt != "") {
-//                deviceInfoObj = objectMapper.readValue(deviceInfoDecrypt, JsonObject.class);
-//            }
-//            input.setJsonObject("deviceInfo", deviceInfoObj);
+            if(deviceInfo != null) {
+                eventPublisher.publishEvent(new DeviceLoginEvent(deviceInfo));
+            }
+
 
             UserDTO userInfo = this.userDAO.getUserByName(userName);
-            log.info("User Info object: "+objectMapper.writeValueAsString(userInfo));
+            log.info("User Info object: "+ Utility.toJSON(userInfo));
 
             if (userInfo == null) {
                 log.info("============== Authorization User Not Found ===============");
@@ -91,10 +86,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 throw new UnauthorizedClientException("userExpired");
             }
 
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String _password = userInfo.getPassword();
 
-            boolean isPasswordMatch = passwordEncoder.matches(password, _password);
+            boolean isPasswordMatch = BCryptPwEncoder.matches(password, _password);
             System.out.println(isPasswordMatch);
             if (!isPasswordMatch) {
                 throw new UnauthorizedClientException("invalidPassword");
@@ -112,15 +107,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             Map<String, Object> credentials = new HashMap<>();
             principal.put("password", userInfo.getPassword());
 
-
-//            JsonObj param = new JsonObj();
-//            param.setString("user_name", authentication.getName());
-//            log.info("Apply keep login success");
-//            JsonObj principal = new JsonObj();
-
-//            JsonObj credentials = new JsonObj();
-//            credentials.setString("password", userInfo.getPassword());
-//            Object principal, Object credentials
             log.info("============== End Authorization ===============>>>>>>>>>>>>\n");
             return new UsernamePasswordAuthenticationToken(
                     principal,
