@@ -1,1 +1,60 @@
-<p>login works!</p>
+<div class="account-content">
+
+    <div class="container">
+  
+        <!-- Account Logo -->
+        <div class="account-logo">
+            <a href="javascript:"><img src="assets/img/logo2.png" alt="Dreamguy's Technologies"></a>
+        </div>
+        <!-- /Account Logo -->
+  
+        <div class="account-box">
+            <div class="account-wrapper">
+                <h3 class="account-title">{{'login.label.login' | translate}}</h3>
+                <p class="account-subtitle">{{'login.label.accessToOurSystem' | translate}}</p>
+  
+                <!-- Account Form -->
+  
+  
+                  <div class="form-row row">
+                    <div class="form-group col-md-12">
+                      <label class="font-khmer-cursive">{{'login.label.userName' | translate}}</label>
+                      <span class="text-danger">*</span>
+                      <input [(ngModel)]="userName" type="text" class=" form-control font-khmer-cursive" placeholder="{{'login.holder.enterUserName' | translate}} ...">
+  
+                      <ng-container *ngIf="submitted && !userName">
+                        <small class="text-danger"> {{'login.message.passwordRequired' | translate}}</small>
+                      </ng-container>
+                    
+                    </div>
+                  </div>`
+  
+                  <div class="form-row row">
+                    <div class="form-group col-md-12">
+                      <label class="font-khmer-cursive">{{'login.label.password' | translate}}</label>
+                      <span class="text-danger">*</span>
+                      <input [(ngModel)]="password" type="password" class=" form-control font-khmer-cursive" placeholder="{{'login.holder.enterPassword' | translate}} ...">
+  
+                      <ng-container *ngIf="submitted && !password">
+                        <small class="text-danger"> {{'login.message.passwordRequired' | translate}}</small>
+                      </ng-container>
+                    </div>
+                  </div>
+  
+                  <div class="form-group text-center">
+                    <button class="btn btn-primary account-btn btn-login" type="button" (click)="onLogin()">
+                      <span class = "scroll-load-vd login" *ngIf = "submitted && password && userName">
+                        <img src="assets/img/loading.gif" alt="" style = "width: 9%;height: 100%;">
+                      </span>
+                      <span>Login</span>
+                      <i class="fa fa-sign-in i-con" aria-hidden="true"></i>
+                    </button>
+                  </div>
+  
+                <!-- /Account Form -->
+  
+            </div>
+        </div>
+    </div>
+  </div>
+  

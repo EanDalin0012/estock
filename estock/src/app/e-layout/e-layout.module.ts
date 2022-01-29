@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { SlidebarComponent } from './slidebar/slidebar.component';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { EShareModule } from '../e-share/e-share.module';
+import { BlanklayoutComponent } from './blanklayout/blanklayout.component';
 
 
 @NgModule({
@@ -13,7 +14,6 @@ import { EShareModule } from '../e-share/e-share.module';
     FooterComponent,
     HeaderComponent,
     SlidebarComponent,
-
   ],
   imports: [
     CommonModule,

@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlanklayoutComponent } from './e-layout/blanklayout/blanklayout.component';
 import { ELayoutComponent } from './e-layout/e-layout.component';
 
 const routes: Routes = [
-  // {
-  //   path: '', component: BlankLayoutComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadChildren: () => import('./authorization/authorization.module').then(m => m.AuthorizationModule)
-  //     }
-  //   ]
-  // },
+  {
+    path: '', component: BlanklayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./e-auth/e-auth.module').then(m => m.EAuthModule)
+      }
+    ]
+  },
   {
     path: '', component: ELayoutComponent,
     children: [
@@ -45,7 +46,7 @@ const routes: Routes = [
   // { path: '**', component: Error404Component },
   {
     path: '',
-    redirectTo: '/home/product-sale-type',
+    redirectTo: '/home/product',
     pathMatch: 'full'
   }
 ];

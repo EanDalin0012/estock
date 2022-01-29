@@ -1,4 +1,4 @@
-import { Utils } from 'src/app/v-share/util/utils.static';
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
@@ -7,9 +7,9 @@ import { environment } from 'src/environments/environment';
 import { LOCAL_STORAGE, HTTPResponseCode } from '../constants/common.const';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import * as moment from 'moment';
-import { EncryptionUtil } from '../util/encryption-util';
 import { AuthService } from './auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Utils } from '../util/utils.static';
 
 @Injectable({
   providedIn: 'root'
@@ -33,22 +33,23 @@ export class AuthentcatiionService {
       this.authService.setLastEventTime();
       this.accessTokenRequest(auth, basicAuth).then(response => {
         console.log('accessTokenRequest',response);
+        resovle(response);
 
         if(response?.header?.result== false) {
           resovle(response.header);
         }
         if (response.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
-          this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
-            console.log('loadUserByUserName',result);
+          // this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
+          //   console.log('loadUserByUserName',result);
 
-            if (result) {
-              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
-              resovle(result);
-            }
-          }).catch((err) => {
+          //   if (result) {
+          //     Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
+          //     resovle(result);
+          //   }
+          // }).catch((err) => {
 
-          });
+          // });
         }
       });
     });
@@ -133,14 +134,14 @@ export class AuthentcatiionService {
       // const data = this.deviceService.getDeviceInfo();
 
       const formData = new FormData();
-      const username = EncryptionUtil.encrypt(auth.user_name);
-      const password = EncryptionUtil.encrypt(auth.password);
+      const username = auth.user_name;//EncryptionUtil.encrypt(auth.user_name);
+      const password = auth.password//;EncryptionUtil.encrypt(auth.password);
 
-      const cInfo = EncryptionUtil.encrypt(username.toString()+ '#'+password.toString()).toString();
-      console.log('cInfo', cInfo);
+      // const cInfo = EncryptionUtil.encrypt(username.toString()+ '#'+password.toString()).toString();
+      // console.log('cInfo', cInfo);
 
 
-      Utils.setSecureStorage('cInfo', cInfo);
+      // Utils.setSecureStorage('cInfo', cInfo);
 
       formData.append('client_id', 'spring-security-oauth2-read-write-client');
       formData.append('grant_type', 'password');
@@ -161,11 +162,13 @@ export class AuthentcatiionService {
         date: date
       };
 
-      formData.append('deviceInfo', EncryptionUtil.encrypt(JSON.stringify(deviceInfo)));
+      // formData.append('deviceInfo', EncryptionUtil.encrypt(JSON.stringify(deviceInfo)));
 
       this.httpClient.post(uri, formData, {
           headers: new HttpHeaders(httpOptionsObj),
         }).subscribe((auth) => {
+          console.log("auth", auth);
+          
           resovle(auth);
         });
     });

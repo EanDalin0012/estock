@@ -1,4 +1,4 @@
-package com.api.stockmanagement.config.corsFilter;
+package com.evideo.evideobackend.core.config.corsFilter;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

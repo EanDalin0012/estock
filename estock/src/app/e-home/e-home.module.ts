@@ -8,6 +8,7 @@ import { ProductSaleTypeComponent } from './product-sale-type/product-sale-type.
 import { MemberComponent } from './member/member.component';
 import { EHomeRoutingModule } from './e-home-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     EHomeComponent,
@@ -20,6 +21,7 @@ import { AgGridModule } from 'ag-grid-angular';
     CommonModule,
     EHomeRoutingModule,
     EShareModule,
+    ReactiveFormsModule,
     AgGridModule.withComponents([]),
   ]
 })

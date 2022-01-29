@@ -37,6 +37,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.1'
+//    implementation 'org.springframework.boot:spring-boot-starter-integration'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.integration:spring-integration-http'
+    implementation 'org.springframework.integration:spring-integration-jdbc'
+    implementation 'org.springframework.integration:spring-integration-ws'
 
     implementation "org.mapstruct:mapstruct:$mapstructVersion"
 
@@ -49,10 +54,12 @@ dependencies {
     implementation group: 'org.springframework', name: 'spring-tx', version: '5.2.7.RELEASE'
     implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.14'
+
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '3.0.2'
-    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.2'
     implementation group: 'javax.xml', name: 'jaxb-impl', version: '2.1'
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    implementation group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '3.0.2'
+
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.13.0'
 
@@ -94,18 +101,28 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.1'
 
     // SPRING SECURITY
-     implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.0'
-     implementation group: 'org.springframework.security', name: 'spring-security-web', version: '5.6.0'
-     implementation group: 'org.springframework.security', name: 'spring-security-config', version: '5.6.0'
+    implementation group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.0.2.RELEASE'
+    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.3.4.RELEASE'
+    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '5.3.4.RELEASE'
+    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-core', version: '5.3.5.RELEASE'
+
 
     // Spring Security Oauth2
-     implementation group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.5.0.RELEASE'
-     implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.6.1'
+//    implementation group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.0.2.RELEASE'
+//    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.3.4.RELEASE'
+//    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '5.3.4.RELEASE'
+//    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-core', version: '5.3.5.RELEASE'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: '2.6.2'
 
     // SPRING FRAMEWORK
-    implementation group: 'org.springframework', name: 'spring-jms', version: '5.3.14'
-    implementation group: 'org.springframework', name: 'spring-messaging', version: '5.3.14'
-    implementation group: 'org.springframework', name: 'spring-oxm', version: '5.3.15'
+//    implementation group: 'org.springframework', name: 'spring-jms', version: '5.3.14'
+//    implementation group: 'org.springframework', name: 'spring-messaging', version: '5.3.14'
+//    implementation group: 'org.springframework', name: 'spring-oxm', version: '5.3.15'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: '2.6.2'
+//    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.7'
+//    implementation group: 'aspectj', name: 'aspectjrt', version: '1.5.3'
+//    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.0.Final'
+//    implementation group: 'org.springframework', name: 'spring-tx', version: '5.3.14'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -114,6 +131,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 }
 
 tasks.named('test') {

@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   autoLogoutTime: 10 * 60 * 1000,
   bizServer : {
-    server : 'http://localhost:8080',
+    server : 'http://localhost:8080/demooauth2',
     port : '8080',
     context : 'bizmob.corp.server'
   },

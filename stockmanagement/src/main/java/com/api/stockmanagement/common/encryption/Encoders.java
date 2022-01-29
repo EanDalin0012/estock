@@ -10,8 +10,8 @@ public class Encoders {
     public PasswordEncoder oauthClientPasswordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
-    @Bean
-    public PasswordEncoder userPasswordEncoder() {
-        return new BCryptPasswordEncoder(8);
-    }
+//    @Bean
+//    public PasswordEncoder userPasswordEncoder() {
+//        return new BCryptPasswordEncoder(8);
+//    }
 }

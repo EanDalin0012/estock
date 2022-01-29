@@ -9,6 +9,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EShareModule } from './e-share/e-share.module';
+import { BlanklayoutComponent } from './e-layout/blanklayout/blanklayout.component';
+import { ToastrModule } from 'ngx-toastr';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -17,7 +19,8 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    ELayoutComponent
+    ELayoutComponent,
+    BlanklayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,13 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       },
     }),
+    ToastrModule.forRoot(
+      {
+        timeOut: 1500,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true,
+      }
+    ),
     EShareModule.forRoot(),
     HttpClientModule,
     BrowserAnimationsModule

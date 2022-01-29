@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { AuthentcatiionService } from 'src/app/e-share/service/authentcatiion.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +9,116 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  userName!: string;
+  password!: string;
 
-  constructor() { }
+  registerForm!: FormGroup;
+  submitted = false;
+
+  @ViewChild("userName") inputUserName: any;
+  @ViewChild("password") inputPassword: any;
+  isFirstLogin = false;
+
+  public formLogin: any;
+  isValidLoading = false;
+  constructor(
+    // private dataService: DataService,
+    private authentcatiionService: AuthentcatiionService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private zone: NgZone,
+    ) {
+      this.formLogin as FormGroup;
+      this.inputUserName as ElementRef;
+      this.inputPassword as ElementRef;
+
+      this.formLogin = this.formBuilder.group({
+        userName: ['', Validators.required],
+        password: ['', Validators.required]
+      });
+    }
 
   ngOnInit(): void {
+    // this.formLogin.patchValue({
+    //   userName: 'admin@gmail.com',
+    //   password: 'admin123'
+    // });
+
+    this.registerForm = this.formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required]
+  });
+  this.userName = 'admin';
+  this.password = 'admin1234';
   }
 
+  routors() {
+    this.router.navigate(['/acc']);
+  }
+
+  isEmpty(value: string) {
+    switch (value) {
+      case 'u':
+        this.formLogin.patchValue({
+          userName: '',
+        });
+        break;
+      case 'p':
+        this.formLogin.patchValue({
+          password: '',
+        });
+        break;
+    }
+  }
+
+  onLogin() {
+    this.submitted = true;
+    if(this.userName && this.password) {
+      const logInfo = {
+        user_name: this.userName,
+        password: this.password
+      };
+      this.authentcatiionService.login(logInfo).then((resp: any) => {
+        if(resp) {
+          this.zone.run(() =>  this.router.navigate(['/home/product'], { replaceUrl: true }));
+          // if(resp.result === false) {
+          //   this.isValidLoading = false;
+          // } else {
+          //   this.isFirstLogin = resp.isFirstLogin;
+          //   if(this.isFirstLogin == true) {
+          //     this.zone.run(() =>  this.router.navigate(['/home/product'], { replaceUrl: true }));
+          //   } else {
+          //     this.zone.run(() =>  this.router.navigate(['/home/product'], { replaceUrl: true }));
+          //   }
+          // }
+
+        }
+      }).catch((err: any) => {
+          console.log(err);
+      });
+    }
+  }
+
+
+  changePassword(item: any) {
+    // this.modalService.open(
+    //   ChangePasswordComponent,
+    //   {
+    //     message: item,
+    //     callback: _response => {
+
+    //   }
+    // });
+  }
+
+   // convenience getter for easy access to form fields
+   get f() { return this.registerForm.controls; }
+
 }
+
+   
+    
+function MustMatch(arg0: string, arg1: string): any {
+  throw new Error('Function not implemented.');
+}
+
