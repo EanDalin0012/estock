@@ -4,11 +4,8 @@ import com.estock.api.dao.AuthenticationDAO;
 import com.estock.api.dto.UserDTO;
 import com.estock.api.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {

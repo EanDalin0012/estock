@@ -6,7 +6,8 @@ import com.estock.api.event.DeviceLoginEvent;
 import com.estock.api.service.AuthenticationService;
 import com.estock.api.util.BCryptPwEncoder;
 import com.estock.api.util.Utility;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-    static Logger log = Logger.getLogger(CustomAuthenticationProvider.class.getName());
+    static Logger log = LogManager.getLogger(CustomAuthenticationProvider.class.getName());
 
     @Inject
     private ApplicationEventPublisher eventPublisher;
@@ -38,7 +39,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         log.info("============== Start Authorization ===============");
-
         try {
 //            String k = this.env.getProperty("security.key");
 //            String encodedBase64Key = Encr8yptionUtil.encodeKey(DemoProperties.secretKey);

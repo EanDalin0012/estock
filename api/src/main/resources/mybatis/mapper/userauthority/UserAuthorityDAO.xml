@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.estock.api.dao.UserAuthorityDAO">
+
+    <resultMap type="UserAuthorityDTO" id="userAuthorityDTO">
+        <id property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="accountExpired" column="account_expired"/>
+        <result property="accountLocked" column="account_locked"/>
+        <result property="credentialsExpired" column="credentials_expired"/>
+        <result property="enabled" column="enabled"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="gender" column="gender"/>
+        <result property="dateBirth" column="date_birth"/>
+        <result property="phone" column="phone"/>
+        <result property="desc" column="desc"/>
+        <result property="userID" column="modify_by"/>
+        <result property="dateTime" column="modify_date"/>
+        <association property="authorities" resultMap="authority" javaType="list"/>
+    </resultMap>
+
+    <resultMap type="AuthorityDTO" id="authority">
+        <id property="id" column="authority_id"/>
+        <result property="name" column="authority_name"/>
+    </resultMap>
+
+
+    <select id="loadUserAuthorityByUserName" resultMap="userAuthorityDTO">
+        <![CDATA[
+            SELECT
+                auth."id"				as "authority_id"
+                 , auth."name" 	        as "authority_name"
+                 , us.id
+                 , us.account_expired
+                 , us.account_locked
+                 , us.credentials_expired
+                 , us.enabled
+                 , us.user_name
+                 , us_info.first_name
+                 , us_info.last_name
+                 , us_info.gender
+                 , us_info.date_birth
+                 , us_info.phone
+                 , us_info."desc"
+                 , us_info.modify_date
+                 , us_info.modify_by
+            FROM users_authorities u_auth
+                     INNER JOIN authority auth on auth."id" = u_auth.authority_id
+                     INNER JOIN user_ us on us."id" = u_auth.user_id
+                     INNER JOIN user_info us_info on us_info."id" = us.user_info_id
+            WHERE user_name = #{userName};
+        ]]>
+    </select>
+
+</mapper>

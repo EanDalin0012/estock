@@ -1,6 +1,7 @@
 package com.estock.api.config.oauth2;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -29,7 +30,7 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-    static Logger log = Logger.getLogger(AuthorizationServerConfiguration.class.getName());
+    static Logger log = LogManager.getLogger(AuthorizationServerConfiguration.class.getName());
 
     @Inject
     private DataSource dataSource;
