@@ -103,17 +103,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		auth.authenticationProvider(authProvider);
 	}
-
-
-//	@Autowired
-//	public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//		JdbcUserDetailsManagerConfigurer<AuthenticationManagerBuilder> cfg = auth.jdbcAuthentication()
-//				.passwordEncoder(passwordEncoder()).dataSource(ds);
-//		cfg.getUserDetailsService().setEnableGroups(true);
-//		cfg.getUserDetailsService().setEnableAuthorities(false);
-//
-//		auth.authenticationProvider(authProvider);
-//	}
+	
 
 	@Bean
 	public AccessDeniedHandler accessDeniedHandler() {
