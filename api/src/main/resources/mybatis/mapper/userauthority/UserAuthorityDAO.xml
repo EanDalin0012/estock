@@ -50,7 +50,35 @@
                      INNER JOIN authority auth on auth."id" = u_auth.authority_id
                      INNER JOIN user_ us on us."id" = u_auth.user_id
                      INNER JOIN user_info us_info on us_info."id" = us.user_info_id
-            WHERE user_name = #{userName};
+            WHERE us.user_name = #{userName};
+        ]]>
+    </select>
+
+
+    <select id="loadUserAuthorityByUserID" resultMap="userAuthorityDTO">
+        <![CDATA[
+        SELECT
+            auth."id"				as "authority_id"
+             , auth."name" 	        as "authority_name"
+             , us.id
+             , us.account_expired
+             , us.account_locked
+             , us.credentials_expired
+             , us.enabled
+             , us.user_name
+             , us_info.first_name
+             , us_info.last_name
+             , us_info.gender
+             , us_info.date_birth
+             , us_info.phone
+             , us_info."desc"
+             , us_info.modify_date
+             , us_info.modify_by
+        FROM users_authorities u_auth
+                 INNER JOIN authority auth on auth."id" = u_auth.authority_id
+                 INNER JOIN user_ us on us."id" = u_auth.user_id
+                 INNER JOIN user_info us_info on us_info."id" = us.user_info_id
+        WHERE us."id" = #{userID};
         ]]>
     </select>
 

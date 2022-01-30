@@ -24,12 +24,29 @@ public class UserAuthorityServiceImpl implements UserAuthorityService {
 
     @Override
     public UserAuthorityDTO loadUserAuthorityByUserName(String userName) throws CustomException{
-        log.info(key+"======== Start User Authority Service ==========");
+        log.info(key+"======== Start User Authority loadUserAuthorityByUserName ==========");
         try{
             if (userName.equals("") || userName == null) {
                 throw new CustomException("INVALID_USER_NAME", "Invalid user name.");
             }
             UserAuthorityDTO userAuthorityDTO = this.userAuthorityDAO.loadUserAuthorityByUserName(userName);
+            log.info(key+"UserAuthorityDTO :"+ Utility.toJSON(userAuthorityDTO));
+            return userAuthorityDTO;
+        }catch (Exception e) {
+            e.printStackTrace();
+            log.error(key+"User Authority Service Error:",e);
+            throw e;
+        }
+    }
+
+    @Override
+    public UserAuthorityDTO loadUserAuthorityByUserID(int userID) throws CustomException {
+        log.info(key+"======== Start User Authority loadUserAuthorityByUserID ==========");
+        try{
+            if (userID <= 0) {
+                throw new CustomException("INVALID_USER_ID", "Invalid user ID.");
+            }
+            UserAuthorityDTO userAuthorityDTO = this.userAuthorityDAO.loadUserAuthorityByUserID(userID);
             log.info(key+"UserAuthorityDTO :"+ Utility.toJSON(userAuthorityDTO));
             return userAuthorityDTO;
         }catch (Exception e) {

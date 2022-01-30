@@ -1,7 +1,7 @@
 <!DOCTYPE logback>
 <configuration>
 
-	<property name="rootDir" value="./api_core/log" />
+	<property name="rootDir" value="./logs/log" />
 	<property name="archiveDir" value="${rootDir}/archived" />
 	<property name="fileSize" value="10MB" />
 	

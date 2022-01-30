@@ -53,6 +53,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             String password         = (String) authentication.getCredentials();
             Map<String, String> data = (Map<String, String>) authentication.getDetails();
             String deviceInfo =  data.get("deviceInfo");
+            String chanel     = data.get("chanel");
 
             if(deviceInfo != null) {
                 eventPublisher.publishEvent(new DeviceLoginEvent(deviceInfo));
@@ -100,9 +101,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
             Map<String, Object> principal = new HashMap<>();
             principal.put("username", userInfo.getUserName());
+            principal.put("Chanel", "Web");
 
             Map<String, Object> credentials = new HashMap<>();
             principal.put("password", userInfo.getPassword());
+
+            principal.put("Chanel", chanel);
 
             log.info("============== End Authorization ===============>>>>>>>>>>>>\n");
             return new UsernamePasswordAuthenticationToken(
