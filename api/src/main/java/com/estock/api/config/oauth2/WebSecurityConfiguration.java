@@ -28,10 +28,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
-/**
- * Created by Sokkheang Huo
- */
-
 @Configuration
 @EnableWebSecurity
 @Order(SecurityProperties.BASIC_AUTH_ORDER)
@@ -61,8 +57,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         webSecurity
                 .ignoring()
                 .antMatchers(
-                        "/api/image/**"
-                        , "/unsecure/**"
+                        "/unsecure/**"
                         , "/401.html"
                         , "/404.html"
                         , "/500.html");
