@@ -1,4 +1,4 @@
-package com.estock.api.config;
+package com.estock.api.config.corsFilter;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Configuration
-public class Cors_Filter extends WebMvcConfigurerAdapter {
-
+public class DoCorsFilterWebMvcConfiguration extends WebMvcConfigurerAdapter {
     @Component
     @Order(Ordered.HIGHEST_PRECEDENCE)
     class CorsFilter implements Filter {

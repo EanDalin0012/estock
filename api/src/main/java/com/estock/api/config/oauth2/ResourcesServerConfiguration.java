@@ -50,20 +50,7 @@ public class ResourcesServerConfiguration  extends ResourceServerConfigurerAdapt
                 .antMatchers(new String[] {"/"}).permitAll()
                 .antMatchers(new String[]{
                         "/mastercard*/**",
-                        "/tutuka*/**",
-                        "/wechat*/**",
-                        "/alipays*/**",
-                        "/templates*/**",
-                        "/tranglo*/notify**",
-                        "/giift*/**",
-                        "/moneygram*/country*/states**",
-                        "/westernunion*/**",
-                        "/liquid*/**",
-                        "/transactions*/**",
-                        "/kbank*/**",
-                        "/siambank*/**",
-                        "/ecomv*/**",
-                        "/controller*/**"
+                        "/tutuka*/**"
                 }).permitAll()
                 .anyRequest()
                 .authenticated().and()

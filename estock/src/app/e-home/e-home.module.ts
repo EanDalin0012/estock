@@ -9,6 +9,7 @@ import { MemberComponent } from './member/member.component';
 import { EHomeRoutingModule } from './e-home-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     EHomeComponent,
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductComponent,
     ProductSaleTypeComponent,
     MemberComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,

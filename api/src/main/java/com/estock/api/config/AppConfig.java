@@ -6,14 +6,14 @@ import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-@Configuration
+//@Configuration
 public class AppConfig {
-    @Bean
-    public ApplicationEventMulticaster applicationEventMulticaster() {
-        SimpleApplicationEventMulticaster applicationEventMulticaster = new SimpleApplicationEventMulticaster();
-        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.initialize();
-        applicationEventMulticaster.setTaskExecutor(threadPoolTaskExecutor);
-        return applicationEventMulticaster;
-    }
+//    @Bean
+//    public ApplicationEventMulticaster applicationEventMulticaster() {
+//        SimpleApplicationEventMulticaster applicationEventMulticaster = new SimpleApplicationEventMulticaster();
+//        ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+//        threadPoolTaskExecutor.initialize();
+//        applicationEventMulticaster.setTaskExecutor(threadPoolTaskExecutor);
+//        return applicationEventMulticaster;
+//    }
 }

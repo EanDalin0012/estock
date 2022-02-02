@@ -20,7 +20,7 @@ export function createTranslateLoader(http: HttpClient) {
   declarations: [
     AppComponent,
     ELayoutComponent,
-    BlanklayoutComponent
+    BlanklayoutComponent,
   ],
   imports: [
     BrowserModule,

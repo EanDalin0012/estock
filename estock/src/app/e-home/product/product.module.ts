@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { EShareModule } from 'src/app/e-share/e-share.module';
 
 
 
@@ -13,7 +14,8 @@ import { CreateProductComponent } from './create-product/create-product.componen
   ],
   imports: [
     CommonModule,
-    EProductRoutingModule
+    EProductRoutingModule,
+    EShareModule
   ]
 })
 export class ProductModule {
