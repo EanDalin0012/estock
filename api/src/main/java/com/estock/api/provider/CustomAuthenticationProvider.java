@@ -19,7 +19,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.common.exceptions.ClientAuthenticationException;
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedClientException;
 import org.springframework.stereotype.Component;
-
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +27,7 @@ import java.util.Map;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-    static Logger log = LogManager.getLogger(CustomAuthenticationProvider.class.getName());
+    private static Logger log = LogManager.getLogger();
 
     @Inject
     private ApplicationEventPublisher eventPublisher;
