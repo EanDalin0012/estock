@@ -19,5 +19,6 @@ public class UserDTO {
     private boolean accountLocked;
     private boolean credentialsExpired;
     private boolean enabled;
+    private int userInfoID;
     private List<AuthorityDTO> authorities;
 }

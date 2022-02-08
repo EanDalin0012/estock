@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.estock.api.dao.UserInfoDAO">
+
+    <resultMap type="UserInfoDTO" id="userInfoDTO">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="dateBirth" column="date_birth"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="desc"/>
+        <result property="desc" column="desc"/>
+        <result property="dateTime" column="modify_date"/>
+        <result property="userID" column="modify_by"/>
+    </resultMap>
+
+    <select id="loadUserByID" resultMap="userInfoDTO">
+        <![CDATA[
+        SELECT
+               id
+             , first_name
+             , last_name
+             , gender
+             , date_birth
+             , phone
+             , "desc"
+             , status
+             , modify_date
+             , modify_by
+        FROM user_info
+        where id = #{id}
+        ]]>
+    </select>
+
+</mapper>

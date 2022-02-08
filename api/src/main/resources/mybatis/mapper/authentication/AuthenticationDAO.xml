@@ -6,6 +6,7 @@
         <id property="id" column="id"/>
         <result property="userName" column="user_name"/>
         <result property="password" column="password"/>
+        <result property="userInfoID" column="user_info_id"/>
         <result property="accountExpired" column="account_expired"/>
         <result property="accountLocked" column="account_locked"/>
         <result property="credentialsExpired" column="credentials_expired"/>
@@ -29,6 +30,7 @@
              , u.account_locked
              , u.credentials_expired
              , u.enabled
+             , u.user_info_id
              , au."name" as "authority_name"
              , au."id" as "authority_id"
         FROM user_ as u
