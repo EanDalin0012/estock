@@ -22,24 +22,17 @@ const routes: Routes = [
       }
     ]
   },
-  // {
-  //   path: '', component: VLayoutComponent,  canActivate: [AuthGuard],
-  //   children: [
-  //     {
-  //       path: 'account',
-  //       loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: '', component: VLayoutComponent,
-  //   children: [
-  //     {
-  //       path: 'error',
-  //       loadChildren: () => import('./errorpages/errorpages.module').then(m => m.ErrorpagesModule)
-  //     }
-  //   ]
-  // },
+
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'user',
+        loadChildren: () => import('./e-user/e-user.module').then(m => m.EUserModule)
+      }
+    ]
+  },
+
   // { path: 'announce/4error', component: Error4Component },
   // { path: 'error500', component: Error500Component },
   // { path: 'error403', component: Error403Component },
