@@ -16,4 +16,5 @@ public class UserInfoDTO extends CommonDTO {
     private String dateBirth;
     private String phone;
     private String desc;
+    private int resourceID;
 }
