@@ -8,16 +8,16 @@
                   <span>Main</span>
               </li>
 
-              <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'dashboard' }">
-                <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'dashboard' }">
+              <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'user' }">
+                <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'user' }">
                   <i class="fa fa-user-circle-o font-size-20px" aria-hidden="true" size="50"></i>
                   <span>User Management</span>
                   <span class="menu-arrow"></span>
                 </a>
                 <ul style="display: none;"
-                    [ngStyle]="{ 'display' : urlComplete.mainUrl === 'dashboard' ? 'block' : 'none' }">
+                    [ngStyle]="{ 'display' : urlComplete.mainUrl === 'user' ? 'block' : 'none' }">
                   <li routerLink="/dashboard/admin"><a
-                    [ngClass]="{ 'active' : urlComplete.subUrl === 'admin' }" href="javascript:">Users</a></li>
+                    [ngClass]="{ 'active' : urlComplete.subUrl === 'user' }" href="javascript:">Users</a></li>
                   <li routerLink="/dashboard/employee"><a
                     [ngClass]="{ 'active' : urlComplete.subUrl === 'employee' }"
                     href="javascript:">Employee Dashboard</a></li>

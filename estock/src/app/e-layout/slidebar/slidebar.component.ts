@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import {DataService} from "../../e-share/service/data.service";
 
 @Component({
   selector: 'app-slidebar',
@@ -48,7 +49,7 @@ export class SlidebarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    // private dataService: DataService,
+    private dataService: DataService,
     // private authService: AuthService
   ) {
     // this.router.events.subscribe((event: Event) => {
@@ -119,13 +120,13 @@ export class SlidebarComponent implements OnInit {
     //   }
     // });
 
-    // this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
-    //   let msg = '';
-    //   if (message !== '') {
-    //     msg = message;
-    //   }
-    //   this.activeSidebar(msg);
-    // });
+    this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
+      let msg = '';
+      if (message !== '') {
+        msg = message;
+      }
+      this.activeSidebar(msg);
+    });
 
     // this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.Account_Info);
 
@@ -175,8 +176,8 @@ export class SlidebarComponent implements OnInit {
 
   activeSidebar(msg: string) {
     switch (msg) {
-      case 'profile':
-        this.urlComplete.mainUrl = 'acc'+msg;
+      case 'user':
+        this.urlComplete.mainUrl = msg;
         this.urlComplete.subUrl = msg;
         break;
       case 'seting-sub-movie-type':

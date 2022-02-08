@@ -149,16 +149,18 @@ export class HTTPService {
         $('div.loading').addClass('none');
         const result = rest as any;
         const responseData = result; //JSON.parse(result);
+        console.log('responseData responseData', responseData)
         // const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-        if(responseData.result.responseCode === HTTPResponseCode.Forbidden) {
+        if(responseData.resultCode === HTTPResponseCode.Forbidden) {
           this.dataService.sendMessagePermissionModule(api);
           this.router.navigate(['/error403']);
+        } else if (responseData.resultCode == '404') {
+          alert(responseData.resultMessage);
         }
         if (!responseData) {
-          //this.showErrMsg(responseData.result.message);
           reject();
         } else {
-          resolve(responseData);
+          resolve(responseData.body);
         }
 
       }, error => console.log('oops', error));

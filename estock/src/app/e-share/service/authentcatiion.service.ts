@@ -10,6 +10,7 @@ import * as moment from 'moment';
 import { AuthService } from './auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Utils } from '../util/utils.static';
+import {TemplateAPI} from "../constants/common.api";
 
 @Injectable({
   providedIn: 'root'
@@ -40,16 +41,16 @@ export class AuthentcatiionService {
         }
         if (response.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
-          // this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
-          //   console.log('loadUserByUserName',result);
+          this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
+            console.log('loadUserByUserName',result);
 
-          //   if (result) {
-          //     Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
-          //     resovle(result);
-          //   }
-          // }).catch((err) => {
+            if (result) {
+              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
+              resovle(result);
+            }
+          }).catch((err) => {
 
-          // });
+          });
         }
       });
     });
@@ -73,7 +74,7 @@ export class AuthentcatiionService {
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
 
-      this.httpClient.post(uri, JSON.stringify(userInfo), {
+      this.httpClient.post(this.baseUrl+TemplateAPI.USER_INFO.LOAD_USER, JSON.stringify(userInfo), {
         headers: new HttpHeaders(httpOptionsObj)
       }).subscribe( res => {
           $('body').addClass('loaded');
@@ -168,7 +169,7 @@ export class AuthentcatiionService {
           headers: new HttpHeaders(httpOptionsObj),
         }).subscribe((auth) => {
           console.log("auth", auth);
-          
+
           resovle(auth);
         });
     });

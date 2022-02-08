@@ -5,6 +5,8 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { EUserComponent } from './e-user.component';
 import {EUserRoutingModule} from "./e-user-routing.module";
+import {EShareModule} from "../e-share/e-share.module";
+import {AgGridModule} from "ag-grid-angular";
 
 
 
@@ -17,7 +19,9 @@ import {EUserRoutingModule} from "./e-user-routing.module";
   ],
   imports: [
     CommonModule,
-    EUserRoutingModule
+    AgGridModule.withComponents([]),
+    EUserRoutingModule,
+    EShareModule
   ]
 })
 export class EUserModule { }

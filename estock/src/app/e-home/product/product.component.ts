@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllCommunityModules } from '@ag-grid-community/all-modules';
 import { ColDef } from 'ag-grid-community';
+import {SrcComponent} from "../../e-share/component/src/src.component";
 
 @Component({
   selector: 'app-product',
@@ -69,7 +70,9 @@ export class ProductComponent implements OnInit {
         field: 'remark',
       }
     ];
-
+    this.frameworkComponents = {
+      srcImg: SrcComponent
+    };
     this.defaultColDef = {
       editable: false,
       sortable: true,

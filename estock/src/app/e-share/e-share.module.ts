@@ -4,10 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AvatarModule } from 'ngx-avatar';
 import { AgGridModule } from 'ag-grid-angular';
+import { SrcComponent } from './component/src/src.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SrcComponent
+  ],
   imports: [
     CommonModule,
     AgGridModule.withComponents([]),
