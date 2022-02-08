@@ -163,7 +163,10 @@ export class HTTPService {
           resolve(responseData.body);
         }
 
-      }, error => console.log('oops', error));
+      }, error => {
+        console.log('oops', error);
+        alert();
+      });
     });
   }
 

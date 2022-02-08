@@ -5,6 +5,7 @@ import {ColDef} from "ag-grid-community";
 import {TemplateAPI} from "../../e-share/constants/common.api";
 import {SrcComponent} from "../../e-share/component/src/src.component";
 import {DataService} from "../../e-share/service/data.service";
+import { MenuActionComponent } from 'src/app/e-share/component/menu-action/menu-action.component';
 
 @Component({
   selector: 'app-user',
@@ -24,6 +25,9 @@ export class UserComponent implements OnInit {
   rowData: any;
   rowSelection: any;
   isRowSelectable: any;
+
+  pinnedTopRowData: any;
+  pinnedBottomRowData: any;
 
   constructor(
     private hTTPService: HTTPService,
@@ -74,14 +78,25 @@ export class UserComponent implements OnInit {
       {
         headerName: 'remark',
         field: 'desc',
-      }
+      },
+      {
+        headerName:'Action',
+        field: 'desc',
+        cellEditor: 'agSelectCellEditor',
+        cellClass: 'text-center',
+        sortable: false,
+        filter: false,
+        cellEditorParams: {
+          values: ['English', 'Spanish', 'French', 'Portuguese', '(other)'],
+      },
+      },
     ];
 
     this.frameworkComponents = {
       srcImg: SrcComponent
     };
     this.defaultColDef = {
-      editable: false,
+      editable: true,
       sortable: true,
       flex: 1,
       minWidth: 100,
@@ -111,6 +126,10 @@ export class UserComponent implements OnInit {
     // }
   }
 
+
+  onCellValueChanged(event:any) {
+    console.log('data after changes is: ', event.data);
+  }
 
   onCellDoubleClicked(event:any) {
     if(event) {

@@ -14,7 +14,6 @@ import * as $ from 'jquery';
 import { finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthentcatiionService } from './authentcatiion.service';
-import { MyLogUtil } from '../util/my-log-util';
 import { ToastrService } from 'ngx-toastr';
 import { Utils } from '../util/utils.static';
 

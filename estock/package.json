@@ -70,7 +70,7 @@
     "primeicons": "^5.0.0",
     "primeng": "^13.0.3",
     "raphael": "^2.3.0",
-    "rxjs": "^7.4.0",
+    "rxjs": "^6.6.7",
     "rxjs-compat": "^6.6.7",
     "rxjs-observable": "0.0.7",
     "tslib": "^2.3.0",

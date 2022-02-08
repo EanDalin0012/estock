@@ -9,7 +9,7 @@ import { SrcComponent } from './component/src/src.component';
 
 @NgModule({
   declarations: [
-    SrcComponent
+    SrcComponent,
   ],
   imports: [
     CommonModule,
@@ -20,7 +20,7 @@ import { SrcComponent } from './component/src/src.component';
     ReactiveFormsModule,
     TranslateModule,
     AvatarModule,
-    
+
   ]
 })
 export class EShareModule {

@@ -15,6 +15,37 @@
   <!-- /Page Header -->
 
 
+  <div class="row">
+    <div class="row col-md-12">
+      <div style="margin: 10px 5px;">
+        <button class="btn btn-sm btn-primary float-left" type="button">
+          <i class="fa fa-plus-circle"></i>
+          {{'video.label.addMovie' | translate}}
+        </button>
+        <button class="btn btn-sm btn-primary float-left left-12" type="button">
+          <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          {{'common.button.edit' | translate}}
+        </button>
+        <button class="btn btn-sm btn-primary float-left left-12" type="button">
+          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          {{'common.button.delete' | translate}}
+        </button>
+
+        <div style="width: 300px;" class="float-right">
+          <input type="text" class="form-control form-control-sm"  placeholder="{{'common.label.searchNameThere' | translate}} ...">
+          <!-- <div class="dropdown-menu"  style="position: absolute; width: 300px;" [ngClass]="{'show': onFocusInt}">
+            <a  href="javascript:" class="dropdown-item" *ngFor="let item of lstSearch" (click)="searchHistoryClick(item)">
+              <i class="fa fa-history" aria-hidden="true"></i>
+              <span style= "margin-left: 10px;">{{item?.search}}</span>
+            </a>
+          </div> -->
+      </div>
+        <label class="col-form-label float-right" style="width: 80px;">{{'common.label.search' | translate}} :</label>
+
+      </div>
+
+    </div>
+
   <div class="row col-md-12">
     <ag-grid-angular
       #agGrid
@@ -33,6 +64,8 @@
       [isRowSelectable]="isRowSelectable"
       [pagination]="pagination"
       [paginationPageSize]="paginationPageSize"
+      [enableRangeSelection]="true"
+      (cellValueChanged)="onCellValueChanged($event)"
     ></ag-grid-angular>
   </div>
 </div>
