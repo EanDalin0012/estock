@@ -24,6 +24,7 @@ export class ProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.inquiry();
     this.columnDefs = [
       {
         headerName: '#',
