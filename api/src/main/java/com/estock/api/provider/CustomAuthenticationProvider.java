@@ -6,8 +6,7 @@ import com.estock.api.event.DeviceLoginEvent;
 import com.estock.api.service.AuthenticationService;
 import com.estock.api.util.BCryptPwEncoder;
 import com.estock.api.util.Utility;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -26,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-    private static Logger log = LogManager.getLogger();
 
     @Inject
     private ApplicationEventPublisher eventPublisher;

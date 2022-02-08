@@ -3,12 +3,14 @@ package com.estock.api.service.impl;
 import com.estock.api.dao.AuthenticationDAO;
 import com.estock.api.dto.UserDTO;
 import com.estock.api.service.AuthenticationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private AuthenticationDAO authenticationDAO;

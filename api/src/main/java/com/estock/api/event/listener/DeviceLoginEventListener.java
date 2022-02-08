@@ -4,14 +4,13 @@ import com.estock.api.common.exception.CustomException;
 import com.estock.api.dto.DeviceInfoDTO;
 import com.estock.api.event.DeviceLoginEvent;
 import com.estock.api.util.Utility;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class DeviceLoginEventListener implements ApplicationListener<DeviceLoginEvent> {
-    private final static Logger log = LogManager.getLogger(DeviceLoginEventListener.class.getName());
 
     @Override
     public void onApplicationEvent(DeviceLoginEvent event) {

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<property name="rootDir" value="api/logs" />
+	<property name="archiveDir" value="${rootDir}/archived" />
+	<property name="pattern"
+		value="%d{yyyy-MM-dd HH:mm:ss} [%thread] [%level] %logger{36} - %msg%n" />
+	<property name="fileSize" value="100MB" />
+
+	<!-- console logger -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- info file logger -->
+	<appender name="INFO-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${rootDir}/info.log</file>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+		<!-- <filter class="ch.qos.logback.classic.filter.LevelFilter"> -->
+		<!-- <level>ERROR</level> -->
+		<!-- <onMatch>DENY</onMatch> -->
+		<!-- <onMismatch>ACCEPT</onMismatch> -->
+		<!-- </filter> -->
+		<!-- <filter class="ch.qos.logback.classic.filter.ThresholdFilter"> -->
+		<!-- <level>INFO</level> -->
+		<!-- </filter> -->
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${archiveDir}/info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>${fileSize}</maxFileSize>
+		</rollingPolicy>
+	</appender>
+
+	<!-- error file logger -->
+	<appender name="ERROR-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${rootDir}/error.log</file>
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${archiveDir}/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<maxFileSize>${fileSize}</maxFileSize>
+		</rollingPolicy>
+	</appender>
+
+
+	<!-- Application Loggers -->
+	<logger name="com.wing.loyalty" level="ALL"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO-FILE" />
+		<appender-ref ref="ERROR-FILE" />
+	</logger>
+
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core" level="INFO"
+		additivity="true" />
+	<logger name="org.springframework.beans" level="INFO"
+		additivity="true" />
+	<logger name="org.springframework.context" level="INFO"
+		additivity="true" />
+	<logger name="org.springframework.web" level="INFO"
+		additivity="true" />
+	<logger name="com.zaxxer" level="ALL" additivity="true" />
+
+	<logger
+		name="org.springframework.security.web.access.intercept.FilterSecurityInterceptor"
+		level="DEBUG" additivity="true" />
+
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		 <appender-ref ref="INFO-FILE"/>
+		 <appender-ref ref="ERROR-FILE"/>
+	</root>
+
+</configuration>

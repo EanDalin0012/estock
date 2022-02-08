@@ -4,6 +4,7 @@ import com.estock.api.common.template.KeyTemplate;
 import com.estock.api.service.impl.TestServiceIml;
 import com.estock.api.service.impl.UserAuthorityServiceImpl;
 import com.estock.api.util.GenerateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
+@Slf4j
 public class HomeRest implements KeyTemplate {
-    private final static Logger log = LogManager.getLogger(HomeRest.class.getName());
-
     private String key;
     @Autowired
     private TestServiceIml testServiceIml;

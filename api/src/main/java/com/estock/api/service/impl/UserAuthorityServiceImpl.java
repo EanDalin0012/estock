@@ -6,14 +6,15 @@ import com.estock.api.dto.UserAuthorityDTO;
 import com.estock.api.service.UserAuthorityService;
 import com.estock.api.util.GenerateUtil;
 import com.estock.api.util.Utility;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class UserAuthorityServiceImpl implements UserAuthorityService {
-    private final static Logger log = LogManager.getLogger(UserAuthorityServiceImpl.class.getName());
     private String key;
     @Autowired
     private UserAuthorityDAO userAuthorityDAO;

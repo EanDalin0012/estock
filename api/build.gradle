@@ -46,12 +46,21 @@ dependencies {
 
 	// log4j
 
-	implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
-	implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
-	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
-	testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.1'
-	implementation group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.17.1'
+//	implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
+//	implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
+//	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+//	testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.1'
+//	implementation group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.17.1'
+//	testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
 	testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
+	implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.30'
+	implementation group: 'org.logback-extensions', name: 'logback-ext-spring', version: '0.1.4'
+	implementation group: 'org.codehaus.janino', name: 'janino', version: '3.1.6'
+//
+//	compile 'ch.qos.logback:logback-classic'
+//	compile 'org.slf4j:jcl-over-slf4j'
+//	compile "org.logback-extensions:logback-ext-spring:0.1.4"
+//	compile 'org.codehaus.janino:janino'
 
 //	implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.30'
 //	implementation group: 'log4j', name: 'log4j', version: '1.2.17'
