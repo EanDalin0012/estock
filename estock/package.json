@@ -50,6 +50,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.6.0",
     "jquery-dropdown": "^1.0.0",
+    "jspdf": "^2.5.1",
     "line-awesome": "^1.3.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",

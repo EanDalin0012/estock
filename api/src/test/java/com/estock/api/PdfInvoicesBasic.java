@@ -1,2 +1,4 @@
-package com.estock.api;public class PdfInvoicesBasic {
+package com.estock.api;
+
+public class PdfInvoicesBasic {
 }

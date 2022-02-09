@@ -5,7 +5,7 @@ import {ColDef} from "ag-grid-community";
 import {TemplateAPI} from "../../e-share/constants/common.api";
 import {SrcComponent} from "../../e-share/component/src/src.component";
 import {DataService} from "../../e-share/service/data.service";
-import { MenuActionComponent } from 'src/app/e-share/component/menu-action/menu-action.component';
+import { UserInfo } from 'src/app/e-share/data/user-inf';
 
 @Component({
   selector: 'app-user',
@@ -48,46 +48,46 @@ export class UserComponent implements OnInit {
       },
       {
         headerName:'image',
-        field: 'firstName',
+        field: 'resourceID',
         cellRenderer: 'srcImg',
         cellClass: 'text-center',
         sortable: false,
         filter: false,
       },
       {
-        headerName: 'userName',
+        headerName: 'Firs Name',
         field: 'firstName'
       },
       {
-        headerName: 'enable',
+        headerName: 'Last Name',
         field: 'lastName',
         cellRenderer: 'status'
       },
       {
-        headerName: 'fullName',
+        headerName: 'Date Birth',
         field: 'dateBirth'
       },
       {
-        headerName: 'dateBirth',
+        headerName: 'Phone',
         field: 'phone'
       },
       {
-        headerName: 'gender',
+        headerName: 'Gender',
         field: 'gender'
       },
       {
-        headerName: 'remark',
+        headerName: 'Description',
         field: 'desc',
       },
       {
-        headerName:'Action',
-        field: 'desc',
+        headerName:'status',
+        field: 'status',
         cellEditor: 'agSelectCellEditor',
         cellClass: 'text-center',
         sortable: false,
         filter: false,
         cellEditorParams: {
-          values: ['English', 'Spanish', 'French', 'Portuguese', '(other)'],
+          values: ['Enable', 'Disable'],
       },
       },
     ];
@@ -99,7 +99,7 @@ export class UserComponent implements OnInit {
       editable: true,
       sortable: true,
       flex: 1,
-      minWidth: 100,
+      minWidth: 50,
       filter: true,
       resizable: true,
     };
@@ -112,23 +112,19 @@ export class UserComponent implements OnInit {
 
   onSelectionChanged(event: any) {
     const selectedRows = this.gridApi.getSelectedRows();
-    // this.selectedJson = selectedRows[0];
-    // console.log(this.selectedJson);
-    // if(this.selectedJson.enabled === false) {
-    //   this.btnEnableTxt = this.translate.instant('users.label.enableUser');
-    //   this.enable = true;
-    // } else {
-    //   this.btnEnableTxt = this.translate.instant('users.label.disableUser');
-    //   this.enable = false;
-    // }
-    // if(selectedRows) {
-    //   this.disabled = false;
-    // }
   }
 
 
   onCellValueChanged(event:any) {
     console.log('data after changes is: ', event.data);
+    const data = event.data as UserInfo;
+    console.log(data);
+    if(data) {
+      this.hTTPService.Post(TemplateAPI.USER_INFO.UPDATE, data).then(response => {
+        console.log(response);
+        this.inquiry();
+      });
+    }
   }
 
   onCellDoubleClicked(event:any) {

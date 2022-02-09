@@ -91,9 +91,11 @@ export class HTTPService {
             $('body').addClass('loaded');
             $('div.loading').addClass('none');
             const result = res as any;
+            console.log('result', result);
+
             if (result) {
               const responseData = result; //JSON.parse(result);
-              if(responseData.result.responseCode === HTTPResponseCode.Forbidden) {
+              if(responseData.resultCode === HTTPResponseCode.Forbidden) {
                 this.dataService.sendMessagePermissionModule(api);
                 this.router.navigate(['/error403']);
               }
@@ -103,7 +105,7 @@ export class HTTPService {
                 reject();
                 // this.message(result.error.message);
               } else {
-                resolve(responseData);
+                resolve(responseData.body);
               }
             } else {
               reject();

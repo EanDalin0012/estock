@@ -7,6 +7,7 @@ import com.estock.api.service.UserInfoService;
 import com.estock.api.util.Utility;
 import com.estock.api.vo.ResponseVO;
 import com.estock.api.vo.request.LoadUserRequestVO;
+import com.estock.api.vo.request.UserInfoRequestVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UserRest {
         ResponseVO<List<UserInfoDTO>> listResponseVO = new ResponseVO<>();
         try{
             List<UserInfoDTO> userInfoDTOList = new ArrayList<>();
-            for (int i = 1; i <1000 ; i++) {
+            for (int i = 1; i <100000 ; i++) {
                 UserInfoDTO userInfoDTO = new UserInfoDTO();
                 userInfoDTO.setId(i);
                 userInfoDTO.setFirstName("first - name "+i);
@@ -34,6 +35,8 @@ public class UserRest {
                 userInfoDTO.setGender("male");
                 userInfoDTO.setUserID(1);
                 userInfoDTO.setDesc("desc "+1);
+                userInfoDTO.setStatus("Enable");
+                userInfoDTO.setResourceID(1);
                 userInfoDTOList.add(userInfoDTO);
             }
             listResponseVO.setBody(userInfoDTOList);
@@ -69,6 +72,16 @@ public class UserRest {
         }
         responseVO.setResultCode(ResponseCode.FAIL.getCode());
         return responseVO;
+    }
+
+    @PostMapping(value = "/update")
+    public  ResponseVO<UserInfoDTO> updateUserInfo(@RequestBody UserInfoRequestVO userInfoRequestVO, @RequestParam("userId") int userId) {
+        log.info("----------- updateUserInfo Data:"+Utility.toJSON(userInfoRequestVO));
+        log.info("----------- userId Data:"+userId);
+        ResponseVO<UserInfoDTO> userInfoDTOResponseVO = new ResponseVO<>();
+        userInfoDTOResponseVO.setResultCode(ResponseCode.SUCCESS.getCode());
+        userInfoDTOResponseVO.setResultMessage(ResponseCode.SUCCESS.name());
+        return userInfoDTOResponseVO;
     }
 
 }

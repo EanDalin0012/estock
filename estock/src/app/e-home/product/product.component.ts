@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AllCommunityModules } from '@ag-grid-community/all-modules';
 import { ColDef } from 'ag-grid-community';
 import {SrcComponent} from "../../e-share/component/src/src.component";
-
+import jsPDF from 'jspdf';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -21,6 +21,11 @@ export class ProductComponent implements OnInit {
   rowData: any;
   rowSelection: any;
   isRowSelectable: any;
+
+
+  @ViewChild('content')
+  content!: ElementRef;
+  name = '';
 
   constructor() { }
 
@@ -145,6 +150,16 @@ export class ProductComponent implements OnInit {
     //     this.rowData =this.lstUser;
     //   }
     // });
+  }
+
+  makePdf() {
+    let doc = new jsPDF();
+    doc.setTextColor(255, 0, 0);
+    doc.text('Hello world!', 20, 20,{align: "center", baseline:'bottom'});
+    // doc.addPage();
+    doc.setDrawColor(255, 0, 0);
+    doc.line(35, 30, 100, 30);
+    doc.save('Test.pdf');
   }
 
 }
