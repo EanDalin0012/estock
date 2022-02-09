@@ -33,6 +33,16 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'employee-request',
+        loadChildren: () => import('./e-employee/e-employee.module').then(m => m.EEmployeeModule)
+      }
+    ]
+  },
+
   // { path: 'announce/4error', component: Error4Component },
   // { path: 'error500', component: Error500Component },
   // { path: 'error403', component: Error403Component },

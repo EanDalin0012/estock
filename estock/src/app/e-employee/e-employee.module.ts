@@ -7,8 +7,7 @@ import { EditEmployeeComponent } from './edit-employee/edit-employee.component';
 import { LeaveEmployeeComponent } from './leave-employee/leave-employee.component';
 import { EEmployeeRoutingModule } from './e-employee-routing.module';
 import { EShareModule } from '../e-share/e-share.module';
-
-
+import {AgGridModule} from "ag-grid-angular";
 
 @NgModule({
   declarations: [
@@ -21,7 +20,8 @@ import { EShareModule } from '../e-share/e-share.module';
   imports: [
     CommonModule,
     EEmployeeRoutingModule,
-    EShareModule
+    EShareModule,
+    AgGridModule.withComponents([]),
   ]
 })
 export class EEmployeeModule { }

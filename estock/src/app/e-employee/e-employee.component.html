@@ -1,1 +1,3 @@
-<p>e-employee works!</p>
+<div class="page-wrapper" (resized)="onResize($event)" [ngStyle]="{ 'height' : innerHeight }">
+  <router-outlet></router-outlet>
+</div>
