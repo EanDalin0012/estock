@@ -13,7 +13,6 @@ import { SrcComponent } from './component/src/src.component';
   ],
   imports: [
     CommonModule,
-    AgGridModule.withComponents([]),
   ],
   exports: [
     FormsModule,

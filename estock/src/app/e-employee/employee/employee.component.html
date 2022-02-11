@@ -60,12 +60,21 @@
 
                 <div class="col-md-4 col-sm-12">
                   <div class="form-group">
-                    <select class="form-control show-tick form-control-sm">
-                      <option >Select Request Type</option>
-                      <option >Super Admin</option>
-                      <option >Admin</option>
-                      <option >Employee</option>
-                    </select>
+                    <select class="form-control" id="service" style="position: relative;">
+                          <option value="">All</option>
+                          <option value="1">Certificate of Employment(COE)</option>
+                          <option value="2">Leave Permission Letter</option>
+                          <option value="3">Bank Statement</option>
+                          <option value="4">Payslip</option>
+                          <option value="5">Stationary</option>
+                          <option value="6">Change Payroll Account</option>
+                          <option value="7">Business Card</option>
+                          <option value="8">Access Card &amp; Employee ID Card</option>
+                          <option value="9">Club Card</option>
+                          <option value="10">SIM Card</option>
+                          <option value="11">Car Booking</option>
+                          <option value="12">Overtime (OT)</option>
+                      </select>
                   </div>
                 </div>
 
@@ -109,12 +118,18 @@
             <div  class="card-body">
               <div class="row clearfix">
                 <div  class="col-md-4 col-sm-12">
-                  <div  class="form-group">
-                    <button class="btn btn-sm btn-primary float-left" type="button" style="width: 45%;">
+                  <div class="task-assign">
+                    <a class="task-complete-btn task-completed" href="javascript:void(0);" (click)="onNewRequest()" style="margin-bottom: 5px;">
+                      <i class="material-icons">check</i> Add New Request
+                    </a>
+                  </div>
+
+                  <!-- <div  class="form-group">
+                    <button (click)="onNewRequest()" class="btn btn-sm btn-primary float-left" type="button" style="width: 45%;">
                       <i class="fa fa-plus-circle"></i>
                       Add New Request
                     </button>
-                  </div>
+                  </div> -->
                 </div>
 
                 <ag-grid-angular

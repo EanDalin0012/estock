@@ -1,3 +1,8 @@
 export interface EmployeeRequest {
-  id: number;
+  id: string;
+  requester: string;
+  position: string;
+  department: string;
+  purspose: string;
+  status: string;
 }

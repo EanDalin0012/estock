@@ -1,0 +1,275 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 class="page-title">Welcome Admin!</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-box">
+    <div class="task-wrapper" style="padding: 20px 0px;">
+      <div class="task-list-container">
+
+        <div class="task-list-body">
+
+          <ul id="task-list">
+            <li class="task">
+              <div class="task-container">
+                <h3>OverTime(OT)</h3>
+              </div>
+            </li>
+
+            <li class="task">
+              <div class="task-container">
+                <span class="task-action-btn task-check">
+                  <span class="action-circle large complete-btn" title="Mark Complete">
+                    <i class="material-icons">check</i>
+                  </span>
+                </span>
+                <span class="task-label">Only approved OverTime will include in Payroll</span>
+              </div>
+            </li>
+
+            <li class="task">
+              <div class="task-container">
+                <span class="task-action-btn task-check">
+                  <span class="action-circle large complete-btn" title="Mark Complete">
+                    <i class="material-icons">check</i>
+                  </span>
+                </span>
+                <span class="task-label">OT Calculatation</span>
+
+              </div>
+            </li>
+
+            <li class="task">
+
+              <div class="task-container">
+                <div class="col-md-4 col-sm-12 float-left" style="padding-right: 5px;">
+                  <div class="form-group">
+                    <label>Request ID</label>
+                    <input disabled type="text" placeholder="From" class="form-control form-control-sm" value="OT-2020-00001">
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12 float-left" style="padding-right: 5px;">
+                  <div class="form-group">
+                    <label>Employee Name</label>
+                    <input disabled type="text" placeholder="From" value="Ean Dalin" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12 float-left" style="padding-right: 5px;">
+                  <div class="form-group">
+                    <label>Employee ID</label>
+                    <input disabled type="text" placeholder="From" value="410" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="task">
+
+              <div class="task-container">
+                <div class="col-md-4 col-sm-12 float-left" style="padding-right: 5px;">
+                  <div class="form-group">
+                    <label>Position</label>
+                    <input disabled type="text" placeholder="From" class="form-control form-control-sm" value="API Developer">
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12 float-left" style="padding-right: 5px;">
+                  <div class="form-group">
+                    <label>Department</label>
+                    <input disabled type="text" placeholder="From" value="Technology" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12 float-left" style="padding-right: 5px;">
+                  <div class="form-group">
+                    <label>Base Location</label>
+                    <input disabled type="text" placeholder="From" value="Phnom Penh" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+
+        </div>
+        <div class="task-list-footer">
+          <div class="new-task-wrapper">
+            <textarea id="new-task" placeholder="Enter new task here. . ."></textarea>
+            <span class="error-message hidden">You need to enter a task first</span>
+            <span class="add-new-task-btn btn" id="add-task">Add Task</span>
+            <span class="btn" id="close-task-panel">Close</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="notification-popup hide">
+      <p>
+        <span class="task"></span>
+        <span class="notification-text"></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+        <div class="card leave-box">
+            <div  class="card-body">
+              <div class="row clearfix">
+
+                <h3>OT Details</h3>
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group">
+                    <label>Date</label>
+                    <input type="text" placeholder="Date" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div  class="col-md-4 col-sm-12">
+                  <div  class="form-group">
+                    <label>Start Time</label>
+                    <input type="text" placeholder="Start Time" class="form-control form-control-sm">
+                  </div>
+                </div>
+                <div  class="col-md-4 col-sm-12">
+                  <div  class="form-group">
+                    <label>End Time</label>
+                    <input type="text" placeholder="End Time" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="form-group">
+                    <label>Total OT</label>
+                    <input type="text" placeholder="0" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div  class="col-md-4 col-sm-12">
+                  <div  class="form-group">
+                    <label>OT Type</label>
+                    <select class="form-control show-tick form-control-sm">
+                      <option >Select Type</option>
+                      <option >Holiday OT</option>
+                      <option >Normal OT (Mon-Fri)</option>
+                      <option >Day off/Night OT (10pm-5am)</option>
+                    </select>
+                  </div>
+                </div>
+                <div  class="col-md-4 col-sm-12">
+                  <div  class="form-group">
+                    <label>Purspose</label>
+                    <input type="text" placeholder="Purspose" class="form-control form-control-sm">
+                  </div>
+                </div>
+
+                <div  class="col-sm-12">
+                  <div class="float-left"></div>
+                  <div class="task-assign" style="float: right !important;">
+                    <a class="task-complete-btn task-completed" href="javascript:void(0);">
+                      <i class="fa fa-plus-circle"></i>
+                      Add OT Details
+                    </a>
+                  </div>
+                  <!-- <button class="btn btn-sm btn-primary float-left" type="button" style="float: right !important;">
+                    <i class="fa fa-plus-circle"></i>
+                    Apply
+                  </button> -->
+                </div>
+
+              </div>
+            </div>
+
+            <div style="padding: 0px 50px;">
+              <ag-grid-angular
+                #agGrid
+                style="width: 100%; height: 500px;"
+                id="myGrid"
+                class="ag-theme-alpine"
+                [modules]="modules"
+                [columnDefs]="columnDefs"
+                [frameworkComponents]="frameworkComponents"
+                [defaultColDef]="defaultColDef"
+                [rowData]="rowData"
+                [rowSelection]="rowSelection"
+                (selectionChanged)="onSelectionChanged($event)"
+                (cellDoubleClicked)="onCellDoubleClicked($event)"
+                (gridReady)="onGridReady($event)"
+                [isRowSelectable]="isRowSelectable"
+                [pagination]="pagination"
+                [paginationPageSize]="paginationPageSize"
+                [enableRangeSelection]="true"
+                (cellValueChanged)="onCellValueChanged($event)"
+              ></ag-grid-angular>
+            </div>
+
+            <div class="row" style="padding: 30px 50px 30px 50px;">
+              <div class="col-sm-12">
+                <div>
+                  <h4 class="m-b-10"><strong>OT Request Summary</strong></h4>
+                  <table class="table table-bordered">
+                    <tbody>
+                      <tr>
+                        <td><strong>Normal OT (Mon-Fri)</strong> <span class="float-right">0 Hr</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Holiday OT</strong> <span class="float-right"> 0 Hr</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Day off/Night OT (10pm-5am)</strong> <span class="float-right"> 0 Hr</span></td>
+                      </tr>
+                      <tr>
+                        <td><strong>Total</strong> <span class="float-right">0 Hr</span></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <div class="col-sm-12">
+                <p><strong>Net Salary: $59698</strong> (Fifty nine thousand six hundred and ninety eight only.)</p>
+              </div>
+            </div>
+
+            <div class="task-assign" style="float: right !important;">
+              <a class="task-complete-btn task-completed float-right" href="javascript:void(0);">
+                <i class="fa fa-plus-circle"></i>
+                Submit
+              </a>
+
+              <a class="task-complete-btn task-completed float-right" href="javascript:void(0);">
+                <i class="fa fa-plus-circle"></i>
+                Save
+              </a>
+
+              <a class="task-complete-btn float-right btn-primary" href="javascript:void(0);" style="background-color: #f10e1d;
+              /* border-color: #f10e1d; */
+              color: white;">
+              <i class="fa-regular fa-aperture"></i>
+                Cancel
+              </a>
+
+
+            </div>
+        </div>
+      </div>
+  </div>
+
+</div>

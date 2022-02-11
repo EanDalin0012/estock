@@ -4,6 +4,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { EEmployeeComponent } from './e-employee.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { FormEmployeeComponent } from './form-employee/form-employee.component';
+import { OtEmployeeComponent } from './ot-employee/ot-employee.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
       { path: '', component: EmployeeComponent},
       { path: 'add', component: AddEmployeeComponent},
       { path: 'form', component: FormEmployeeComponent},
+      { path: 'ot-form', component: OtEmployeeComponent},
     ]
   }
 ];

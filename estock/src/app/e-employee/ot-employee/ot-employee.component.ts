@@ -8,13 +8,14 @@ import { UserInfo } from 'src/app/e-share/data/user-inf';
 import { EmployeeRequest } from 'src/app/e-share/data/employee-request';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { EmployeeOT } from 'src/app/e-share/data/employee-OT';
 
 @Component({
-  selector: 'app-employee',
-  templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.css']
+  selector: 'app-ot-employee',
+  templateUrl: './ot-employee.component.html',
+  styleUrls: ['./ot-employee.component.css']
 })
-export class EmployeeComponent implements OnInit {
+export class OtEmployeeComponent implements OnInit {
 
   pagination = true;
   paginationPageSize = 20;
@@ -30,7 +31,7 @@ export class EmployeeComponent implements OnInit {
 
   pinnedTopRowData: any;
   pinnedBottomRowData: any;
-  employeeRequests: EmployeeRequest[] = [];
+  employeeOTs: EmployeeOT[] = [];
 
   constructor(
     private hTTPService: HTTPService,
@@ -48,29 +49,28 @@ export class EmployeeComponent implements OnInit {
     this.inquiry();
     this.columnDefs = [
       {
-        headerName: 'Request Type',
-        field: 'id', minWidth: 50, width: 50
+        headerName: 'Date',
+        field: 'date', minWidth: 50, width: 50,
       },
       {
-        headerName: 'Requester',
-        field: 'requester'
+        headerName: 'Start Time',
+        field: 'startTime'
       },
       {
-        headerName: 'Position',
-        field: 'position',
-        cellRenderer: 'status'
+        headerName: 'End Time',
+        field: 'endTime',
       },
       {
-        headerName: 'Department',
-        field: 'department'
+        headerName: 'Total OT',
+        field: 'totalOT'
       },
       {
-        headerName: 'Purspose',
-        field: 'purspose'
+        headerName: 'OT Type',
+        field: 'OTtype'
       },
       {
-        headerName: 'Status',
-        field: 'status'
+        headerName: 'Purspuse',
+        field: 'purspuse'
       }
     ];
 
@@ -118,30 +118,32 @@ export class EmployeeComponent implements OnInit {
   onGridReady(params:any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    // this.inquiry();
   }
 
   inquiry() {
-    for (let index = 0; index < 100; index++) {
-      this.employeeRequests.push({
-        id: 'OT-2022-0000'+index,
-        requester: 'Ean Dalin '+index,
-        position: 'API Developer',
-        department: 'Technology',
-        purspose: '?',
-        status: 'Approved'
-      });
+    this.employeeOTs = [
+      {
+        date: '',
+        startTime: '',
+        endTime: '',
+        totalOT: '',
+        OTtype: '',
+        purspuse: '',
+      }
+    ];
+    this.rowData = this.employeeOTs ;
     }
-    this.rowData = this.employeeRequests;
+    // this.rowData = this.employeeRequests;
 
-    const api = '/api/user-info';
+    // const api = '/api/user-info';
     // this.hTTPService.Get(TemplateAPI.USER_INFO.URL).then(response =>{
     //   console.log("response", response)
     //   this.rowData = response;
     // });
-  }
+  // }
 
   onNewRequest() {
     this.router.navigate(['/employee-request/form']);
   }
+
 }

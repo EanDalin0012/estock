@@ -9,7 +9,7 @@ import { EEmployeeRoutingModule } from './e-employee-routing.module';
 import { EShareModule } from '../e-share/e-share.module';
 import {AgGridModule} from "ag-grid-angular";
 import { FormEmployeeComponent } from './form-employee/form-employee.component';
-
+import { OtEmployeeComponent } from './ot-employee/ot-employee.component';
 @NgModule({
   declarations: [
     EEmployeeComponent,
@@ -17,7 +17,8 @@ import { FormEmployeeComponent } from './form-employee/form-employee.component';
     AddEmployeeComponent,
     EditEmployeeComponent,
     LeaveEmployeeComponent,
-    FormEmployeeComponent
+    FormEmployeeComponent,
+    OtEmployeeComponent
   ],
   imports: [
     CommonModule,
