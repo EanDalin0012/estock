@@ -61,6 +61,24 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'sale',
+        loadChildren: () => import('./e-sale/e-sale.module').then(m => m.ESaleModule)
+      }
+    ]
+  },
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'report',
+        loadChildren: () => import('./e-report/e-report.module').then(m => m.EReportModule)
+      }
+    ]
+  },
   // { path: 'announce/4error', component: Error4Component }, ETypeModule
   // { path: 'error500', component: Error500Component },
   // { path: 'error403', component: Error403Component },
