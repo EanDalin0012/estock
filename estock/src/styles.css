@@ -8453,6 +8453,23 @@ height: 300px; width:500px
   transition: background 200ms ease;
 }
 
+.margin-right-10px{
+  margin-right: 10px;
+}
+
+.read-color{
+  background-color: #f43b48;
+    color: white;
+}
+
+.btn-save {
+  width: 120px;
+  text-align: center;
+  vertical-align: bottom;
+  display: inline-block;
+}
+
+
 @import "ag-grid-community/dist/styles/ag-grid.css";
 @import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 

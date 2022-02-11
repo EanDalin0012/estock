@@ -43,7 +43,25 @@ const routes: Routes = [
     ]
   },
 
-  // { path: 'announce/4error', component: Error4Component },
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'product',
+        loadChildren: () => import('./e-product/e-product.module').then(m => m.EProductModule)
+      }
+    ]
+  },
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'type',
+        loadChildren: () => import('./e-type/e-type.module').then(m => m.ETypeModule)
+      }
+    ]
+  },
+  // { path: 'announce/4error', component: Error4Component }, ETypeModule
   // { path: 'error500', component: Error500Component },
   // { path: 'error403', component: Error403Component },
   // { path: '**', component: Error404Component },
