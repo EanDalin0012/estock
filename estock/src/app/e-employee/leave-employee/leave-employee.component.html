@@ -13,39 +13,25 @@
 
 
   <div class="chat-box card-0">
-    <div class="task-wrapper" style="padding: 20px 0px;">
-      <div class="task-list-container">
 
-        <div class="task-list-body">
           <div class="task-container">
             <h3>Request Type</h3>
           </div>
 
-          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
             <div class="col-md-3 float-left" style="padding-right: 5px;">
               <div class="form-group">
-                <a class="task-complete-btn task-completed" href="javascript:void(0);" style="background-color: #6B8E23;">
-                  <img src="assets/icon/circle-regular.svg" class="svg-icon">
+                <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #6B8E23;">
+                  <i class="fa-regular fa-circle-dot"></i>
                   Annaual Leave
                 </a>
               </div>
 
             </div>
-          </form>
 
           <div class="col-md-3 float-left" style="padding-right: 5px;">
             <div class="form-group">
-              <a class="task-complete-btn task-completed" href="javascript:void(0);" style="background-color: #6B8E23;">
-                <i class="fa-regular fa-circle"></i>
-                Annaual Leave
-              </a>
-            </div>
-          </div>
-
-          <div class="col-md-3 float-left" style="padding-right: 5px;">
-            <div class="form-group">
-              <a class="task-complete-btn task-completed" href="javascript:void(0);">
-                <i class="fa fa-plus-circle"></i>
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #6A5ACD;">
+                <i class="fa-regular fa-circle-check"></i>
                 Compensatory Leave
               </a>
             </div>
@@ -53,8 +39,8 @@
 
           <div class="col-md-3 float-left" style="padding-right: 5px;">
             <div class="form-group">
-              <a class="task-complete-btn task-completed" href="javascript:void(0);">
-                <i class="fa fa-plus-circle"></i>
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #00008B">
+                <i class="fa-regular fa-circle-dot"></i>
                 Election Leave
               </a>
             </div>
@@ -62,31 +48,220 @@
 
           <div class="col-md-3 float-left" style="padding-right: 5px;">
             <div class="form-group">
-              <a class="task-complete-btn task-completed" href="javascript:void(0);" style="background-color: #6B8E23;">
-                <i class="fa-solid fa-circle"></i>
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #FF4500">
+                <i class="fa-regular fa-circle-dot"></i>
                 Long Sick Leave
               </a>
             </div>
           </div>
 
-        </div>
-        <div class="task-list-footer">
-          <div class="new-task-wrapper">
-            <textarea id="new-task" placeholder="Enter new task here. . ."></textarea>
-            <span class="error-message hidden">You need to enter a task first</span>
-            <span class="add-new-task-btn btn" id="add-task">Add Task</span>
-            <span class="btn" id="close-task-panel">Close</span>
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #20B2AA;">
+                <i class="fa-regular fa-circle-dot"></i>
+                Maternity Leave
+              </a>
+            </div>
           </div>
-        </div>
 
-      </div>
-    </div>
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #2E8B57">
+                <i class="fa-regular fa-circle-dot"></i>
+               Paternity Leave
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #DAA520">
+                <i class="fa-regular fa-circle-dot"></i>
+               Sick Leave
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #FF1493">
+                <i class="fa-regular fa-circle-dot"></i>
+                Spacial Leave
+              </a>
+            </div>
+          </div>
+
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #795548">
+                <i class="fa-regular fa-circle-dot"></i>
+                Unpaid Leave
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #BE9003">
+                <i class="fa-regular fa-circle-dot"></i>
+                Work At Office
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn leave-color" href="javascript:void(0);" style="background-color: #4671C4">
+                <i class="fa-regular fa-circle-dot"></i>
+                Work From Home
+              </a>
+            </div>
+          </div>
+
+          <div class="row col-md-12">
+            <h3>Annual Leave</h3>
+          </div>
+
+          <div class="row col-md-12">
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Leave Entitlement</label>
+                <input type="text" value="18" placeholder="Date" class="form-control form-control-sm">
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Leave Balance</label>
+                <input type="text" value="18" placeholder="Date" class="form-control form-control-sm">
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Leave Taken</label>
+                <input type="text" value="18" placeholder="Date" class="form-control form-control-sm">
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row col-md-12">
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>From Date</label>
+                <input type="date"  placeholder="From Date" class="form-control form-control-sm">
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Shift</label>
+                <select class="form-control show-tick form-control-sm">
+                  <option >Morning</option>
+                  <option >Afternoon</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row col-md-12">
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>To Date</label>
+                <input type="date"  placeholder="To Date" class="form-control form-control-sm">
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <div class="form-group">
+                <label>Shift</label>
+                <select class="form-control show-tick form-control-sm">
+                  <option >Afternoon</option>
+                  <option >Morning</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+
+
+          <div class="row col-md-12">
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Reason</label>
+                <input type="text"  placeholder="Reason" class="form-control form-control-sm">
+              </div>
+            </div>
+
+            <div  class="col-sm-12">
+              <div class="float-left"></div>
+              <div class="task-assign" style="float: right !important;">
+                <a class="task-complete-btn task-completed" href="javascript:void(0);">
+                  <i class="fa fa-plus-circle"></i>
+                  Submit
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+
     <div class="notification-popup hide">
       <p>
         <span class="task"></span>
         <span class="notification-text"></span>
       </p>
     </div>
+  </div>
+
+  <div class="chat-box card-0" style="margin-top: 15px;">
+
+    <div class="task-container">
+      <h3>Request Type</h3>
+    </div>
+
+    <div class="row col-md-12">
+
+      <div class="col-md-4 col-sm-12">
+        <div class="form-group">
+          <label>Request Type</label>
+          <select class="form-control show-tick form-control-sm">
+            <option >Annaual Leave</option>
+            <option >Compensatory Leave</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+      <ag-grid-angular
+        #agGrid
+        style="width: 100%; height: 500px;"
+        id="myGrid"
+        class="ag-theme-alpine"
+        [modules]="modules"
+        [columnDefs]="columnDefs"
+        [frameworkComponents]="frameworkComponents"
+        [defaultColDef]="defaultColDef"
+        [rowData]="rowData"
+        [rowSelection]="rowSelection"
+        (selectionChanged)="onSelectionChanged($event)"
+        (cellDoubleClicked)="onCellDoubleClicked($event)"
+        (gridReady)="onGridReady($event)"
+        [isRowSelectable]="isRowSelectable"
+        [pagination]="pagination"
+        [paginationPageSize]="paginationPageSize"
+        [enableRangeSelection]="true"
+        (cellValueChanged)="onCellValueChanged($event)"
+      ></ag-grid-angular>
+
   </div>
 
 </div>

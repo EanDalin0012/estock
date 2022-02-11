@@ -5,7 +5,6 @@ import {AllCommunityModules} from "@ag-grid-community/all-modules";
 import {ColDef} from "ag-grid-community";
 import { TemplateAPI } from 'src/app/e-share/constants/common.api';
 import { UserInfo } from 'src/app/e-share/data/user-inf';
-import { EmployeeRequest } from 'src/app/e-share/data/employee-request';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EmployeeOT } from 'src/app/e-share/data/employee-OT';
