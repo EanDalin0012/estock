@@ -114,114 +114,57 @@ export class AuthInterceptor implements HttpInterceptor {
       // ------------------------------------------------------------------
       Utils.clearSecureStorage();
       console.log('HttpErrorResponse', error);
+      let body = {
+        resultCode: '404',
+        resultMessage:'Can not connect to server.',
+        header:{'result':false, 'resultCode': '' },
+        body:{
+
+        }
+      };
+
       $("div.loading").addClass("none");
       // environment.production ? (() => '')() : console.log(req.url + " reqeusting failed. " );
       // console.log("Http Response Error");
       // console.log(error);
-      let httpErrorCode;
-      // if (error instanceof HttpErrorResponse) {
-      if (error.status){
-        httpErrorCode = error.status;
-      } else {
-        httpErrorCode = '999999';
-      }
+
 
       console.log(error.status);
 
       if(error.status === 0) {
-        this.showErrMsg('ERR_CONNECTION_REFUSED');
+        body.resultCode = '000'
+        body.resultMessage = 'Can not connect to server.';
       }
       if(error.status === 401) {
-        this.showErrMsg(error.error.error_description);
-        this.zone.run(() =>  this.router.navigate(['/login'],{ replaceUrl: true }));
-        return Observable.of(new HttpResponse({body:{ 'header':{'result':false, 'resultCode': httpErrorCode },'body':{}} }));
+        body.resultCode = '401'
+        body.resultMessage = 'UnAuthorization Server.';
+        if(error.error.error === 'invalid_token') {
+          body.resultMessage = 'Invalid Token';
+        }
+        // this.showErrMsg(error.error.error_description);
+        // this.zone.run(() =>  this.router.navigate(['/login'],{ replaceUrl: true }));
+
+        return Observable.of(new HttpResponse({body:body }));
       }
       if(error.status === 404) {
-        this.toastr.error(this.translate.instant('serverResponseCode.label.apiNotFound'), "Error",{
-          timeOut: 5000,
-        });
-        return Observable.of(new HttpResponse({body:{
-          'header':{'result':false, 'resultCode': httpErrorCode },
-          'result': {
-            responseCode: '404',
-            responseMessage: 'invalid_token'
-          },
-          'body':{
-
-          }
-        } }));
+        body.resultCode = '404'
+        body.resultMessage = 'API not found.';
+        return Observable.of(new HttpResponse({body:body }));
+      }
+      if(error.status === 500) {
+        body.resultCode = '404'
+        body.resultMessage = 'Server Error.';
+        return Observable.of(new HttpResponse({body:body }));
       }
 
-      if(error.status == 401 && error.error.error === 'invalid_token') {
-        alert(error.error.error_description);
-
-        // this.modal.alert(
-        //   error.error.error_description,
-        //  {
-        //   modalClass: 'open-alert',
-        //   btnText: this.translate.instant('Common.Button.Confirme'),
-        //   callback :() => {
-
-        //   }
-        // });
-        this.zone.run(() =>  this.router.navigate(['/login'],{ replaceUrl: true }));
-        return Observable.of(new HttpResponse({body:{
-          'header':{'result':false, 'resultCode': httpErrorCode },
-          'result': {
-            responseCode: '401',
-            responseMessage: 'invalid_token'
-          },
-          'body':{
-
-          }
-        } }));
+      if (error.status === 400) {
+        body.resultCode = '400'
+        body.resultMessage = error.error.error_description;
+        return Observable.of(new HttpResponse({body:body }));
       }
-
-      if (error.status === 400 || error.status === 500) {
-        this.zone.run(() =>  this.router.navigate(['/login'],{ replaceUrl: true }));
-        this.showErrMsg(error.error.error_description);
-        return Observable.of(new HttpResponse({body:{
-          'header':{'result':false, 'resultCode': httpErrorCode },
-          'result': {
-            responseCode: '401',
-            responseMessage: 'invalid_token'
-          },
-          'body':{
-
-          }
-        } }));
-      }
-
-
-      // if (error.status >= 400 && error.status < 500) {
-      //   this.zone.run(() =>  this.router.navigate(['announce/4error']));
-      // } else if (error.status >= 500 && error.status < 600) {
-      //   this.zone.run(() =>  this.router.navigate(['announce/5error']));
-      // }
-      // else {
-      //   this.zone.run(() => this.router.navigate(['announce/5error']));
-      // }
-      //  this.showErrMsg("REQFAIL");
-      //  this.zone.run(() => this.router.navigate(['announce/5error']));
-      //   else if (error.status === 0) {
-      //     this.router.navigate(['/index01']);
-      //   }
-      // } else {
-
-      //   this.zone.run(() => this.router.navigate(['announce/5error']));
-      // }
 
       return Observable.of(new HttpResponse({
-        body:{
-          'header':{'result':false, 'resultCode': httpErrorCode },
-          'result': {
-            responseCode: '500',
-            responseMessage: 'Internal Server Error'
-          },
-          'body':{
-
-          }
-        }
+        body:body
       }));
     }) as any;
   }

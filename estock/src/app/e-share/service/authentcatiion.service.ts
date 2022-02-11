@@ -49,7 +49,7 @@ export class AuthentcatiionService {
               resovle(result);
             }
           }).catch((err) => {
-
+              console.log('err', err);
           });
         }
       });
@@ -167,10 +167,14 @@ export class AuthentcatiionService {
 
       this.httpClient.post(uri, formData, {
           headers: new HttpHeaders(httpOptionsObj),
-        }).subscribe((auth) => {
+        }).subscribe((auth: any) => {
           console.log("auth", auth);
+          if(auth && auth.resultCode) {
+            alert(auth.resultMessage);
+          } else {
+            resovle(auth);
+          }
 
-          resovle(auth);
         });
     });
     }
