@@ -43,7 +43,8 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",
               "node_modules/ng-drag-drop/style.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/fontawesome-free/css/all.min.css"
             ],
             "scripts": [
               "src/assets/js/jquery-3.2.1.min.js",
@@ -52,7 +53,8 @@
               "src/assets/js/jquery.slimscroll.min.js",
               "src/assets/js/jquery.dataTables.min.js",
               "src/assets/js/dataTables.bootstrap4.min.js",
-              "src/assets/js/select2.min.js"
+              "src/assets/js/select2.min.js",
+              "src/assets/fontawesome-free/js/all.min.js"
             ]
           },
           "configurations": {

@@ -3,11 +3,89 @@
   <div class="page-header">
     <div class="row">
       <div class="col-sm-12">
-        <h3 class="page-title">Employee Service Request</h3>
+        <h3 class="page-title">Employee Request Leave</h3>
         <ul class="breadcrumb">
           <li class="breadcrumb-item active">Add New Request</li>
         </ul>
       </div>
+    </div>
+  </div>
+
+
+  <div class="chat-box card-0">
+    <div class="task-wrapper" style="padding: 20px 0px;">
+      <div class="task-list-container">
+
+        <div class="task-list-body">
+          <div class="task-container">
+            <h3>Request Type</h3>
+          </div>
+
+          <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+            <div class="col-md-3 float-left" style="padding-right: 5px;">
+              <div class="form-group">
+                <a class="task-complete-btn task-completed" href="javascript:void(0);" style="background-color: #6B8E23;">
+                  <img src="assets/icon/circle-regular.svg" class="svg-icon">
+                  Annaual Leave
+                </a>
+              </div>
+
+            </div>
+          </form>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn task-completed" href="javascript:void(0);" style="background-color: #6B8E23;">
+                <i class="fa-regular fa-circle"></i>
+                Annaual Leave
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn task-completed" href="javascript:void(0);">
+                <i class="fa fa-plus-circle"></i>
+                Compensatory Leave
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn task-completed" href="javascript:void(0);">
+                <i class="fa fa-plus-circle"></i>
+                Election Leave
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-3 float-left" style="padding-right: 5px;">
+            <div class="form-group">
+              <a class="task-complete-btn task-completed" href="javascript:void(0);" style="background-color: #6B8E23;">
+                <i class="fa-solid fa-circle"></i>
+                Long Sick Leave
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="task-list-footer">
+          <div class="new-task-wrapper">
+            <textarea id="new-task" placeholder="Enter new task here. . ."></textarea>
+            <span class="error-message hidden">You need to enter a task first</span>
+            <span class="add-new-task-btn btn" id="add-task">Add Task</span>
+            <span class="btn" id="close-task-panel">Close</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="notification-popup hide">
+      <p>
+        <span class="task"></span>
+        <span class="notification-text"></span>
+      </p>
     </div>
   </div>
 

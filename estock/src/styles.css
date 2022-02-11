@@ -8441,6 +8441,18 @@ height: 300px; width:500px
   float: right !important;
 }
 
+.card-0 {
+  background: #fff;
+  display: table;
+  background: #fff;
+  padding: 8px 15px;
+  width: 100%;
+  border: 1px solid #eaeaea;
+  box-sizing: border-box;
+  position: relative;
+  transition: background 200ms ease;
+}
+
 @import "ag-grid-community/dist/styles/ag-grid.css";
 @import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
