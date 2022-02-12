@@ -290,7 +290,7 @@ export class SaleComponent implements OnInit {
         },
         productName: '',
         newQty: 0,
-        totalQty: 0,
+        totalQty: null,
         total: 0
       }
     ]
@@ -313,13 +313,12 @@ export class SaleComponent implements OnInit {
   }
 
   onChangeSaleProductType(event: any) {
-    console.log(this.saleProductType);
     this.total = this.saleProductType.total;
-    this.totalStr = this.total + ' $';
+    this.totalStr =  PipeUtil.amount(this.total) + ' $';
   }
 
   inputQty(event: any) {
-    if(event.target.value) {
+    if(event.target.value && Number(event.target.value > 0)) {
       this.newQty = Number(event.target.value);
       this.total = (Number(this.saleProductType.qty) +this.newQty ) * this.saleProductType.price;
       this.totalStr = PipeUtil.amount(this.total) + ' $';
@@ -353,6 +352,10 @@ export class SaleComponent implements OnInit {
       this.gridApi.setRowData(this.rowData);
 
       console.log(this.saleDetails);
+  }
+
+  btnConfirm() {
+
   }
 
 }
