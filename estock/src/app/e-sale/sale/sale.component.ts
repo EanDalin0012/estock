@@ -12,6 +12,8 @@ import { SaleProductTypeDetail } from 'src/app/e-share/data/sale-product-type-dt
 import { SaleProductType } from 'src/app/e-share/data/sale-product-type';
 import { SaleDetail } from 'src/app/e-share/data/sale-dt';
 import { PipeUtil } from 'src/app/e-share/util/pipe-util';
+import { Utils } from 'src/app/e-share/util/utils.static';
+declare const $: any;
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
@@ -46,6 +48,8 @@ export class SaleComponent implements OnInit {
   totalStr: string = '';
   newQty: number = 0;
   paidAmount: number = 0;
+
+  isCustomer: boolean = true;
 
   constructor(
     private hTTPService: HTTPService,
@@ -354,8 +358,28 @@ export class SaleComponent implements OnInit {
       console.log(this.saleDetails);
   }
 
-  btnConfirm() {
-
+  isSelectCustomer(isCustomer: boolean) {
+    this.isCustomer = isCustomer;
   }
 
+  btnToDo() {
+    $("#add_movie_type").modal("show");
+  }
+
+  btnConfirm() {
+    $("#add_movie_type").modal("hide");
+      const data = {
+        isCustomer: this.isCustomer,
+        saleDetails: this.saleDetails,
+        customerInfo: {
+          phone: '038983',
+          customerName: 'Ean Dalin',
+        },
+        member: {
+          name: '',
+        }
+      }
+      Utils.setSecureStorage('sale-info', data);
+      this.router.navigate(['/sale/sale-invoice']);
+  }
 }

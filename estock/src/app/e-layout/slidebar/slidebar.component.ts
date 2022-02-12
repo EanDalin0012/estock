@@ -176,6 +176,12 @@ export class SlidebarComponent implements OnInit {
 
   activeSidebar(msg: string) {
     switch (msg) {
+      case 'sale':
+        this.urlComplete.mainUrl = 'sale';
+        this.urlComplete.subUrl = 'sale';
+        break;
+
+
       case 'user':
         this.urlComplete.mainUrl = msg;
         this.urlComplete.subUrl = msg;
@@ -249,6 +255,10 @@ export class SlidebarComponent implements OnInit {
         break;
     }
 
+  }
+
+  btnSale(){
+    this.router.navigate(['/sale']);
   }
 
 }

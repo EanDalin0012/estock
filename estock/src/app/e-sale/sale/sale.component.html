@@ -120,8 +120,8 @@
 
       <div class="row col-md-12 " style="margin-top: 15px;">
         <div class="task-assign form-group">
-          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnConfirm()">
-            <i class="fa-solid fa-check-double" style="color: #183153;margin-right: 5px;"></i> To Do
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnToDo()">
+            <i class="fa-solid fa-check" style="color: #183153;margin-right: 5px;"></i> To Do
           </a>
         </div>
       </div>
@@ -135,3 +135,79 @@
 
 </div>
 
+
+
+
+<!-- Add Modal -->
+<div id="add_movie_type" class="modal custom-modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h3 class="modal-title">Customer Info</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <ul class="nav nav-tabs nav-tabs-bottom">
+            <li class="nav-item" (click)="isSelectCustomer(true)"><a class="nav-link active" href="#bottom-tab1" data-toggle="tab">Customer</a></li>
+            <li class="nav-item" (click)="isSelectCustomer(false)"><a class="nav-link" href="#bottom-tab2" data-toggle="tab">Member</a></li>
+          </ul>
+
+          <div class="modal-body">
+
+            <ng-container *ngIf="isCustomer === true">
+                <!-- <form> -->
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                          <label>Customer Name <span class="text-danger">*</span></label>
+                          <input  class="form-control form-control-sm" type="text" placeholder="Enter customer name">
+
+                          <!-- <div *ngIf="submitted && f.movieType.errors">
+                              <small class="text-danger"> {{'movieType.message.subMovieTypeRequired' | translate}}</small>
+                          </div> -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <div class="form-group">
+                              <label>Phone <span class="text-danger">*</span></label>
+                              <input class="form-control form-control-sm" type="text" placeholder="Enter phone">
+                          </div>
+                      </div>
+                  </div>
+                <!-- </form> -->
+            </ng-container>
+
+            <ng-container *ngIf="isCustomer === false">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                      <label>Select Member <span class="text-danger">*</span></label>
+                      <select class="form-control show-tick form-control-sm" [(ngModel)]="saleProductTypeDetail" (change)="onChangeProduct($event)">
+                          <option *ngFor="let item of saleProductTypeDetails" [ngValue]="item">{{item.productName}}</option>
+                      </select>
+
+                      <!-- <div *ngIf="submitted && f.movieType.errors">
+                          <small class="text-danger"> {{'movieType.message.subMovieTypeRequired' | translate}}</small>
+                      </div> -->
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <div class="submit-section row">
+              <div class="task-assign form-group">
+                <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnConfirm()">
+                  <i class="fa-solid fa-check-double" style="color: #183153;margin-right: 5px;"></i> Confirm
+                </a>
+              </div>
+            </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /Add Modal -->

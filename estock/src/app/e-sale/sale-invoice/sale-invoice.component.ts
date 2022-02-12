@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DataService } from 'src/app/e-share/service/data.service';
 import { HTTPService } from 'src/app/e-share/service/http.service';
 import {AllCommunityModules} from "@ag-grid-community/all-modules";
@@ -12,13 +12,14 @@ import { SaleProductTypeDetail } from 'src/app/e-share/data/sale-product-type-dt
 import { SaleProductType } from 'src/app/e-share/data/sale-product-type';
 import { SaleDetail } from 'src/app/e-share/data/sale-dt';
 import { PipeUtil } from 'src/app/e-share/util/pipe-util';
+import { Utils } from 'src/app/e-share/util/utils.static';
 
 @Component({
   selector: 'app-sale-invoice',
   templateUrl: './sale-invoice.component.html',
   styleUrls: ['./sale-invoice.component.css']
 })
-export class SaleInvoiceComponent implements OnInit {
+export class SaleInvoiceComponent implements OnInit, OnDestroy {
   pagination = true;
   paginationPageSize = 20;
   gridApi:any;
@@ -58,9 +59,12 @@ export class SaleInvoiceComponent implements OnInit {
     this.dataService.visitParamRouterChange(url[3]);
     this.titleService.setTitle('Employee Request');
   }
+  ngOnDestroy(): void {
+    Utils.removeSecureStorage('sale-info');
+  }
 
   ngOnInit(): void {
-    this.inquiry();
+
     this.columnDefs = [
       {
         headerName: 'Product',
@@ -97,6 +101,16 @@ export class SaleInvoiceComponent implements OnInit {
     this.isRowSelectable = function (rowNode: any) {
       return rowNode.data;
     };
+    const data =  Utils.getSecureStorage('sale-info');
+    if(data) {
+      this.saleDetails = data.saleDetails;
+      console.log(this.saleDetails);
+
+      this.rowData = this.saleDetails;
+    }
+
+    console.log('data', data);
+
   }
 
   onSelectionChanged(event: any) {
@@ -111,7 +125,6 @@ export class SaleInvoiceComponent implements OnInit {
     if(data) {
       this.hTTPService.Post(TemplateAPI.USER_INFO.UPDATE, data).then(response => {
         console.log(response);
-        this.inquiry();
       });
     }
   }
@@ -128,178 +141,8 @@ export class SaleInvoiceComponent implements OnInit {
   onGridReady(params:any) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.inquiry();
     console.log('test');
-
     // this.rowData = this.saleDetails;
-  }
-
-  inquiry() {
-    this.saleProductTypeDetails = [{
-      productId: 1,
-      productName: 'P-White Milk Bath',
-      desc: '',
-      saleProductTypes: [
-        {
-          id: 1,
-          saleProductType: 'Price',
-          qty: 1,
-          price: 15,
-          total: 15
-        },
-        {
-          id: 2,
-          saleProductType: 'Silver',
-          qty: 6,
-          price: 10,
-          total: 60
-        },
-        {
-          id: 3,
-          saleProductType: 'VIP Silver',
-          qty: 15,
-          price: 9.5,
-          total: 142.5
-        },
-        {
-          id: 4,
-          saleProductType: 'Premuim',
-          qty: 35,
-          price: 9,
-          total: 315
-        },{
-          id: 5,
-          saleProductType: 'VIP Premuim',
-          qty: 55,
-          price: 8.5,
-          total: 467.5
-        },{
-          id: 6,
-          saleProductType: 'Gold',
-          qty: 100,
-          price: 8,
-          total: 800
-        },{
-          id: 7,
-          saleProductType: 'VIP Gold',
-          qty: 200,
-          price: 7.5,
-          total: 1500
-        },{
-          id: 8,
-          saleProductType: 'Diamond',
-          qty: 400,
-          price: 7,
-          total: 2800
-        },{
-          id: 9,
-          saleProductType: 'VIP Diamond',
-          qty: 600,
-          price: 6.5,
-          total: 3900
-        },{
-          id: 10,
-          saleProductType: 'Queen',
-          qty: 1000,
-          price: 6,
-          total: 6000
-        },{
-          id: 11,
-          saleProductType: 'VIP Queen',
-          qty: 2000,
-          price: 5.5,
-          total: 11000
-        },{
-          id: 12,
-          saleProductType: 'Super Queen',
-          qty: 3000,
-          price: 5,
-          total: 15000
-        },
-      ]
-    },{
-      productId: 2,
-      productName: 'P-White',
-      desc: '',
-      saleProductTypes: []
-    },{
-      productId: 3,
-      productName: 'Tamarind Scrub',
-      desc: '',
-      saleProductTypes: [
-        {
-          id: 1,
-          saleProductType: 'Price',
-          qty: 1,
-          price: 10,
-          total: 10
-        },{
-          id: 2,
-          saleProductType: 'Silver',
-          qty: 6,
-          price: 5.5,
-          total: 33
-        },{
-          id: 3,
-          saleProductType: 'VIP Silver',
-          qty: 12,
-          price: 5,
-          total: 60
-        },{
-          id: 4,
-          saleProductType: 'Premuin',
-          qty: 60,
-          price: 4.5,
-          total: 270
-        },{
-          id: 5,
-          saleProductType: 'VIP Premuin',
-          qty: 144,
-          price: 4,
-          total: 576
-        },{
-          id: 6,
-          saleProductType: 'Gold',
-          qty: 600,
-          price: 3.5,
-          total: 2100
-        },{
-          id: 7,
-          saleProductType: 'VIP Gold',
-          qty: 1800,
-          price: 3,
-          total: 5400
-        }
-      ]
-    }
-    ];
-
-    this.saleProductTypeDetail = this.saleProductTypeDetails[0];
-    this.saleProductTypes = this.saleProductTypeDetail.saleProductTypes;
-    this.saleProductType = this.saleProductTypes[0];
-    this.total = this.saleProductType.total;
-    this.totalStr = PipeUtil.amount(this.total) + ' $';
-    this.rowData = [
-      {
-        saleProductType: null,
-        saleTypeProduct: '',
-        proudct: {
-          id: 0,
-          productName: '',
-          desc: '',
-        },
-        productName: '',
-        newQty: 0,
-        totalQty: null,
-        total: 0
-      }
-    ]
-
-    const api = '/api/user-info';
-    // this.hTTPService.Get(TemplateAPI.USER_INFO.URL).then(response =>{
-    //   console.log("response", response)
-    //   this.rowData = response;
-    // });
   }
 
   onNewRequest() {
@@ -325,37 +168,12 @@ export class SaleInvoiceComponent implements OnInit {
     }
   }
 
-  btnAdd() {
-      this.saleDetails.push({
-        saleProductType: this.saleProductType,
-        saleTypeProduct: this.saleProductType.saleProductType,
-        proudct: {
-          id: this.saleProductTypeDetail.productId,
-          productName: this.saleProductTypeDetail.productName,
-          desc: this.saleProductTypeDetail.desc,
-        },
-        productName: this.saleProductTypeDetail.productName,
-        newQty: this.newQty ,
-        totalQty: (this.newQty + this.saleProductType.qty),
-        price:  PipeUtil.amount(this.saleProductType.price) + ' $',
-        total: this.total,
-        totalStr: PipeUtil.amount(this.total) + ' $'
-      });
-
-      if(this.saleDetails.length > 0) {
-        this.paidAmount = 0;
-        this.saleDetails.forEach(element => {
-          this.paidAmount += element.total;
-        });
-      }
-      this.rowData = this.saleDetails;
-      this.gridApi.setRowData(this.rowData);
-
-      console.log(this.saleDetails);
-  }
-
   btnConfirm() {
 
+  }
+
+  btnBack() {
+    this.router.navigate(['/sale']);
   }
 
 }

@@ -6,12 +6,14 @@ import { SaleInvoiceComponent } from './sale-invoice/sale-invoice.component';
 import { ESaleRoutingModule } from './e-sale-routing.module';
 import { EShareModule } from '../e-share/e-share.module';
 import {AgGridModule} from "ag-grid-angular";
+import { SaleInfoComponent } from './sale-info/sale-info.component';
 
 @NgModule({
   declarations: [
     ESaleComponent,
     SaleComponent,
-    SaleInvoiceComponent
+    SaleInvoiceComponent,
+    SaleInfoComponent
   ],
   imports: [
     CommonModule,
