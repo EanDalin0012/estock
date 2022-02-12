@@ -34,8 +34,8 @@
         </div>
         <ul>
           <li>Qty : {{saleProductType.qty}}</li>
-          <li>Price : {{saleProductType.price}} $</li>
-          <li>Total : {{saleProductType.total}} $</li>
+          <li>Price : {{saleProductType.price | amount}} $</li>
+          <li>Total : {{saleProductType.total | amount}} $</li>
         </ul>
       </div>
 
@@ -102,10 +102,10 @@
                 <table class="table table-bordered">
                   <tbody>
                     <tr>
-                      <td><strong>Total Amount</strong> <span class="float-right">$ {{paidAmount}}</span></td>
+                      <td><strong>Total Amount</strong> <span class="float-right">$ {{paidAmount | amount}}</span></td>
                     </tr>
                     <tr>
-                      <td><strong>Paid Amount</strong> <span class="float-right">$ {{paidAmount}}</span></td>
+                      <td><strong>Paid Amount</strong> <span class="float-right">$ {{paidAmount | amount}}</span></td>
                     </tr>
                   </tbody>
                 </table>

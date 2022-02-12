@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { SaleProductTypeDetail } from 'src/app/e-share/data/sale-product-type-dt';
 import { SaleProductType } from 'src/app/e-share/data/sale-product-type';
 import { SaleDetail } from 'src/app/e-share/data/sale-dt';
+import { PipeUtil } from 'src/app/e-share/util/pipe-util';
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
@@ -277,7 +278,7 @@ export class SaleComponent implements OnInit {
     this.saleProductTypes = this.saleProductTypeDetail.saleProductTypes;
     this.saleProductType = this.saleProductTypes[0];
     this.total = this.saleProductType.total;
-    this.totalStr = this.total + ' $';
+    this.totalStr = PipeUtil.amount(this.total) + ' $';
     this.rowData = [
       {
         saleProductType: null,
@@ -321,7 +322,7 @@ export class SaleComponent implements OnInit {
     if(event.target.value) {
       this.newQty = Number(event.target.value);
       this.total = (Number(this.saleProductType.qty) +this.newQty ) * this.saleProductType.price;
-      this.totalStr = this.total + ' $';
+      this.totalStr = PipeUtil.amount(this.total) + ' $';
     }
   }
 
@@ -337,9 +338,9 @@ export class SaleComponent implements OnInit {
         productName: this.saleProductTypeDetail.productName,
         newQty: this.newQty ,
         totalQty: (this.newQty + this.saleProductType.qty),
-        price: this.saleProductType.price + ' $',
+        price:  PipeUtil.amount(this.saleProductType.price) + ' $',
         total: this.total,
-        totalStr: this.total + ' $'
+        totalStr: PipeUtil.amount(this.total) + ' $'
       });
 
       if(this.saleDetails.length > 0) {

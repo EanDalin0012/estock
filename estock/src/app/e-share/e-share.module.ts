@@ -5,11 +5,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AvatarModule } from 'ngx-avatar';
 import { AgGridModule } from 'ag-grid-angular';
 import { SrcComponent } from './component/src/src.component';
+import { AmountPipe } from './pipe/amount.pipe';
 
 
 @NgModule({
   declarations: [
     SrcComponent,
+    AmountPipe,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { SrcComponent } from './component/src/src.component';
     ReactiveFormsModule,
     TranslateModule,
     AvatarModule,
+    AmountPipe
   ]
 })
 export class EShareModule {
