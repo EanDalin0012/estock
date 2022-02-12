@@ -50,6 +50,7 @@ export class SaleComponent implements OnInit {
   paidAmount: number = 0;
 
   isCustomer: boolean = true;
+  discount: number =0;
 
   constructor(
     private hTTPService: HTTPService,
@@ -85,6 +86,10 @@ export class SaleComponent implements OnInit {
       {
         headerName: 'Total',
         field: 'totalStr'
+      },
+      {
+        headerName: 'Paid Amount',
+        field: 'paidAmountStr'
       }
     ];
 
@@ -314,11 +319,19 @@ export class SaleComponent implements OnInit {
     console.log(JSON.stringify( event.target.value));
     console.log(this.saleProductTypeDetail);
     this.saleProductTypes = this.saleProductTypeDetail.saleProductTypes;
+
   }
 
   onChangeSaleProductType(event: any) {
-    this.total = this.saleProductType.total;
+    this.total = (this.newQty + this.saleProductType.qty) * this.saleProductType.price;
     this.totalStr =  PipeUtil.amount(this.total) + ' $';
+    // if(this.discount > 0) {
+    //   const discountRate = this.discount / 100;
+    //   const discountedPrice = this.total - (this.total * discountRate) ;
+    //   this.total = discountedPrice;
+    //   this.totalStr = PipeUtil.amount(this.total) + ' $';
+    // }
+
   }
 
   inputQty(event: any) {
@@ -327,6 +340,22 @@ export class SaleComponent implements OnInit {
       this.total = (Number(this.saleProductType.qty) +this.newQty ) * this.saleProductType.price;
       this.totalStr = PipeUtil.amount(this.total) + ' $';
     }
+  }
+
+  inputDisCound(event: any) {
+    this.discount =  Number(event.target.value );
+
+    // console.log(event.target.value );
+    // if(event.target.value && Number(event.target.value > 0)) {
+    //   this.total = (this.newQty + this.saleProductType.qty) * this.saleProductType.price;
+    //   this.totalStr = PipeUtil.amount(this.total) + ' $';
+    // }
+  }
+
+  calculateDiscount(discount: number, totalPrice:number): number {
+    const discountRate = discount / 100;
+    const discountedPrice = totalPrice - (totalPrice * discountRate) ;
+    return discountedPrice;
   }
 
   btnAdd() {
@@ -343,13 +372,16 @@ export class SaleComponent implements OnInit {
         totalQty: (this.newQty + this.saleProductType.qty),
         price:  PipeUtil.amount(this.saleProductType.price) + ' $',
         total: this.total,
-        totalStr: PipeUtil.amount(this.total) + ' $'
+        totalStr: PipeUtil.amount(this.total) + ' $',
+        paidAmount: this.calculateDiscount(this.discount, this.total),
+        paidAmountStr: PipeUtil.amount(this.calculateDiscount(this.discount, this.total)) + ' $',
+        discount: this.discount
       });
 
       if(this.saleDetails.length > 0) {
         this.paidAmount = 0;
         this.saleDetails.forEach(element => {
-          this.paidAmount += element.total;
+          this.paidAmount += element.paidAmount;
         });
       }
       this.rowData = this.saleDetails;

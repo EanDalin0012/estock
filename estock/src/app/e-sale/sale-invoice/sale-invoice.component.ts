@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/e-share/service/data.service';
 import { HTTPService } from 'src/app/e-share/service/http.service';
 import {AllCommunityModules} from "@ag-grid-community/all-modules";
-import {ColDef} from "ag-grid-community";
+import {ColDef, Context} from "ag-grid-community";
 import { TemplateAPI } from 'src/app/e-share/constants/common.api';
 import { UserInfo } from 'src/app/e-share/data/user-inf';
 import { EmployeeRequest } from 'src/app/e-share/data/employee-request';
@@ -13,13 +13,16 @@ import { SaleProductType } from 'src/app/e-share/data/sale-product-type';
 import { SaleDetail } from 'src/app/e-share/data/sale-dt';
 import { PipeUtil } from 'src/app/e-share/util/pipe-util';
 import { Utils } from 'src/app/e-share/util/utils.static';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-sale-invoice',
   templateUrl: './sale-invoice.component.html',
   styleUrls: ['./sale-invoice.component.css']
 })
 export class SaleInvoiceComponent implements OnInit, OnDestroy {
+  @ViewChild('htmlData') htmlData!:ElementRef;
+
   pagination = true;
   paginationPageSize = 20;
   gridApi:any;
@@ -85,6 +88,9 @@ export class SaleInvoiceComponent implements OnInit, OnDestroy {
       {
         headerName: 'Total',
         field: 'totalStr'
+      }, {
+        headerName: 'Paid Amount',
+        field: 'paidAmountStr'
       }
     ];
 
@@ -174,6 +180,24 @@ export class SaleInvoiceComponent implements OnInit, OnDestroy {
 
   btnBack() {
     this.router.navigate(['/sale']);
+  }
+
+  btnDownloadPDF() {
+    const DATA = document.getElementById('htmlData') as HTMLElement;
+    console.log('DATA', DATA);
+
+    html2canvas(DATA).then(canvas => {
+
+        let fileWidth = 208;
+        let fileHeight = canvas.height * fileWidth / canvas.width;
+
+        const FILEURI = canvas.toDataURL('image/png')
+        let PDF = new jsPDF('p', 'mm', 'a4');
+        let position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+
+        PDF.save('angular-demo.pdf');
+      });
   }
 
 }

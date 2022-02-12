@@ -11,4 +11,7 @@ export interface SaleDetail {
   totalQty: number;
   total: number;
   totalStr: string;
+  paidAmount: number;
+  paidAmountStr: string;
+  discount: number;
 }
