@@ -5,7 +5,7 @@
   <div class="page-header">
     <div class="row">
       <div class="col-sm-12">
-        <h3 class="page-title">Sale Type Product</h3>
+        <h3 class="page-title">New Sale</h3>
         <ul class="breadcrumb">
           <li class="breadcrumb-item active">Dashboard</li>
         </ul>
@@ -19,9 +19,8 @@
       <div class="col-md-6 col-sm-12">
         <div class="form-group">
           <label>Select Product</label>
-          <select class="form-control show-tick form-control-sm">
-            <option >Select Product</option>
-            <option >Product 1</option>
+          <select class="form-control show-tick form-control-sm" [(ngModel)]="saleProductTypeDetail" (change)="onChangeProduct($event)">
+              <option *ngFor="let item of saleProductTypeDetails" [ngValue]="item">{{item.productName}}</option>
           </select>
         </div>
       </div>
@@ -29,28 +28,35 @@
       <div class="col-md-6 col-sm-12 pro">
         <div class="form-group" style="margin-bottom: 0px;">
           <label>Select Sale Type Product</label>
-          <select class="form-control show-tick form-control-sm">
-            <option>Price</option>
-            <option>Product 1</option>
+          <select class="form-control show-tick form-control-sm" [(ngModel)]="saleProductType" (change)="onChangeSaleProductType($event)">
+            <option *ngFor="let item of saleProductTypes"  [selected]="item?.id == saleProductType?.id" [ngValue]="item">{{item?.saleProductType}}</option>
           </select>
         </div>
         <ul>
-          <li>Qty: 1</li>
-          <li>Price : 22.00 $</li>
+          <li>Qty : {{saleProductType.qty}}</li>
+          <li>Price : {{saleProductType.price}} $</li>
+          <li>Total : {{saleProductType.total}} $</li>
         </ul>
       </div>
 
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-5 col-sm-12">
         <div class="form-group">
           <label>Qty</label>
-          <input type="text"  placeholder="0" class="form-control form-control-sm">
+          <input type="number" (input)="inputQty($event)" placeholder="0" class="form-control form-control-sm">
         </div>
       </div>
 
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-5 col-sm-12">
+        <div class="form-group">
+          <label>Discount</label>
+          <input type="number" (input)="inputQty($event)" placeholder="0 %" class="form-control form-control-sm">
+        </div>
+      </div>
+
+      <div class="col-md-2 col-sm-12">
         <div class="form-group">
           <label>Total</label>
-          <input type="text" disabled value="22.00 $" placeholder="22.00 $" class="form-control form-control-sm">
+          <input type="text" disabled [(ngModel)]="totalStr"  placeholder="22.00 $" class="form-control form-control-sm">
         </div>
       </div>
 
@@ -60,7 +66,7 @@
 
       <div class="row col-md-12 ">
         <div class="task-assign form-group">
-          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);">
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnAdd()">
             <i class="fa-solid fa-square-plus" style="color: #183153;margin-right: 5px;"></i> Add
           </a>
         </div>
@@ -70,11 +76,9 @@
           <ag-grid-angular
             #agGrid
             style="width: 100%; height: 500px;"
-            id="myGrid"
             class="ag-theme-alpine"
             [modules]="modules"
             [columnDefs]="columnDefs"
-            [frameworkComponents]="frameworkComponents"
             [defaultColDef]="defaultColDef"
             [rowData]="rowData"
             [rowSelection]="rowSelection"
@@ -87,6 +91,39 @@
             [enableRangeSelection]="true"
             (cellValueChanged)="onCellValueChanged($event)"
           ></ag-grid-angular>
+      </div>
+
+      <div class="row col-md-12" style="    float: right;display: block;">
+        <div class="col-md-4" style="float: right; margin-top: 20px;">
+          <div class="row">
+            <div class="col-sm-12">
+              <div>
+                <h4 class="m-b-10"><strong>Total Payment</strong></h4>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <td><strong>Total Amount</strong> <span class="float-right">$ {{paidAmount}}</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Paid Amount</strong> <span class="float-right">$ {{paidAmount}}</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <input type="text"  placeholder="Remark" class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row col-md-12 " style="margin-top: 15px;">
+        <div class="task-assign form-group">
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnAdd()">
+            <i class="fa-solid fa-square-plus" style="color: #183153;margin-right: 5px;"></i> Confirm
+          </a>
+        </div>
       </div>
 
     </div>
