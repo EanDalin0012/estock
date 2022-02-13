@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/e-share/service/data.service';
 import { HTTPService } from 'src/app/e-share/service/http.service';
-import {AllCommunityModules} from "@ag-grid-community/all-modules";
-import {ColDef} from "ag-grid-community";
-import { TemplateAPI } from 'src/app/e-share/constants/common.api';
-import { UserInfo } from 'src/app/e-share/data/user-inf';
+
 import { EmployeeRequest } from 'src/app/e-share/data/employee-request';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -14,6 +11,10 @@ import { SaleDetail } from 'src/app/e-share/data/sale-dt';
 import { PipeUtil } from 'src/app/e-share/util/pipe-util';
 import { Utils } from 'src/app/e-share/util/utils.static';
 declare const $: any;
+import { ColDef, GridReadyEvent } from 'ag-grid-community';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
@@ -21,52 +22,8 @@ declare const $: any;
 })
 export class SaleComponent implements OnInit {
 
-  pagination = true;
-  paginationPageSize = 20;
-  gridApi:any;
-  gridColumnApi :any;
-  public modules: any[] = AllCommunityModules;
-  frameworkComponents: any;
-  defaultColDef: any;
-  columnDefs: ColDef[] = [];
-  rowData: any;
-  rowSelection: any;
-  isRowSelectable: any;
 
-  pinnedTopRowData: any;
-  pinnedBottomRowData: any;
-  employeeRequests: EmployeeRequest[] = [];
-
-  saleProductTypeDetails!: SaleProductTypeDetail[];
-  saleProductTypes!: SaleProductType[];
-
-  saleProductTypeDetail!: SaleProductTypeDetail;
-  saleProductType!: SaleProductType;
-  saleDetails: SaleDetail[] = [];
-
-  total: number = 0;
-  totalStr: string = '';
-  newQty: number = 0;
-  paidAmount: number = 0;
-
-  isCustomer: boolean = true;
-  discount: number =0;
-
-  constructor(
-    private hTTPService: HTTPService,
-    private dataService: DataService,
-    private titleService: Title,
-    private router: Router,
-  ) {
-    const url = (window.location.href).split('/');
-    console.log(url)
-    this.dataService.visitParamRouterChange(url[3]);
-    this.titleService.setTitle('Employee Request');
-  }
-
-  ngOnInit(): void {
-    this.inquiry();
-    this.columnDefs = [
+  public columnDefs: ColDef[] = [
       {
         headerName: 'Product',
         field: 'productName'
@@ -91,57 +48,115 @@ export class SaleComponent implements OnInit {
         headerName: 'Paid Amount',
         field: 'paidAmountStr'
       }
-    ];
 
-    this.defaultColDef = {
-      editable: false,
-      sortable: true,
-      flex: 1,
-      // minWidth: 50,
-      filter: true,
-      resizable: true,
-    };
+  ];
 
-    this.rowSelection = 'multiple';
-    this.isRowSelectable = function (rowNode: any) {
-      return rowNode.data;
-    };
+  public defaultColDef: ColDef = {
+    resizable: true,
+    sortable: true,
+    filter: true,
+  };
+  public rowData!: any[];
+  pagination = true;
+  paginationPageSize = 20;
+  gridApi:any
+
+  employeeRequests: EmployeeRequest[] = [];
+
+  saleProductTypeDetails!: SaleProductTypeDetail[];
+  saleProductTypes!: SaleProductType[];
+
+  saleProductTypeDetail!: SaleProductTypeDetail;
+  saleProductType!: SaleProductType;
+  saleDetails: SaleDetail[] = [];
+
+  total: number = 0;
+  totalStr: string = '';
+  newQty: number = 0;
+  paidAmount: number = 0;
+
+  isCustomer: boolean = true;
+  discount: number =0;
+
+  style: any = {
+    width: '100%',
+    height: '100%',
+    flex: '1 1 auto'
+};
+
+  constructor(
+    private hTTPService: HTTPService,
+    private dataService: DataService,
+    private titleService: Title,
+    private router: Router,
+    private http: HttpClient
+  ) {
+    const url = (window.location.href).split('/');
+    console.log(url)
+    this.dataService.visitParamRouterChange(url[3]);
+    this.titleService.setTitle('Employee Request');
   }
 
-  onSelectionChanged(event: any) {
-    const selectedRows = this.gridApi.getSelectedRows();
-  }
-
-
-  onCellValueChanged(event:any) {
-    console.log('data after changes is: ', event.data);
-    const data = event.data as UserInfo;
-    console.log(data);
-    if(data) {
-      this.hTTPService.Post(TemplateAPI.USER_INFO.UPDATE, data).then(response => {
-        console.log(response);
-        this.inquiry();
-      });
-    }
-  }
-
-  onCellDoubleClicked(event:any) {
-    if(event) {
-      // const jsonString = JSON.stringify(this.lstUser[event.rowIndex]);
-      // const encryptString = EncryptionUtil.encrypt(jsonString.toString()).toString();
-      // Utils.setSecureStorage(LOCAL_STORAGE.UserDetail, encryptString);
-      // this.router.navigate(['account/user-detail']);
-    }
-  }
-
-  onGridReady(params:any) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
+  ngOnInit(): void {
     this.inquiry();
-    console.log('test');
-
-    // this.rowData = this.saleDetails;
   }
+
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+    // this.http
+    //   .get<any[]>('https://www.ag-grid.com/example-assets/olympic-winners.json')
+    //   .subscribe((data) => (this.rowData = data));
+      this.rowData = [
+      {
+        saleProductType: null,
+        saleTypeProduct: '',
+        proudct: {
+          id: 0,
+          productName: '',
+          desc: '',
+        },
+        productName: '',
+        newQty: 0,
+        totalQty: null,
+        total: 0
+      }
+    ]
+  }
+
+  // onSelectionChanged(event: any) {
+  //   const selectedRows = this.gridApi.getSelectedRows();
+  // }
+
+
+  // onCellValueChanged(event:any) {
+  //   console.log('data after changes is: ', event.data);
+  //   const data = event.data as UserInfo;
+  //   console.log(data);
+  //   if(data) {
+  //     this.hTTPService.Post(TemplateAPI.USER_INFO.UPDATE, data).then(response => {
+  //       console.log(response);
+  //       this.inquiry();
+  //     });
+  //   }
+  // }
+
+  // onCellDoubleClicked(event:any) {
+  //   if(event) {
+  //     // const jsonString = JSON.stringify(this.lstUser[event.rowIndex]);
+  //     // const encryptString = EncryptionUtil.encrypt(jsonString.toString()).toString();
+  //     // Utils.setSecureStorage(LOCAL_STORAGE.UserDetail, encryptString);
+  //     // this.router.navigate(['account/user-detail']);
+  //   }
+  // // }
+
+  // onGridReady(params:any) {
+  //   this.gridApi = params.api;
+  //   this.gridColumnApi = params.columnApi;
+  //   this.inquiry();
+  //   console.log('test');
+
+  //   // this.rowData = this.saleDetails;
+  // }
 
   inquiry() {
     this.saleProductTypeDetails = [{
@@ -288,21 +303,21 @@ export class SaleComponent implements OnInit {
     this.saleProductType = this.saleProductTypes[0];
     this.total = this.saleProductType.total;
     this.totalStr = PipeUtil.amount(this.total) + ' $';
-    this.rowData = [
-      {
-        saleProductType: null,
-        saleTypeProduct: '',
-        proudct: {
-          id: 0,
-          productName: '',
-          desc: '',
-        },
-        productName: '',
-        newQty: 0,
-        totalQty: null,
-        total: 0
-      }
-    ]
+    // this.rowData = [
+    //   {
+    //     saleProductType: null,
+    //     saleTypeProduct: '',
+    //     proudct: {
+    //       id: 0,
+    //       productName: '',
+    //       desc: '',
+    //     },
+    //     productName: '',
+    //     newQty: 0,
+    //     totalQty: null,
+    //     total: 0
+    //   }
+    // ]
 
     const api = '/api/user-info';
     // this.hTTPService.Get(TemplateAPI.USER_INFO.URL).then(response =>{

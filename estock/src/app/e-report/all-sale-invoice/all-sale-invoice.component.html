@@ -1,1 +1,42 @@
-<p>all-sale-invoice works!</p>
+
+<!-- Page Content -->
+<div class="content container-fluid">
+
+
+  <div class="page-header">
+    <div class="row">
+      <div class="col-sm-12">
+        <h3 class="page-title">New Sale</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="width: 100%;height: 500px;">
+    <ag-grid-angular
+    style="width: 100%; height: 100%;"
+    class="ag-theme-alpine"
+    [columnDefs]="columnDefs"
+    [debounceVerticalScrollbar]="true"
+    [defaultColDef]="defaultColDef"
+    [rowData]="rowData"
+    [pagination]="pagination"
+    [paginationPageSize]="paginationPageSize"
+    (gridReady)="onGridReady($event)"
+  ></ag-grid-angular>
+  </div>
+</div>
+
+<ag-grid-angular
+style="width: 100%; height: 100%;"
+class="ag-theme-alpine"
+[columnDefs]="columnDefs"
+[debounceVerticalScrollbar]="true"
+[defaultColDef]="defaultColDef"
+[rowData]="rowData"
+[pagination]="pagination"
+(gridReady)="onGridReady($event)"
+></ag-grid-angular>
+

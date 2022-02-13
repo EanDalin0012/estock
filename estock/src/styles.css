@@ -8471,10 +8471,6 @@ height: 300px; width:500px
 .padding-right-0{
   padding-right: 0;
 }
-
-@import "ag-grid-community/dist/styles/ag-grid.css";
-@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
-
 .ag-root-wrapper-body.ag-layout-normal {
   height: 0;
 }

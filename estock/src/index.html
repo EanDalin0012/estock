@@ -545,7 +545,7 @@ $('#loader-wrapper').delay(500).fadeOut('slow');
 
   </script>
 </head>
-<body class="loaded">
+<body class="loaded" style="width: 100%;">
   <div class="main-wrapper">
     <app-root></app-root>
   </div>
@@ -584,6 +584,47 @@ $('#loader-wrapper').delay(500).fadeOut('slow');
   <div class="zloader"></div> -->
 
   <script src="./assets/js/select2.min.js"></script>
+  <script src="https://unpkg.com/core-js-bundle@3.6.5/minified.js">
+  </script>
+  <script src="https://unpkg.com/zone.js@0.11.2/dist/zone.min.js">
+  </script>
+  <script>
+          var appLocation = './';
+          var boilerplatePath = '';
+          var systemJsMap = {
+              "@ag-grid-community/core/dist/styles/ag-grid.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-grid.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-alpine-dark.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-alpine-dark.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-alpine.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-alpine.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-balham-dark.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-balham-dark.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-balham.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-balham.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-blue.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-blue.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-bootstrap.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-bootstrap.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-dark.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-dark.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-fresh.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-fresh.css",
+              "@ag-grid-community/core/dist/styles/ag-theme-material.css": "https://unpkg.com/@ag-grid-community/core@27.0.1/dist/styles/ag-theme-material.css",
+              "@ag-grid-community/react": "https://unpkg.com/@ag-grid-community/react@27.0.1/",
+              "@ag-grid-community/angular": "https://unpkg.com/@ag-grid-community/angular@27.0.0/",
+              "@ag-grid-community/vue": "https://unpkg.com/@ag-grid-community/vue@27.0.0/",
+              "@ag-grid-community/vue3": "https://unpkg.com/@ag-grid-community/vue3@27.0.0/",
+              "ag-grid-community": "https://unpkg.com/ag-grid-community@27.0.1/",
+              "ag-grid-enterprise": "https://unpkg.com/ag-grid-enterprise@27.0.1/",
+              "ag-grid-angular": "https://unpkg.com/ag-grid-angular@27.0.0/",
+              "ag-grid-react": "https://unpkg.com/ag-grid-react@27.0.1/",
+              "ag-grid-vue": "https://unpkg.com/ag-grid-vue@27.0.0/",
+              "ag-grid-vue3": "https://unpkg.com/ag-grid-vue3@27.0.0/"
+          };
+          var systemJsPaths = {
+              "@ag-grid-community/client-side-row-model": "https://unpkg.com/@ag-grid-community/client-side-row-model/dist/client-side-row-model.cjs.js",
+              "@ag-grid-community/core": "https://unpkg.com/@ag-grid-community/core/dist/core.cjs.js",
+              "@ag-grid-community/csv-export": "https://unpkg.com/@ag-grid-community/csv-export/dist/csv-export.cjs.js",
+              "@ag-grid-community/infinite-row-model": "https://unpkg.com/@ag-grid-community/infinite-row-model/dist/infinite-row-model.cjs.js"
+          };
+      </script>
+  <script src="https://unpkg.com/systemjs@0.19.47/dist/system.js">
+  </script>
+  <script src="./assets/js/config.js">
+  </script>
+  <!-- <script>System.import('main.ts').catch(function(err) { console.error(err); });</script> -->
 
 </body>
 </html>
