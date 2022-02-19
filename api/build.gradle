@@ -94,6 +94,11 @@ dependencies {
 
 	implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.2'
 
+//	HTTP Client
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient-cache', version: '4.5.13'
+	implementation group: 'org.ehcache', name: 'ehcache', version: '3.9.9'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

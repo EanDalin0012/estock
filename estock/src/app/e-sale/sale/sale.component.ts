@@ -355,11 +355,19 @@ export class SaleComponent implements OnInit {
       this.total = (Number(this.saleProductType.qty) +this.newQty ) * this.saleProductType.price;
       this.totalStr = PipeUtil.amount(this.total) + ' $';
     }
+
+    if (event.target.value && Number(event.target.value < 0)) {
+      event.target.value = 0;
+    }
   }
 
   inputDisCound(event: any) {
-    this.discount =  Number(event.target.value );
-
+    console.log(event.target.value);
+    if (event.target.value && Number(event.target.value < 0)) {
+      event.target.value = '0 %';
+    } else {
+      this.discount =  Number(event.target.value );
+    }
     // console.log(event.target.value );
     // if(event.target.value && Number(event.target.value > 0)) {
     //   this.total = (this.newQty + this.saleProductType.qty) * this.saleProductType.price;

@@ -182,6 +182,12 @@ export class SaleInvoiceComponent implements OnInit, OnDestroy {
     this.router.navigate(['/sale']);
   }
 
+  btnDownloadPDF1() {
+    this.hTTPService.Get('/api/pdf-exporter/users/export/pdf').then(rest=> {
+      console.log(rest);
+    });
+  }
+
   btnDownloadPDF() {
     const DATA = document.getElementById('htmlData') as HTMLElement;
     console.log('DATA', DATA);

@@ -12,6 +12,9 @@ import { EShareModule } from './e-share/e-share.module';
 import { BlanklayoutComponent } from './e-layout/blanklayout/blanklayout.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AuthInterceptor } from './e-share/service/auth-interceptor.service';
+import { Error404Component } from './error/error404/error404.component';
+import { Error405Component } from './error/error405/error405.component';
+import { Error403Component } from './error/error403/error403.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -22,6 +25,9 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     ELayoutComponent,
     BlanklayoutComponent,
+    Error404Component,
+    Error405Component,
+    Error403Component,
   ],
   imports: [
     BrowserModule,

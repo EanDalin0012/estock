@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlanklayoutComponent } from './e-layout/blanklayout/blanklayout.component';
 import { ELayoutComponent } from './e-layout/e-layout.component';
+import { Error404Component } from './error/error404/error404.component';
 
 const routes: Routes = [
   {
@@ -82,7 +83,7 @@ const routes: Routes = [
   // { path: 'announce/4error', component: Error4Component }, ETypeModule
   // { path: 'error500', component: Error500Component },
   // { path: 'error403', component: Error403Component },
-  // { path: '**', component: Error404Component },
+  { path: '**', component: Error404Component },
   {
     path: '',
     redirectTo: '/home/product',
