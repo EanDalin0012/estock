@@ -23,7 +23,6 @@ const routes: Routes = [
       }
     ]
   },
-
   {
     path: '', component: ELayoutComponent,
     children: [
@@ -32,9 +31,7 @@ const routes: Routes = [
         loadChildren: () => import('./e-user/e-user.module').then(m => m.EUserModule)
       }
     ]
-  },
-
-  {
+  },{
     path: '', component: ELayoutComponent,
     children: [
       {
@@ -42,9 +39,7 @@ const routes: Routes = [
         loadChildren: () => import('./e-employee/e-employee.module').then(m => m.EEmployeeModule)
       }
     ]
-  },
-
-  {
+  },{
     path: '', component: ELayoutComponent,
     children: [
       {
@@ -77,6 +72,15 @@ const routes: Routes = [
       {
         path: 'report',
         loadChildren: () => import('./e-report/e-report.module').then(m => m.EReportModule)
+      }
+    ]
+  },
+  {
+    path: '', component: ELayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
       }
     ]
   },

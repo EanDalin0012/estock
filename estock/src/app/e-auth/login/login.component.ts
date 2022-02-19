@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
       };
       this.authentcatiionService.login(logInfo).then((resp: any) => {
         if(resp) {
-          this.zone.run(() =>  this.router.navigate(['/home/product'], { replaceUrl: true }));
+          this.zone.run(() =>  this.router.navigate(['/dashboard'], { replaceUrl: true }));
           // if(resp.result === false) {
           //   this.isValidLoading = false;
           // } else {
@@ -116,8 +116,8 @@ export class LoginComponent implements OnInit {
 
 }
 
-   
-    
+
+
 function MustMatch(arg0: string, arg1: string): any {
   throw new Error('Function not implemented.');
 }
