@@ -184,11 +184,19 @@ export class SlidebarComponent implements OnInit {
         this.urlComplete.mainUrl = 'stock';
         this.urlComplete.subUrl = 'stock';
         break;
-
       case 'warehouse':
         this.urlComplete.mainUrl = 'warehouse';
         this.urlComplete.subUrl = 'warehouse';
         break;
+      case 'product':
+        this.urlComplete.mainUrl = 'product';
+        this.urlComplete.subUrl = 'product';
+        break;
+      case 'product-import':
+        this.urlComplete.mainUrl = 'product';
+        this.urlComplete.subUrl = 'product-import';
+        break;
+
 
 
       case 'user':
