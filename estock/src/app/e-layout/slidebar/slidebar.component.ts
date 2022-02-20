@@ -180,12 +180,24 @@ export class SlidebarComponent implements OnInit {
         this.urlComplete.mainUrl = 'sale';
         this.urlComplete.subUrl = 'sale';
         break;
+      case 'stock':
+        this.urlComplete.mainUrl = 'stock';
+        this.urlComplete.subUrl = 'stock';
+        break;
+
+      case 'warehouse':
+        this.urlComplete.mainUrl = 'warehouse';
+        this.urlComplete.subUrl = 'warehouse';
+        break;
 
 
       case 'user':
         this.urlComplete.mainUrl = msg;
         this.urlComplete.subUrl = msg;
         break;
+
+
+
       case 'seting-sub-movie-type':
         this.urlComplete.mainUrl = 'setting';
         this.urlComplete.subUrl = 'seting-sub-movie-type';
@@ -259,6 +271,10 @@ export class SlidebarComponent implements OnInit {
 
   btnSale(){
     this.router.navigate(['/sale']);
+  }
+
+  btnRouting(routure: string) {
+    this.router.navigate([routure]);
   }
 
 }

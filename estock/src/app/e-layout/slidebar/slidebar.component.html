@@ -9,26 +9,41 @@
                 </li>
 
                 <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'sale' }">
-                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'sale' }" (click)="btnSale()">
+                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'sale' }" (click)="btnRouting('/sale')">
                     <i class="fa-solid fa-hand-holding-dollar font-size-20px" aria-hidden="true" size="50"></i>
                     <span>Sale</span>
                   </a>
                 </li>
 
-                <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'sale' }">
-                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'sale' }" (click)="btnSale()">
+                <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'warehouse' }">
+                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'warehouse' }" (click)="btnRouting('/warehouse')">
                     <i class="fa-solid fa-store font-size-20px" aria-hidden="true" size="50"></i>
                     <span>Warehouse</span>
                   </a>
                 </li>
 
-                <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'sale' }">
-                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'sale' }" (click)="btnSale()">
+                <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'stock' }">
+                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'stock' }" (click)="btnRouting('/stock')">
                     <i class="fa-solid fa-layer-group font-size-20px" aria-hidden="true" size="50"></i>
                     <span>Stock</span>
                   </a>
                 </li>
 
+                <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'user' }">
+                  <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'user' }">
+                    <i class="fa fa-user-circle-o font-size-20px" aria-hidden="true" size="50"></i>
+                    <span>Product</span>
+                    <span class="menu-arrow"></span>
+                  </a>
+                  <ul style="display: none;"
+                      [ngStyle]="{ 'display' : urlComplete.mainUrl === 'user' ? 'block' : 'none' }">
+                    <li routerLink="/dashboard/admin"><a
+                      [ngClass]="{ 'active' : urlComplete.subUrl === 'user' }" href="javascript:">Product</a></li>
+                    <li routerLink="/dashboard/employee"><a
+                      [ngClass]="{ 'active' : urlComplete.subUrl === 'employee' }"
+                      href="javascript:">Import Product</a></li>
+                  </ul>
+                </li>
 
                 <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'user' }">
                   <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'user' }">

@@ -7,13 +7,19 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { EShareModule } from '../e-share/e-share.module';
 import { EProductRoutingModule } from './e-product-routing.module';
 import {AgGridModule} from "ag-grid-angular";
+import { ImportComponent } from './import/import.component';
+import { NewImportComponent } from './new-import/new-import.component';
+import { ImportDtComponent } from './import-dt/import-dt.component';
 
 @NgModule({
   declarations: [
     EProductComponent,
     ProductComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    ImportComponent,
+    NewImportComponent,
+    ImportDtComponent
   ],
   imports: [
     CommonModule,

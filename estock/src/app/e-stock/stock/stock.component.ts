@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import {
   CheckboxSelectionCallbackParams,
   ColDef,
@@ -8,6 +9,7 @@ import {
 } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { DataService } from 'src/app/e-share/service/data.service';
 
 @Component({
   selector: 'app-stock',
@@ -37,23 +39,28 @@ export class StockComponent implements OnInit {
     },
     {
       headerName: 'Opening Stock',
-      field: 'openingStock'
+      field: 'openingStock',
+      minWidth: 150,
     },
     {
       headerName: 'Received',
-      field: 'received'
+      field: 'received',
+      minWidth: 130,
      },
     {
       headerName: 'Total',
-      field: 'total'
+      field: 'total',
+      minWidth: 100,
     },
     {
       headerName: 'Sales',
-      field: 'sales'
+      field: 'sales',
+      minWidth: 100,
     },
     {
       headerName: 'Closing Stock',
-      field: 'closingStock'
+      field: 'closingStock',
+      minWidth: 140,
     }
   ];
   public autoGroupColumnDef: ColDef = {
@@ -89,7 +96,15 @@ export class StockComponent implements OnInit {
   public pivotPanelShow = 'always';
   public rowData!: any[];
 
-  constructor() {}
+  constructor(
+    private dataService: DataService,
+    private titleService: Title,
+  ) {
+    const url = (window.location.href).split('/');
+    console.log(url)
+    this.dataService.visitParamRouterChange(url[3]);
+    this.titleService.setTitle('Employee Request');
+  }
   ngOnInit(): void {
   }
 
