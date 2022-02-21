@@ -15,6 +15,7 @@ public class DeviceLoginEventListener implements ApplicationListener<DeviceLogin
     @Override
     public void onApplicationEvent(DeviceLoginEvent event) {
         try {
+            Thread.sleep(10000);
             String deviceInfo = (String) event.getSource();
             DeviceInfoDTO deviceInfoDTO = Utility.readJSON(deviceInfo,DeviceInfoDTO.class );
             log.info("Device Info :"+ Utility.toJSON(deviceInfoDTO));

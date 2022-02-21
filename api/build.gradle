@@ -107,6 +107,12 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 }
 
+def profiles = 'prod'
+
+bootRun {
+	args = ["--spring.profiles.active=" + profiles]
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }

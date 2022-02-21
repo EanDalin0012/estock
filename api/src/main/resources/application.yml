@@ -11,6 +11,11 @@ spring:
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
+#prod,dev
+  profiles:
+    active: 'dev'
+  main:
+    banner-mode: off
 
   servlet:
     multipart:

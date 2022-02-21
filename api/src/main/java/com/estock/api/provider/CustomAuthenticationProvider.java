@@ -57,7 +57,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 eventPublisher.publishEvent(new DeviceLoginEvent(deviceInfo));
             }
 
-
             UserDTO userInfo = this.userDAO.authenticate(userName);
             log.info("User Info object: "+ Utility.toJSON(userInfo));
 
