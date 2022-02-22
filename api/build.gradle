@@ -48,7 +48,11 @@ dependencies {
 	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
 	implementation group: 'org.apache.commons', name: 'commons-text', version: '1.9'
 	implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
-
+	implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+	implementation group: 'org.apache.poi', name: 'poi', version: '3.17'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+	implementation group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.17'
+	implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '2.6.0'
 	// log4j
 
 //	implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
@@ -93,6 +97,7 @@ dependencies {
 	implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.14'
 
 	implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.2'
+	implementation group: 'com.itextpdf', name: 'layout', version: '7.2.0'
 
 //	HTTP Client
 	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
@@ -105,12 +110,6 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
-}
-
-def profiles = 'prod'
-
-bootRun {
-	args = ["--spring.profiles.active=" + profiles]
 }
 
 tasks.named('test') {

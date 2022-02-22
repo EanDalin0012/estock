@@ -9,8 +9,8 @@ import {
 } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import { CustomDateFilterComponent } from 'src/app/e-share/component/custom-date-filter/custom-date-filter.component';
 import { DataService } from 'src/app/e-share/service/data.service';
-
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
@@ -21,6 +21,8 @@ export class StockComponent implements OnInit {
     {
       headerName: 'Date',
       field: 'date',
+      filter: 'agDateColumnFilter',
+      filterParams: filterParams,
       minWidth: 170,
       checkboxSelection: checkboxSelection,
       headerCheckboxSelection: headerCheckboxSelection,
@@ -96,6 +98,12 @@ export class StockComponent implements OnInit {
   public pivotPanelShow = 'always';
   public rowData!: any[];
 
+  public components: {
+    [p: string]: any;
+  } = {
+    agDateInput: CustomDateFilterComponent,
+  };
+
   constructor(
     private dataService: DataService,
     private titleService: Title,
@@ -106,6 +114,9 @@ export class StockComponent implements OnInit {
     this.titleService.setTitle('Employee Request');
   }
   ngOnInit(): void {
+    this.components = {
+      agDateInput: CustomDateFilterComponent,
+    };
   }
 
   onGridReady(params: GridReadyEvent) {
@@ -126,6 +137,35 @@ var headerCheckboxSelection = function (
   // we put checkbox on the name if we are not doing grouping
   return params.columnApi.getRowGroupColumns().length === 0;
 };
+
+var filterParams = {
+  comparator: function (filterLocalDateAtMidnight: Date, cellValue: string) {
+    const dateAsString = cellValue;
+    const dateParts = dateAsString.split('/');
+    const cellDate = new Date(
+      Number(dateParts[2]),
+      Number(dateParts[1]) - 1,
+      Number(dateParts[0])
+    );
+
+    if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+      return 0;
+    }
+
+    if (cellDate < filterLocalDateAtMidnight) {
+      return -1;
+    }
+
+    if (cellDate > filterLocalDateAtMidnight) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+};
+
+
+
 export interface Data {
   date: string;
   warehouse: string;
@@ -140,7 +180,7 @@ export interface Data {
 
 export const stockDatas: Data[] = [
   {
-    date: '01 Jan 2021',
+    date: '24/08/2008',
     warehouse: 'Warehouse 1',
     name: 'China Apple',
     unit: 'Kilogram (kg)',
@@ -151,7 +191,7 @@ export const stockDatas: Data[] = [
     closingStock: 80,
   },
   {
-    date: '02 Jan 2021',
+    date: '24/08/2008',
     warehouse: 'Warehouse 2',
     name: 'Orange',
     unit: 'Kilogram (kg)',

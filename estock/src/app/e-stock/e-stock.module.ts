@@ -6,6 +6,7 @@ import { EStockRoutingModule } from './e-stock-routing.module';
 import { EShareModule } from '../e-share/e-share.module';
 import {AgGridModule} from "ag-grid-angular";
 import { EStockComponent } from './e-stock.component';
+import { CustomDateFilterComponent } from '../e-share/component/custom-date-filter/custom-date-filter.component';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { EStockComponent } from './e-stock.component';
     CommonModule,
     EStockRoutingModule,
     EShareModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([CustomDateFilterComponent]),
   ]
 })
 export class EStockModule { }
