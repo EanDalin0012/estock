@@ -8,6 +8,7 @@ import { SrcComponent } from './component/src/src.component';
 import { AmountPipe } from './pipe/amount.pipe';
 import { CustomDateFilterComponent } from './component/custom-date-filter/custom-date-filter.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
   imports: [
     CommonModule,
     AgGridModule.withComponents([CustomDateFilterComponent]),
-    CKEditorModule
+    CKEditorModule,
+    RouterModule
   ],
   exports: [
     FormsModule,
