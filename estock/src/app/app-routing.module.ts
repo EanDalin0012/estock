@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '', component: ELayoutComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         loadChildren: () => import('./e-home/e-home.module').then(m => m.EHomeModule)
       }
     ]

@@ -10,6 +10,7 @@ import { EHomeRoutingModule } from './e-home-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CkeditorComponent } from './ckeditor/ckeditor.component';
 @NgModule({
   declarations: [
     EHomeComponent,
@@ -18,6 +19,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ProductSaleTypeComponent,
     MemberComponent,
     DashboardComponent,
+    CkeditorComponent,
   ],
   imports: [
     CommonModule,

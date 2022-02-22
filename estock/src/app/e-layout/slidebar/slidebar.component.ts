@@ -203,7 +203,10 @@ export class SlidebarComponent implements OnInit {
         this.urlComplete.mainUrl = msg;
         this.urlComplete.subUrl = msg;
         break;
-
+      case 'role':
+        this.urlComplete.mainUrl = 'user'
+        this.urlComplete.subUrl = 'role';
+        break;
 
 
       case 'seting-sub-movie-type':

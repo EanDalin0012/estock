@@ -7,6 +7,7 @@ import { EUserComponent } from './e-user.component';
 import {EUserRoutingModule} from "./e-user-routing.module";
 import {EShareModule} from "../e-share/e-share.module";
 import {AgGridModule} from "ag-grid-angular";
+import { RoleComponent } from './role/role.component';
 
 
 
@@ -15,7 +16,8 @@ import {AgGridModule} from "ag-grid-angular";
     UserComponent,
     AddUserComponent,
     EditUserComponent,
-    EUserComponent
+    EUserComponent,
+    RoleComponent
   ],
   imports: [
     CommonModule,

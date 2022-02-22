@@ -7,7 +7,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { SrcComponent } from './component/src/src.component';
 import { AmountPipe } from './pipe/amount.pipe';
 import { CustomDateFilterComponent } from './component/custom-date-filter/custom-date-filter.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -18,6 +18,7 @@ import { CustomDateFilterComponent } from './component/custom-date-filter/custom
   imports: [
     CommonModule,
     AgGridModule.withComponents([CustomDateFilterComponent]),
+    CKEditorModule
   ],
   exports: [
     FormsModule,
@@ -26,6 +27,7 @@ import { CustomDateFilterComponent } from './component/custom-date-filter/custom
     AvatarModule,
     AmountPipe,
     AgGridModule,
+    CKEditorModule
   ]
 })
 export class EShareModule {
