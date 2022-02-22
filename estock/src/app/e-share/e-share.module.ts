@@ -13,7 +13,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
   declarations: [
     SrcComponent,
     AmountPipe,
-    CustomDateFilterComponent,
+    CustomDateFilterComponent
   ],
   imports: [
     CommonModule,

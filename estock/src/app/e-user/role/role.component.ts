@@ -34,6 +34,8 @@ export class RoleComponent implements OnInit {
     {
       headerName: 'Description',
       field: 'desc',
+      tooltipField: 'desc',
+      tooltipComponentParams: { color: '#ececec' },
       minWidth: 300,
     }
   ];
@@ -69,6 +71,8 @@ export class RoleComponent implements OnInit {
   public rowGroupPanelShow = 'always';
   public pivotPanelShow = 'always';
   public rowData!: any[];
+  public tooltipShowDelay = 0;
+  public tooltipHideDelay = 2000;
 
   constructor(
     private dataService: DataService,
@@ -120,17 +124,17 @@ export const stockDatas: Role[] = [
   {
     id: 3,
     name: 'Moderator',
-    desc: 'Moderator'
+    desc: 'Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post'
   },
   {
     id: 4,
     name: 'Advertiser',
-    desc: 'Advertiser'
+    desc: 'Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page'
   },
   {
     id: 5,
     name: 'Analyst',
-    desc: 'Analyst'
+    desc: 'View other insights,View Page Quality tab,See who published as the Page'
   },
 
 ];
