@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import {
   CheckboxSelectionCallbackParams,
   ColDef,
@@ -82,6 +83,7 @@ export class RoleComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private titleService: Title,
+    private router: Router,
   ) {
     const url = (window.location.href).split('/');
     console.log(url)
@@ -117,6 +119,13 @@ export class RoleComponent implements OnInit {
     //   selectedRows.length === 1 ? selectedRows[0].athlete : '';
   }
 
+  btnNew() {
+    this.router.navigate(['/user/new-role']);
+  }
+
+  btnEdit() {
+    this.router.navigate(['/user/edit-role']);
+  }
 
 }
 

@@ -9,6 +9,7 @@ import { AmountPipe } from './pipe/amount.pipe';
 import { CustomDateFilterComponent } from './component/custom-date-filter/custom-date-filter.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RouterModule } from '@angular/router';
+import { WebSocketService } from './service/web-socket.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,9 @@ import { RouterModule } from '@angular/router';
     AmountPipe,
     AgGridModule,
     CKEditorModule
+  ],
+  providers: [
+    // WebSocketService
   ]
 })
 export class EShareModule {

@@ -68,6 +68,13 @@
       "reqFail": "Your request failed. please try again later"
     }
   },
+  "role":{
+    "label": {
+      "role":"Role"
+    }
+  },
+
+
   "login":{
     "label": {
       "userName":"User Name",

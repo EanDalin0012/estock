@@ -20,13 +20,13 @@
     <div class="row col-md-12">
       <div style="margin: 10px 5px;">
         <div class="task-assign form-group">
-          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);">
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnNew()">
             <i class="fa-solid fa-square-plus" style="color: #183153;margin-right: 5px;"></i> Add
           </a>
         </div>
 
         <div class="task-assign form-group" style="margin-left: 15px;">
-          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled': disabled === true}">
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled': disabled === true}" (click)="btnEdit()">
             <i class="fa-solid fa-square-plus icon-color-01"></i> Edit
           </a>
         </div>

@@ -139,6 +139,14 @@ Version      : 3.6
 	src: local('Circular Std Black Italic'), url('assets/fonts/CircularStd-BlackItalic.woff') format('woff');
 }
 
+@font-face {
+  font-family: "Content";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Content"), local("Content"), url("assets/fonts/Content/Content-Regular.ttf") format("truetype");
+}
+
+
 /*-----------------
 	1. General
 -----------------------*/
@@ -147,7 +155,7 @@ html {
 	height: 100%;
 }
 body {
-	font-family: 'CircularStd', sans-serif;
+	font-family: 'CircularStd', sans-serif, 'Content';
 	font-size: .9375rem;
 	color: #1f1f1f;
 	background-color: #f7f7f7;
@@ -3110,12 +3118,12 @@ table.dataTable thead > tr > td.sorting {
 .fc-toolbar h2 {
 	font-size: 18px;
 	font-weight: 600;
-	font-family: 'CircularStd', sans-serif;
+	font-family: 'CircularStd', sans-serif, 'Content';
 	line-height: 30px;
 	text-transform: uppercase;
 }
 .fc-day-grid-event .fc-time {
-	font-family: 'CircularStd', sans-serif;
+	font-family: 'CircularStd', sans-serif, 'Content';
 }
 .fc-day {
 	background: #fff;

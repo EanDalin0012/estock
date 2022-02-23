@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlanklayoutComponent } from '../e-layout/blanklayout/blanklayout.component';
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
+import { WebsocketComponent } from './websocket/websocket.component';
 
 const routes: Routes = [
   {path: 'ckeditor', component: CkeditorComponent},
+  {path: 'websocket', component: WebsocketComponent},
   {
     path: '', component: BlanklayoutComponent,
     children: [

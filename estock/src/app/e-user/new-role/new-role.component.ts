@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/e-share/service/data.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class NewRoleComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private titleService: Title,
+    private router: Router
   ) {
     const url = (window.location.href).split('/');
     console.log(url)
@@ -20,6 +22,10 @@ export class NewRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  btnRole(){
+    this.router.navigate(['/user/role']);
   }
 
 }

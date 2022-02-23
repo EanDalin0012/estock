@@ -6,6 +6,7 @@ import {TemplateAPI} from "../../e-share/constants/common.api";
 import {SrcComponent} from "../../e-share/component/src/src.component";
 import {DataService} from "../../e-share/service/data.service";
 import { UserInfo } from 'src/app/e-share/data/user-inf';
+import { WebSocketService } from 'src/app/e-share/service/web-socket.service';
 
 @Component({
   selector: 'app-user',
@@ -32,6 +33,7 @@ export class UserComponent implements OnInit {
   constructor(
     private hTTPService: HTTPService,
     private dataService: DataService,
+    // private webSocketService: WebSocketService
   ) {
     const url = (window.location.href).split('/');
     console.log(url)
@@ -153,6 +155,9 @@ export class UserComponent implements OnInit {
   onBtnExport() {
     this.gridApi.exportDataAsCsv();
   }
+
+
+
 
 }
 

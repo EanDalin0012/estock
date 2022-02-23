@@ -11,6 +11,7 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CkeditorComponent } from './ckeditor/ckeditor.component';
+import { WebsocketComponent } from './websocket/websocket.component';
 @NgModule({
   declarations: [
     EHomeComponent,
@@ -20,6 +21,7 @@ import { CkeditorComponent } from './ckeditor/ckeditor.component';
     MemberComponent,
     DashboardComponent,
     CkeditorComponent,
+    WebsocketComponent,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,8 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { LOCAL_STORAGE } from 'src/app/e-share/constants/common.const';
+import { Utils } from 'src/app/e-share/util/utils.static';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -156,20 +158,20 @@ export class HeaderComponent implements OnInit {
   }
 
   onChangeLanguage(code: string) {
-    // this.langCode = code;
-    // if(code == 'en') {
-    //   this.flags = 'assets/img/flags/us.png';
-    //   this.langText = 'English';
-    // } else if (code == 'kh') {
-    //   this.flags = 'assets/img/flags/kh.png';
-    //   this.langText = 'ខ្មែរ';
-    // } else if (code == 'ch') {
-    //   this.flags = 'assets/img/flags/cn.png';
-    //   this.langText = '中文';
-    // }
-    // console.log(this.langCode, localStorage.I18N, code);
-    // Utils.setSecureStorage(LOCAL_STORAGE.I18N, this.langCode );
-    // this.translate.use( this.langCode );
+    this.langCode = code;
+    if(code == 'en') {
+      this.flags = 'assets/img/flags/us.png';
+      this.langText = 'English';
+    } else if (code == 'kh') {
+      this.flags = 'assets/img/flags/kh.png';
+      this.langText = 'ខ្មែរ';
+    } else if (code == 'ch') {
+      this.flags = 'assets/img/flags/cn.png';
+      this.langText = '中文';
+    }
+    console.log(this.langCode, LOCAL_STORAGE.I18N, code);
+    Utils.setSecureStorage(LOCAL_STORAGE.I18N, this.langCode );
+    this.translate.use( this.langCode );
   }
 
   logOut() {
