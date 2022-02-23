@@ -1,0 +1,8 @@
+.disabled:hover {
+  background-color: #35ba67;
+  border-color: #2fa65c;
+  color: gray !important;
+}
+.disabled svg {
+  color: gray !important;
+}
