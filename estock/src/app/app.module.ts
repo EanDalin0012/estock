@@ -15,6 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { Error404Component } from './error/error404/error404.component';
 import { Error405Component } from './error/error405/error405.component';
 import { Error403Component } from './error/error403/error403.component';
+import { AuthInterceptor } from './e-share/service/auth-interceptor.service';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -53,11 +54,11 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

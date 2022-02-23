@@ -31,6 +31,12 @@
           </a>
         </div>
 
+        <div class="task-assign form-group" style="margin-left: 15px;" >
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled-delete': disabled === true,'disabled-delete-remove': disabled === false }" (click)="btnDelete()">
+            <i class="las la-trash icon-color-01"></i> Delete
+          </a>
+        </div>
+
         <div class="task-assign form-group">
           <a class="task-complete-btn task-completed float-right" href="javascript:void(0);" (click)="onBtnExport()" style="margin-left: 15px;">
             <i class="lar la-file-excel" style="color: #183153;margin-right: 5px;"></i> Download CSV export file

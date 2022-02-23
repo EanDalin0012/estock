@@ -80,13 +80,14 @@ export class RoleComponent implements OnInit {
   public tooltipShowDelay = 0;
   public tooltipHideDelay = 2000;
 
+  itemSelectedGride: any;
+
   constructor(
     private dataService: DataService,
     private titleService: Title,
     private router: Router,
   ) {
     const url = (window.location.href).split('/');
-    console.log(url)
     this.dataService.visitParamRouterChange(url[4]);
     this.titleService.setTitle('Employee Request');
   }
@@ -111,9 +112,8 @@ export class RoleComponent implements OnInit {
       this.disabled = true;
     } else {
       this.disabled = false;
+      this.itemSelectedGride = selectedRows[0];
     }
-
-    console.log(selectedRows,event);
 
     // (document.querySelector('#selectedRows') as any).innerHTML =
     //   selectedRows.length === 1 ? selectedRows[0].athlete : '';
@@ -125,6 +125,12 @@ export class RoleComponent implements OnInit {
 
   btnEdit() {
     this.router.navigate(['/user/edit-role']);
+  }
+  btnDelete() {
+    if(this.disabled === false) {
+      alert(JSON.stringify(this.itemSelectedGride));
+    }
+
   }
 
 }
