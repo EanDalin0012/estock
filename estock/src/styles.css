@@ -8474,3 +8474,17 @@ height: 300px; width:500px
 .ag-root-wrapper-body.ag-layout-normal {
   height: 0;
 }
+.icon-color-01{
+  color: #183153;
+  margin-right: 5px;
+}
+
+.disabled {
+  color: gray;
+  cursor: not-allowed;
+  text-decoration: underline;
+}
+
+.color-gray {
+  color: gray;
+}

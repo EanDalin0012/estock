@@ -5,6 +5,7 @@ import {
   ColDef,
   GridReadyEvent,
   HeaderCheckboxSelectionCallbackParams,
+  GridApi
 } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -17,6 +18,10 @@ import { DataService } from 'src/app/e-share/service/data.service';
   styleUrls: ['./role.component.css']
 })
 export class RoleComponent implements OnInit {
+
+  disabled = true;
+
+  private gridApi!: GridApi;
 
   public columnDefs: ColDef[] = [
     {
@@ -67,7 +72,7 @@ export class RoleComponent implements OnInit {
     flex: 1,
     minWidth: 100,
   };
-  public rowSelection = 'multiple';
+  public rowSelection = 'single';
   public rowGroupPanelShow = 'always';
   public pivotPanelShow = 'always';
   public rowData!: any[];
@@ -87,11 +92,32 @@ export class RoleComponent implements OnInit {
   }
 
   onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
     // this.http
     //   .get<any[]>('https://www.ag-grid.com/example-assets/olympic-winners.json')
     //   .subscribe((data) => (this.rowData = data));
     this.rowData = stockDatas;
   }
+
+  onBtnExport() {
+    this.gridApi.exportDataAsCsv();
+  }
+
+  onSelectionChanged(event: any) {
+    const selectedRows = this.gridApi.getSelectedRows();
+    if(selectedRows.length === 0) {
+      this.disabled = true;
+    } else {
+      this.disabled = false;
+    }
+
+    console.log(selectedRows,event);
+
+    // (document.querySelector('#selectedRows') as any).innerHTML =
+    //   selectedRows.length === 1 ? selectedRows[0].athlete : '';
+  }
+
+
 }
 
 var checkboxSelection = function (params: CheckboxSelectionCallbackParams) {

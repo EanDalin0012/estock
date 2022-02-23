@@ -8,6 +8,8 @@ import {EUserRoutingModule} from "./e-user-routing.module";
 import {EShareModule} from "../e-share/e-share.module";
 import {AgGridModule} from "ag-grid-angular";
 import { RoleComponent } from './role/role.component';
+import { NewRoleComponent } from './new-role/new-role.component';
+import { EditRoleComponent } from './edit-role/edit-role.component';
 
 
 
@@ -17,7 +19,9 @@ import { RoleComponent } from './role/role.component';
     AddUserComponent,
     EditUserComponent,
     EUserComponent,
-    RoleComponent
+    RoleComponent,
+    NewRoleComponent,
+    EditRoleComponent
   ],
   imports: [
     CommonModule,

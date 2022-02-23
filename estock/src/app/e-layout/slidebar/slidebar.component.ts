@@ -204,6 +204,8 @@ export class SlidebarComponent implements OnInit {
         this.urlComplete.subUrl = msg;
         break;
       case 'role':
+      case 'new-role':
+      case 'edit-role':
         this.urlComplete.mainUrl = 'user'
         this.urlComplete.subUrl = 'role';
         break;

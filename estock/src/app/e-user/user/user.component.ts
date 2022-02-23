@@ -150,6 +150,10 @@ export class UserComponent implements OnInit {
     });
   }
 
+  onBtnExport() {
+    this.gridApi.exportDataAsCsv();
+  }
+
 }
 
 export interface Data {
