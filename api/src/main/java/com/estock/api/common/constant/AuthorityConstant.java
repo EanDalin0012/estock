@@ -7,8 +7,6 @@ public enum AuthorityConstant {
     DELETE_USER("Delete User"),
     RESET_PASSWORD_USER("Reset Password User");
 
-
-
     private String textValue;
     private AuthorityConstant(String textValue) {
         this.textValue = textValue;
