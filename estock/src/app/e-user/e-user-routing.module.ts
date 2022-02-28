@@ -17,6 +17,7 @@ const routes: Routes = [
       { path: 'role', component: RoleComponent},
       { path: 'new-role', component: NewRoleComponent},
       { path: 'edit-role', component: EditRoleComponent},
+      // { path: 'user-add', component: AddUserComponent},
     ]
   }
 ];

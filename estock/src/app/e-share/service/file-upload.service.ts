@@ -1,10 +1,9 @@
-import { Title } from '@angular/platform-browser';
 import { LOCAL_STORAGE, FileUploadModule } from './../constants/common.const';
-import { Utils } from 'src/app/v-share/util/utils.static';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Utils } from '../util/utils.static';
 
 @Injectable({
   providedIn: 'root'

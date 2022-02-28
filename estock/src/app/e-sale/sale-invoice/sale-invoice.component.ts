@@ -13,8 +13,7 @@ import { SaleProductType } from 'src/app/e-share/data/sale-product-type';
 import { SaleDetail } from 'src/app/e-share/data/sale-dt';
 import { PipeUtil } from 'src/app/e-share/util/pipe-util';
 import { Utils } from 'src/app/e-share/util/utils.static';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-sale-invoice',
   templateUrl: './sale-invoice.component.html',
@@ -189,21 +188,21 @@ export class SaleInvoiceComponent implements OnInit, OnDestroy {
   }
 
   btnDownloadPDF() {
-    const DATA = document.getElementById('htmlData') as HTMLElement;
-    console.log('DATA', DATA);
+    // const DATA = document.getElementById('htmlData') as HTMLElement;
+    // console.log('DATA', DATA);
 
-    html2canvas(DATA).then(canvas => {
+    // html2canvas(DATA).then(canvas => {
 
-        let fileWidth = 208;
-        let fileHeight = canvas.height * fileWidth / canvas.width;
+    //     let fileWidth = 208;
+    //     let fileHeight = canvas.height * fileWidth / canvas.width;
 
-        const FILEURI = canvas.toDataURL('image/png')
-        let PDF = new jsPDF('p', 'mm', 'a4');
-        let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
+    //     const FILEURI = canvas.toDataURL('image/png')
+    //     let PDF = new jsPDF('p', 'mm', 'a4');
+    //     let position = 0;
+    //     PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight)
 
-        PDF.save('angular-demo.pdf');
-      });
+    //     PDF.save('angular-demo.pdf');
+    //   });
   }
 
 }

@@ -82,7 +82,7 @@ export class SaleComponent implements OnInit {
     width: '100%',
     height: '100%',
     flex: '1 1 auto'
-};
+  };
 
   constructor(
     private hTTPService: HTTPService,

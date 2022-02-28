@@ -9,4 +9,5 @@ export interface UserInfo {
   userID: string;
   dateTime: string;
   status: string;
+  remark: string
 }
