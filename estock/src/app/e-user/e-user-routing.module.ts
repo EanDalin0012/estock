@@ -20,7 +20,6 @@ const routes: Routes = [
           {path: 'edit-user', component: EditUserComponent}
         ]
       },
-      { path: 'add', component: AddUserComponent},
       { path: 'role',
         children: [
           {path: '', component: RoleComponent},
