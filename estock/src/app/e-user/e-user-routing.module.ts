@@ -1,3 +1,4 @@
+import { EditUserComponent } from './edit-user/edit-user.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {UserComponent} from "./user/user.component";
@@ -9,15 +10,24 @@ import { EditRoleComponent } from './edit-role/edit-role.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: EUserComponent,
     children: [
-      { path: '', component: UserComponent},
+      { path: '',
+        children: [
+          {path: '', component: UserComponent},
+          {path: 'add-new-user', component: AddUserComponent},
+          {path: 'edit-user', component: EditUserComponent}
+        ]
+      },
       { path: 'add', component: AddUserComponent},
-      { path: 'role', component: RoleComponent},
-      { path: 'new-role', component: NewRoleComponent},
-      { path: 'edit-role', component: EditRoleComponent},
-      // { path: 'user-add', component: AddUserComponent},
+      { path: 'role',
+        children: [
+          {path: '', component: RoleComponent},
+          {path: 'add-new-role', component: NewRoleComponent},
+          {path: 'edit-role', component: EditRoleComponent}
+        ]
+      },
     ]
   }
 ];
