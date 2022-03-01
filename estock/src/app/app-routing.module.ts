@@ -1,3 +1,4 @@
+import { AuthGuard } from './e-share/service/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlanklayoutComponent } from './e-layout/blanklayout/blanklayout.component';
@@ -15,92 +16,42 @@ const routes: Routes = [
     ]
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'home',
-        loadChildren: () => import('./e-home/e-home.module').then(m => m.EHomeModule)
-      }
-    ]
+    path: 'home', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-home/e-home.module').then(m => m.EHomeModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'user',
-        loadChildren: () => import('./e-user/e-user.module').then(m => m.EUserModule)
-      }
-    ]
+    path: 'user', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-user/e-user.module').then(m => m.EUserModule)
   },{
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'employee-request',
-        loadChildren: () => import('./e-employee/e-employee.module').then(m => m.EEmployeeModule)
-      }
-    ]
+    path: 'employee-request', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-employee/e-employee.module').then(m => m.EEmployeeModule)
   },{
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'product',
-        loadChildren: () => import('./e-product/e-product.module').then(m => m.EProductModule)
-      }
-    ]
+    path: 'product', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-product/e-product.module').then(m => m.EProductModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'type',
-        loadChildren: () => import('./e-type/e-type.module').then(m => m.ETypeModule)
-      }
-    ]
+    path: 'type', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-type/e-type.module').then(m => m.ETypeModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'sale',
-        loadChildren: () => import('./e-sale/e-sale.module').then(m => m.ESaleModule)
-      }
-    ]
+    path: 'sale', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-sale/e-sale.module').then(m => m.ESaleModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'report',
-        loadChildren: () => import('./e-report/e-report.module').then(m => m.EReportModule)
-      }
-    ]
+    path: 'report', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./e-report/e-report.module').then(m => m.EReportModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
-      }
-    ]
+    path: 'dashboard', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'warehouse',
-        loadChildren: () => import('./e-warehouse/e-warehouse.module').then(m => m.EWarehouseModule)
-      }
-    ]
+    path: 'warehouse', canActivate: [ AuthGuard ],component: ELayoutComponent,
+    loadChildren: () => import('./e-warehouse/e-warehouse.module').then(m => m.EWarehouseModule)
   },
   {
-    path: '', component: ELayoutComponent,
-    children: [
-      {
-        path: 'stock',
-        loadChildren: () => import('./e-stock/e-stock.module').then(m => m.EStockModule)
-      }
-    ]
+    path: 'stock', canActivate: [ AuthGuard ],component: ELayoutComponent,
+    loadChildren: () => import('./e-stock/e-stock.module').then(m => m.EStockModule)
   },
   // { path: 'announce/4error', component: Error4Component }, ETypeModule
   // { path: 'error500', component: Error500Component },

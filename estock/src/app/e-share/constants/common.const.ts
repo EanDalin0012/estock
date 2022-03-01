@@ -83,7 +83,8 @@ export enum LOCAL_STORAGE {
   LAST_EVENT_TIME = 'lastEventTime',
   LAST_TIME_CHECK_NOTIFICATION = 'theLastTimeCheckNotification',
   Authorization   = 'Authorization',
-  SearchHistoryVideo = 'SearchHistoryVideo'
+  SearchHistoryVideo = 'SearchHistoryVideo',
+  CONSTANT_AUTHORITY = 'CONSTANT_AUTHORITY'
 }
 
 
