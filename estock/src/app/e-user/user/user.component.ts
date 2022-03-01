@@ -36,7 +36,6 @@ export class UserComponent implements OnInit {
     // private webSocketService: WebSocketService
   ) {
     const url = (window.location.href).split('/');
-    console.log(url)
     this.dataService.visitParamRouterChange(url[3]);
 
   }
@@ -46,7 +45,8 @@ export class UserComponent implements OnInit {
     this.columnDefs = [
       {
         headerName: '#',
-        field: 'id', minWidth: 50, width: 50
+        field: 'id',
+        minWidth: 100,
       },
       {
         headerName:'image',
@@ -55,31 +55,40 @@ export class UserComponent implements OnInit {
         cellClass: 'text-center',
         sortable: false,
         filter: false,
+        minWidth: 150,
       },
       {
         headerName: 'Firs Name',
-        field: 'firstName'
+        field: 'firstName',
+        minWidth: 150,
       },
       {
         headerName: 'Last Name',
         field: 'lastName',
-        cellRenderer: 'status'
+        cellRenderer: 'status',
+        minWidth: 150,
       },
       {
         headerName: 'Date Birth',
-        field: 'dateBirth'
+        field: 'dateBirth',
+        minWidth: 150,
       },
       {
         headerName: 'Phone',
-        field: 'phone'
+        field: 'phone',
+        minWidth: 150,
       },
       {
         headerName: 'Gender',
-        field: 'gender'
+        field: 'gender',
+        minWidth: 100,
       },
       {
         headerName: 'Description',
         field: 'desc',
+        minWidth: 150,
+        tooltipField: 'desc',
+        tooltipComponentParams: { color: '#ececec' },
       },
       {
         headerName:'status',
@@ -90,7 +99,8 @@ export class UserComponent implements OnInit {
         filter: false,
         cellEditorParams: {
           values: ['Enable', 'Disable'],
-      },
+        },
+        minWidth: 150,
       },
     ];
 

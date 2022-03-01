@@ -49,7 +49,9 @@ export class AuthentcatiionService {
               resovle(result);
             }
           }).catch((err) => {
-              console.log('err', err);
+            $('body').addClass('loaded');
+            $('div.loading').addClass('none');
+            console.log('err', err);
           });
         }
       });
@@ -82,12 +84,15 @@ export class AuthentcatiionService {
           const responseData = res as any;
           console.log('responseData', responseData);
 
-          if(responseData.result && responseData.result.responseCode !== HTTPResponseCode.Success) {
-            this.showErrMsg(responseData.result.responseMessage);
+          if(responseData.resultCode && responseData.resultCode !== HTTPResponseCode.NotFound) {
+            // this.showErrMsg(responseData.result.responseMessage);
+            alert('User Info Not Found.');
           } else if (responseData.body !== null ) {
             resolve(responseData.body);
           }
       }, error => {
+        $('body').addClass('loaded');
+        $('div.loading').addClass('none');
         console.log('error', error);
       });
     });
@@ -175,6 +180,10 @@ export class AuthentcatiionService {
             resovle(auth);
           }
 
+        },error => {
+          $('body').addClass('loaded');
+          $('div.loading').addClass('none');
+          console.log('error', error);
         });
     });
     }
