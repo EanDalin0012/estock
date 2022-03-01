@@ -8496,3 +8496,7 @@ height: 300px; width:500px
 .color-gray {
   color: gray;
 }
+
+.ag-overlay {
+	top: 50px !important;
+}
