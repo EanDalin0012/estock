@@ -107,20 +107,7 @@ export class SaleComponent implements OnInit {
     //   .get<any[]>('https://www.ag-grid.com/example-assets/olympic-winners.json')
     //   .subscribe((data) => (this.rowData = data));
       this.rowData = [
-      {
-        saleProductType: null,
-        saleTypeProduct: '',
-        proudct: {
-          id: 0,
-          productName: '',
-          desc: '',
-        },
-        productName: '',
-        newQty: 0,
-        totalQty: null,
-        total: 0
-      }
-    ]
+      ]
   }
 
   // onSelectionChanged(event: any) {
