@@ -7,6 +7,7 @@ import com.estock.api.dto.UserInfoDTO;
 import com.estock.api.service.AuthenticationService;
 import com.estock.api.service.UserInfoService;
 import com.estock.api.service.constant.UserInfoConstant;
+import com.estock.api.util.Utility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class UserInfoServiceImpl  implements UserInfoService {
                 throw new CustomException(UserInfoConstant.INVALID_USER_INFO_ID.name(), UserInfoConstant.INVALID_USER_INFO_ID.getDesc());
             }
             UserInfoDTO userInfoDTO = this.userInfoDAO.loadUserByID(id);
+            log.info("User Info :"+ Utility.toJSON(userInfoDTO));
             return userInfoDTO;
         }catch (Exception e) {
             e.printStackTrace();

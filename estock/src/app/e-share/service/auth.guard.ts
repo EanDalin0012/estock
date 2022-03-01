@@ -1,4 +1,6 @@
-import { Authorization_Server } from './../constants/common.const.authority';
+import { UserAuthorizationServer } from './../data/user.authorization.code';
+import { authorizationServer } from './../constants/common.const.authority';
+
 import { Utils } from 'src/app/e-share/util/utils.static';
 import { LOCAL_STORAGE } from './../constants/common.const';
 import { Injectable } from '@angular/core';
@@ -9,7 +11,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  data: any[] =[];
+  userAuthorization: UserAuthorizationServer[] =[];
   dataAuthorites: any[] = [];
 
   canActivate(
@@ -19,26 +21,27 @@ export class AuthGuard implements CanActivate {
       console.log('route', route);
       console.log('state', state);
       console.log('state url', state.url);
-      this.data = Utils.getSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY);
-      console.log(this.data);
+      this.userAuthorization = Utils.getSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY);
+      console.log(this.userAuthorization);
 
       if('/dashboard' === state.url) {
         checkReturn  = true;
       }
-      if( this.data && this.data.length > 0 ) {
+      if( this.userAuthorization && this.userAuthorization.length > 0 ) {
         let code = 'NA';
-        Authorization_Server.forEach(element => {
+        authorizationServer.forEach(element => {
            if(element.url === state.url) {
-              code = element.authorizationServer;
+              code = element.authorizationCode;
+              console.log(element);
+
            }
         });
         if(code != 'NA') {
-          for (let index = 0; index < this.data.length; index++) {
-            const element = this.data[index];
-            if(code === element.name) {
+          this.userAuthorization.forEach(itm => {
+            if(code === itm.userAuthorizationCode) {
               checkReturn = true;
             }
-          }
+          });
         }
       }
       if(checkReturn === false) {

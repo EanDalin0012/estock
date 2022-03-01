@@ -1,3 +1,6 @@
+import { UserAuthorizationServer } from './../../e-share/data/user.authorization.code';
+import { LOCAL_STORAGE } from './../../e-share/constants/common.const';
+import { Utils } from 'src/app/e-share/util/utils.static';
 import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -21,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   public formLogin: any;
   isValidLoading = false;
+  userAuthorizationServer: UserAuthorizationServer[] = [];
   constructor(
     // private dataService: DataService,
     private authentcatiionService: AuthentcatiionService,
@@ -80,6 +84,37 @@ export class LoginComponent implements OnInit {
       };
       this.authentcatiionService.login(logInfo).then((resp: any) => {
         if(resp) {
+          this.userAuthorizationServer = [
+            {
+              id: 1,
+              userAuthorizationCode: 'SALE'
+            },
+            {
+              id: 2,
+              userAuthorizationCode: 'READ_USER'
+            },
+            {
+              id: 3,
+              userAuthorizationCode: 'ADD_USER'
+            },
+            {
+              id: 4,
+              userAuthorizationCode: 'EDIT_USER'
+            },
+            {
+              id: 5,
+              userAuthorizationCode: 'READ_ROLE'
+            },
+            {
+              id: 6,
+              userAuthorizationCode: 'ADD_ROLE'
+            },
+            {
+              id: 6,
+              userAuthorizationCode: 'EDIT_ROLE'
+            }
+          ];
+          Utils.setSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY, this.userAuthorizationServer);
           this.zone.run(() =>  this.router.navigate(['/dashboard'], { replaceUrl: true }));
           // if(resp.result === false) {
           //   this.isValidLoading = false;

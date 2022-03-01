@@ -16,15 +16,15 @@ const routes: Routes = [
       { path: '',
         children: [
           {path: '', component: UserComponent},
-          {path: 'add-new-user', component: AddUserComponent},
-          {path: 'edit-user', component: EditUserComponent}
+          {path: 'add', component: AddUserComponent},
+          {path: 'edit', component: EditUserComponent}
         ]
       },
       { path: 'role',
         children: [
           {path: '', component: RoleComponent},
-          {path: 'add-new-role', component: NewRoleComponent},
-          {path: 'edit-role', component: EditRoleComponent}
+          {path: 'add', component: NewRoleComponent},
+          {path: 'edit', component: EditRoleComponent}
         ]
       },
     ]
