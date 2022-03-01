@@ -18,12 +18,7 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let checkReturn = false;
-      console.log('route', route);
-      console.log('state', state);
-      console.log('state url', state.url);
       this.userAuthorization = Utils.getSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY);
-      console.log(this.userAuthorization);
-
       if('/dashboard' === state.url) {
         checkReturn  = true;
       }
@@ -32,8 +27,6 @@ export class AuthGuard implements CanActivate {
         authorizationServer.forEach(element => {
            if(element.url === state.url) {
               code = element.authorizationCode;
-              console.log(element);
-
            }
         });
         if(code != 'NA') {
