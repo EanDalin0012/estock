@@ -27,4 +27,4 @@ spring:
 mybatis:
   type-aliases-package: com.estock.api.dto
   config-location: classpath:mybatis/mybatis_config.xml
-  mapper-locations: classpath:mybatis/mapper/**/*.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
