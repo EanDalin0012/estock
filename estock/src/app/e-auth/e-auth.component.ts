@@ -1,3 +1,4 @@
+import { Credentails } from './../e-share/data/credentail';
 import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -8,6 +9,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
   styleUrls: ['./e-auth.component.css']
 })
 export class EAuthComponent implements OnInit {
+
+  credentails!: Credentails;
   submitted = false;
   @ViewChild("userName") inputUserName: any;
   @ViewChild("password") inputPassword: any;
@@ -22,6 +25,9 @@ export class EAuthComponent implements OnInit {
     private formBuilder: FormBuilder,
     private zone: NgZone,
     ) {
+
+      this.credentails = {} as Credentails;
+
       this.formLogin as FormGroup;
       this.inputUserName as ElementRef;
       this.inputPassword as ElementRef;

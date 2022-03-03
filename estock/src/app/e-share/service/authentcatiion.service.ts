@@ -1,3 +1,6 @@
+import { TokenInfo } from './../data/token.info';
+import { LoadUser } from './../data/request/load.user';
+import { Credentails } from './../data/credentail';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -29,7 +32,7 @@ export class AuthentcatiionService {
     this.baseUrl = environment.bizServer.server;
   }
 
-  public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
+  public login(auth: Credentails, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
       this.authService.setLastEventTime();
       this.accessTokenRequest(auth, basicAuth).then(response => {
@@ -37,46 +40,46 @@ export class AuthentcatiionService {
         resovle(response);
 
         if(response?.header?.result== false) {
-          resovle(response.header);
+          if (response.access_token) {
+            Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
+            resovle(response.header);
+          }
         }
-        if (response.access_token) {
-          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
-          this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
-            console.log('loadUserByUserName',result);
+        // if (response.access_token) {
+        //   Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
+        //   this.loadUserByUserName(auth.userName, response.access_token).then((result) => {
+        //     console.log('loadUserByUserName',result);
 
-            if (result) {
-              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
-              resovle(result);
-            }
-          }).catch((err) => {
-            $('body').addClass('loaded');
-            $('div.loading').addClass('none');
-            console.log('err', err);
-          });
-        }
+        //     if (result) {
+        //       Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
+        //       resovle(result);
+        //     }
+        //   }).catch((err) => {
+        //     $('body').addClass('loaded');
+        //     $('div.loading').addClass('none');
+        //     console.log('err', err);
+        //   });
+        // }
       });
     });
 
   }
 
-  private loadUserByUserName(userName: string, accessToken: string): Promise<any> {
+  public loadUserByUserName(loaduser: LoadUser, tokenInfo: TokenInfo): Promise<any> {
     return new Promise((resolve, reject) => {
-      const data = this.deviceService.getDeviceInfo();
-      const userInfo = {
-        userName: userName
-      };
 
       const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
       const httpOptionsObj = {
         'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + accessToken
+        Authorization: 'Bearer ' + tokenInfo.access_token
       };
+
       const date = moment().format('YYYYMMDD hh:mm:ss');
-      const uri = this.baseUrl + '/api/user/v0/loadUser?lang=' + lang + '&date='+date;
+      const uri = this.baseUrl + '/api/user-info/load-user?lang=' + lang;
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
 
-      this.httpClient.post(this.baseUrl+TemplateAPI.USER_INFO.LOAD_USER, JSON.stringify(userInfo), {
+      this.httpClient.post(uri, JSON.stringify(loaduser), {
         headers: new HttpHeaders(httpOptionsObj)
       }).subscribe( res => {
           $('body').addClass('loaded');
@@ -84,11 +87,11 @@ export class AuthentcatiionService {
           const responseData = res as any;
           console.log('responseData', responseData);
 
-          if(responseData.resultCode && responseData.resultCode !== HTTPResponseCode.NotFound) {
-            // this.showErrMsg(responseData.result.responseMessage);
-            alert('User Info Not Found.');
-          } else if (responseData.body !== null ) {
+          if (responseData.resultCode ===  HTTPResponseCode.Success) {
             resolve(responseData.body);
+          }
+          if(responseData.resultCode && responseData.resultCode != HTTPResponseCode.Success) {
+            alert(responseData.resultCode.resultMessage);
           }
       }, error => {
         $('body').addClass('loaded');
@@ -98,11 +101,11 @@ export class AuthentcatiionService {
     });
   }
 
-  private accessTokenRequest(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
+  private accessTokenRequest(auth: Credentails, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
       // $('div.loading').removeClass('none');
 
-      if (!auth.user_name || auth.user_name === null) {
+      if (!auth.userName || auth.userName === null) {
         // this.modalService.alert(
         //   this.translate.instant('COMMON.MESSAGE.InValid_User_Name'),
         //   {
@@ -140,7 +143,7 @@ export class AuthentcatiionService {
       // const data = this.deviceService.getDeviceInfo();
 
       const formData = new FormData();
-      const username = auth.user_name;//EncryptionUtil.encrypt(auth.user_name);
+      const username = auth.userName;//EncryptionUtil.encrypt(auth.user_name);
       const password = auth.password//;EncryptionUtil.encrypt(auth.password);
 
       // const cInfo = EncryptionUtil.encrypt(username.toString()+ '#'+password.toString()).toString();

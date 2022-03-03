@@ -14,17 +14,26 @@
               <p class="account-subtitle">{{'login.label.accessToOurSystem' | translate}}</p>
 
               <!-- Account Form -->
-              <form [formGroup]="formLogin">
+              <form #form="ngForm">
 
                 <div class="form-row row">
                   <div class="form-group col-md-12">
                     <label class="font-khmer-cursive">{{'login.label.userName' | translate}}</label>
                     <span class="text-danger">*</span>
-                    <input #userName formControlName="userName" type="text" [ngClass]="formLogin.getRawValue().userName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'login.holder.enterUserName' | translate}} ...">
+                    <input type="text" id="userName" name="userName" #userName="ngModel" [(ngModel)]="credentails.userName" placeholder="Enter your first name" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="userName.invalid && (userName.dirty || userName.touched)">
 
-                    <!-- <ng-container *ngIf="submitted && f.userName.errors">
-                      <small class="text-danger"> {{'login.message.userNameRequired' | translate}}</small>
-                    </ng-container> -->
+                    <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="invalid-feedback">
+                      <div *ngIf="userName.errors?.['required']">
+                        This first name is required.
+                      </div>
+                      <div *ngIf="userName.errors?.['minlength']">
+                        This first name must have at least 1 character.
+                      </div>
+                      <div *ngIf="userName.errors?.['maxlength']">
+                        This first name must have at most 250 characters.
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
@@ -32,11 +41,19 @@
                   <div class="form-group col-md-12">
                     <label class="font-khmer-cursive">{{'login.label.password' | translate}}</label>
                     <span class="text-danger">*</span>
-                    <input #password formControlName="password" type="password" [ngClass]="formLogin.getRawValue().password? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'login.holder.enterPassword' | translate}} ...">
+                    <input type="text" id="password" name="password" #password="ngModel" [(ngModel)]="credentails.password" placeholder="Enter your first name" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="password.invalid && (password.dirty || password.touched)">
 
-                    <!-- <ng-container *ngIf="submitted && f.password.errors">
-                      <small class="text-danger"> {{'login.message.passwordRequired' | translate}}</small>
-                    </ng-container> -->
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="invalid-feedback">
+                      <div *ngIf="password.errors?.['required']">
+                        This first name is required.
+                      </div>
+                      <div *ngIf="password.errors?.['minlength']">
+                        This first name must have at least 1 character.
+                      </div>
+                      <div *ngIf="password.errors?.['maxlength']">
+                        This first name must have at most 250 characters.
+                      </div>
+                    </div>
                   </div>
                 </div>
 

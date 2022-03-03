@@ -52,7 +52,7 @@ public class UserRest {
         return listResponseVO;
     }
 
-    @PostMapping(value = "/load-user-info")
+    @PostMapping(value = "/load-user")
     public ResponseVO<UserInfoDTO> loadUserInfo(@RequestBody LoadUserRequestVO loadUserRequestVO) {
         ResponseVO<UserInfoDTO> responseVO = new ResponseVO<>();
         try {

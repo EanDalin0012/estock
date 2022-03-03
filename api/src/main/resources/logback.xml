@@ -57,7 +57,7 @@
 
 
 	<!-- Application Loggers -->
-	<logger name="com.wing.loyalty" level="ALL"
+	<logger name="com.estock.api" level="ALL"
 		additivity="false">
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="INFO-FILE" />

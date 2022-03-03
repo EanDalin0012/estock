@@ -1,9 +1,13 @@
+import { TokenInfo } from './../../e-share/data/token.info';
+import { LoadUser } from './../../e-share/data/request/load.user';
+import { HTTPService } from './../../e-share/service/http.service';
+import { Credentails } from './../../e-share/data/credentail';
 import { UserAuthorizationServer } from './../../e-share/data/user.authorization.code';
 import { LOCAL_STORAGE } from './../../e-share/constants/common.const';
 import { Utils } from 'src/app/e-share/util/utils.static';
 import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, NgForm } from '@angular/forms';
 import { AuthentcatiionService } from 'src/app/e-share/service/authentcatiion.service';
 
 @Component({
@@ -12,78 +16,52 @@ import { AuthentcatiionService } from 'src/app/e-share/service/authentcatiion.se
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userName!: string;
-  password!: string;
 
-  registerForm!: FormGroup;
-  submitted = false;
+  credentails!: Credentails;
+  loadUser!: LoadUser;
+  tokenInfo!: TokenInfo;
 
-  @ViewChild("userName") inputUserName: any;
-  @ViewChild("password") inputPassword: any;
   isFirstLogin = false;
-
-  public formLogin: any;
-  isValidLoading = false;
   userAuthorizationServer: UserAuthorizationServer[] = [];
   constructor(
-    // private dataService: DataService,
     private authentcatiionService: AuthentcatiionService,
     private router: Router,
-    private formBuilder: FormBuilder,
     private zone: NgZone,
+    private httpServer: HTTPService
     ) {
-      this.formLogin as FormGroup;
-      this.inputUserName as ElementRef;
-      this.inputPassword as ElementRef;
-
-      this.formLogin = this.formBuilder.group({
-        userName: ['', Validators.required],
-        password: ['', Validators.required]
-      });
+      this.credentails = {} as Credentails;
+      this.loadUser = {} as LoadUser;
+      this.tokenInfo = {} as TokenInfo;
     }
 
   ngOnInit(): void {
-    // this.formLogin.patchValue({
-    //   userName: 'admin@gmail.com',
-    //   password: 'admin123'
-    // });
-
-    this.registerForm = this.formBuilder.group({
-      userName: ['', Validators.required],
-      password: ['', Validators.required]
-  });
-  this.userName = 'admin';
-  this.password = 'admin1234';
+    this.credentails.userName = 'admin';
+    this.credentails.password = 'admin1234';
   }
 
   routors() {
     this.router.navigate(['/acc']);
   }
 
-  isEmpty(value: string) {
-    switch (value) {
-      case 'u':
-        this.formLogin.patchValue({
-          userName: '',
-        });
-        break;
-      case 'p':
-        this.formLogin.patchValue({
-          password: '',
-        });
-        break;
-    }
-  }
 
-  onLogin() {
-    this.submitted = true;
-    if(this.userName && this.password) {
-      const logInfo = {
-        user_name: this.userName,
-        password: this.password
-      };
-      this.authentcatiionService.login(logInfo).then((resp: any) => {
-        if(resp) {
+  public btnLogin(form: NgForm): void {
+    console.log(form.form.value, form.invalid);
+
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+      return;
+    } else {
+      this.authentcatiionService.login(this.credentails).then(resp => {
+        console.log('resp', resp);
+        this.tokenInfo = resp;
+        if(this.tokenInfo) {
+          this.loadUser.userName = this.credentails.userName;
+          this.authentcatiionService.loadUserByUserName(this.loadUser, this.tokenInfo).then(response=> {
+            console.log('response', response);
+
+          });
           this.userAuthorizationServer = [
             {
               id: 1,
@@ -115,7 +93,7 @@ export class LoginComponent implements OnInit {
             }
           ];
           Utils.setSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY, this.userAuthorizationServer);
-          this.zone.run(() =>  this.router.navigate(['/dashboard'], { replaceUrl: true }));
+          // this.zone.run(() =>  this.router.navigate(['/dashboard'], { replaceUrl: true }));
           // if(resp.result === false) {
           //   this.isValidLoading = false;
           // } else {
@@ -133,21 +111,6 @@ export class LoginComponent implements OnInit {
       });
     }
   }
-
-
-  changePassword(item: any) {
-    // this.modalService.open(
-    //   ChangePasswordComponent,
-    //   {
-    //     message: item,
-    //     callback: _response => {
-
-    //   }
-    // });
-  }
-
-   // convenience getter for easy access to form fields
-   get f() { return this.registerForm.controls; }
 
 }
 
