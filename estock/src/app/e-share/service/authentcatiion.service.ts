@@ -33,18 +33,24 @@ export class AuthentcatiionService {
   }
 
   public login(auth: Credentails, basicAuth?: BasicAuth): Promise<any> {
-    return new Promise((resovle) => {
+    return new Promise((resovle, reject) => {
       this.authService.setLastEventTime();
       this.accessTokenRequest(auth, basicAuth).then(response => {
         console.log('accessTokenRequest',response);
-        resovle(response);
-
-        if(response?.header?.result== false) {
-          if (response.access_token) {
-            Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
-            resovle(response.header);
-          }
+        if(response) {
+          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response)
+          resovle(response);
+        } else {
+          reject()
         }
+
+
+        // if(response?.header?.result== false) {
+        //   if (response.access_token) {
+        //     Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
+        //     resovle(response.header);
+        //   }
+        // }
         // if (response.access_token) {
         //   Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
         //   this.loadUserByUserName(auth.userName, response.access_token).then((result) => {
@@ -89,9 +95,10 @@ export class AuthentcatiionService {
 
           if (responseData.resultCode ===  HTTPResponseCode.Success) {
             resolve(responseData.body);
+            return;
           }
           if(responseData.resultCode && responseData.resultCode != HTTPResponseCode.Success) {
-            alert(responseData.resultCode.resultMessage);
+            alert(responseData.resultMessage);
           }
       }, error => {
         $('body').addClass('loaded');

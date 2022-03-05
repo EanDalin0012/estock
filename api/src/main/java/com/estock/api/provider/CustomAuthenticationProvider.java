@@ -93,7 +93,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
             List<AuthorityDTO> authorities = userInfo.getAuthorities();
             for (AuthorityDTO authority : authorities) {
-                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
+                grantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthorizationCode()));
             }
 
             Map<String, Object> principal = new HashMap<>();

@@ -7,5 +7,5 @@ import lombok.*;
 @ToString
 public class AuthorityDTO {
     private int id;
-    private String name;
+    private String authorizationCode;
 }

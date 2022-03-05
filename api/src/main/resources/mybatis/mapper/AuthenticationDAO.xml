@@ -16,7 +16,7 @@
 
     <resultMap type="AuthorityDTO" id="authority">
         <id property="id" column="authority_id"/>
-        <result property="name" column="authority_name"/>
+        <result property="authorizationCode" column="authority_name"/>
     </resultMap>
 
 
