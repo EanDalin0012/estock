@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 <configuration
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<property name="rootDir" value="api/logs" />
+	<property name="rootDir" value="logs" />
 	<property name="archiveDir" value="${rootDir}/archived" />
 	<property name="pattern"
 		value="%d{yyyy-MM-dd HH:mm:ss} [%thread] [%level] %logger{36} - %msg%n" />
