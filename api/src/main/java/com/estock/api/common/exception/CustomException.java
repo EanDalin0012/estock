@@ -6,42 +6,42 @@ public class CustomException extends Throwable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String key;
-    private String value;
+	private String messageCode;
+    private String message;
 
-    public CustomException(String key, String value) {
-        this.key = key;
-        this.value = value;
+    public CustomException(String messageCode, String message) {
+        this.messageCode = messageCode;
+        this.message = message;
     }
     
-    public CustomException(String key) {
-        this.key = key;
+    public CustomException(String messageCode) {
+        this.messageCode = messageCode;
     }
 
-    public CustomException(String key, Throwable throwable) {
+    public CustomException(String messageCode, Throwable throwable) {
         super(throwable);
-        this.key = key;
+        this.messageCode = messageCode;
     }
 
-    public CustomException(String key, String value, Throwable throwable) {
+    public CustomException(String messageCode, String message, Throwable throwable) {
         super(throwable);
-        this.key = key;
-        this.value = value;
+        this.messageCode = messageCode;
+        this.message = message;
     }
 
-    public String getKey() {
-        return key;
+    public String getMessageCode() {
+        return messageCode;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setMessageCode(String messageCode) {
+        this.messageCode = messageCode;
     }
 
-    public String getValue() {
-        return value;
+    public String getMessage() {
+        return message;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setMessage(String messageCode) {
+        this.messageCode = messageCode;
     }
 }

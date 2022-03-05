@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.estock.api.dao.UserInfoDAO">
+<mapper namespace="com.estock.api.dao.LoadUserInfoDAO">
 
-    <resultMap type="UserInfoDTO" id="userInfoDTO">
+    <resultMap type="LoadUserInfoDTO" id="loadUserInfoDTO">
         <id property="id" column="id"/>
         <result property="firstName" column="first_name"/>
         <result property="lastName" column="last_name"/>
@@ -12,9 +12,31 @@
         <result property="desc" column="desc"/>
         <result property="dateTime" column="modify_date"/>
         <result property="userID" column="modify_by"/>
+        <association property="authorities" resultMap="authorities" javaType="list"/>
+        <association property="userRole" resultMap="userRoleDTO" javaType="UserRoleDTO"/>
+        <association property="credential" resultMap="credential" javaType="CredentialDTO"/>
     </resultMap>
 
-    <select id="loadUserByID" resultMap="userInfoDTO">
+    <resultMap type="AuthorityDTO" id="authorities">
+        <id property="id" column="authority_id"/>
+        <result property="name" column="authority_name"/>
+    </resultMap>
+
+    <resultMap type="UserRoleDTO" id="userRoleDTO">
+        <id property="id" column="role_id"/>
+        <result property="role" column="role"/>
+    </resultMap>
+
+    <resultMap type="CredentialDTO" id="credential">
+        <id property="id" column="role_id"/>
+        <result property="userName" column="role"/>
+        <result property="accountExpired" column="role"/>
+        <result property="accountLocked" column="role"/>
+        <result property="credentialsExpired" column="role"/>
+        <result property="enabled" column="role"/>
+    </resultMap>
+
+    <select id="loadUserInfo" resultMap="loadUserInfoDTO">
         SELECT
             u.id
              , u.user_name

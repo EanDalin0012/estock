@@ -75,7 +75,7 @@ export class AuthentcatiionService {
       };
 
       const date = moment().format('YYYYMMDD hh:mm:ss');
-      const uri = this.baseUrl + '/api/user-info/load-user?lang=' + lang;
+      const uri = this.baseUrl + '/api/load-user/index?lang=' + lang;
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
 

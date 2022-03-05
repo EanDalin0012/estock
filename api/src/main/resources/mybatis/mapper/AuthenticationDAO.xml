@@ -21,7 +21,6 @@
 
 
     <select id="getUserByName" resultMap="user">
-        <![CDATA[
         SELECT
             u.id
              , u.user_name
@@ -34,10 +33,25 @@
              , au."name" as "authority_name"
              , au."id" as "authority_id"
         FROM user_ as u
-                 LEFT JOIN users_authorities as ua on u."id" = ua.user_id
-                 LEFT JOIN authority as au on au."id" = ua.authority_id
-        WHERE user_name = #{userName};
-        ]]>
+        LEFT JOIN users_authorities as ua on u."id" = ua.user_id
+        LEFT JOIN authority as au on au."id" = ua.authority_id
+        WHERE user_name = 'admin'
+        UNION
+        SELECT
+            u.id
+             , u.user_name
+             , u."password"
+             , u.account_expired
+             , u.account_locked
+             , u.credentials_expired
+             , u.enabled
+             , u.user_info_id
+             , aut."name" as "authority_name"
+             , aut."id" as "authority_id"
+        FROM role_authority r_aut
+        INNER JOIN user_ u on u.role_id = r_aut.role_id
+        INNER JOIN authority aut on aut."id" = r_aut.authority_id
+        WHERE u.user_name = #{userName};
     </select>
 
 </mapper>
