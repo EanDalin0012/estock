@@ -3,21 +3,14 @@
 <mapper namespace="com.estock.api.dao.LoadUserInfoDAO">
 
     <resultMap type="LoadUserInfoDTO" id="loadUserInfoDTO">
-        <id property="id" column="id"/>
-        <result property="firstName" column="first_name"/>
-        <result property="lastName" column="last_name"/>
-        <result property="dateBirth" column="date_birth"/>
-        <result property="gender" column="gender"/>
-        <result property="phone" column="desc"/>
-        <result property="desc" column="desc"/>
-        <result property="dateTime" column="modify_date"/>
-        <result property="userID" column="modify_by"/>
-        <association property="authorities" resultMap="authorities" javaType="list"/>
+        <id property="id" column="credential_id"/>
+        <association property="authorities" resultMap="authority" javaType="Collection"/>
         <association property="userRole" resultMap="userRoleDTO" javaType="UserRoleDTO"/>
         <association property="credential" resultMap="credential" javaType="CredentialDTO"/>
+        <association property="userInfo" resultMap="userInfo" javaType="UserInfoDTO"/>
     </resultMap>
 
-    <resultMap type="AuthorityDTO" id="authorities">
+    <resultMap type="AuthorityDTO" id="authority">
         <id property="id" column="authority_id"/>
         <result property="name" column="authority_name"/>
     </resultMap>
@@ -25,22 +18,44 @@
     <resultMap type="UserRoleDTO" id="userRoleDTO">
         <id property="id" column="role_id"/>
         <result property="role" column="role"/>
+        <result property="status" column="role_status"/>
+        <result property="userID" column="role_modify_by"/>
+        <result property="dateTime" column="role_modify_date"/>
     </resultMap>
 
     <resultMap type="CredentialDTO" id="credential">
-        <id property="id" column="role_id"/>
-        <result property="userName" column="role"/>
-        <result property="accountExpired" column="role"/>
-        <result property="accountLocked" column="role"/>
-        <result property="credentialsExpired" column="role"/>
-        <result property="enabled" column="role"/>
+        <id property="id" column="credential_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="accountExpired" column="account_expired"/>
+        <result property="accountLocked" column="account_locked"/>
+        <result property="credentialsExpired" column="credentials_expired"/>
+        <result property="enabled" column="enabled"/>
+        <result property="status" column="credential_status"/>
+        <result property="userID" column="credential_modify_by"/>
+        <result property="dateTime" column="credential_modify_date"/>
+    </resultMap>
+
+    <resultMap type="UserInfoDTO" id="userInfo">
+        <id property="id" column="user_inf_id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="gender" column="gender"/>
+        <result property="dateBirth" column="date_birth"/>
+        <result property="phone" column="phone"/>
+        <result property="resourceID" column="resource_id"/>
+        <result property="desc" column="desc"/>
+        <result property="status" column="user_info_status"/>
+        <result property="userID" column="user_info_modify_by"/>
+        <result property="dateTime" column="user_info_modify_date"/>
     </resultMap>
 
     <select id="loadUserInfo" resultMap="loadUserInfoDTO">
         SELECT
-            u.id
+            u.id as "credential_id"
+             , u.status     as "credential_status"
+             , u.modify_by  as "credential_modify_by"
+             , u.modify_date    as "credential_modify_date"
              , u.user_name
-             , u."password"
              , u.account_expired
              , u.account_locked
              , u.credentials_expired
@@ -48,6 +63,8 @@
              , u.user_info_id
              , aut."name" as "authority_name"
              , aut."id" as "authority_id"
+
+             , us_info."id" as "user_inf_id"
              , us_info.first_name
              , us_info.last_name
              , us_info.gender
@@ -56,19 +73,28 @@
              , us_info."desc"
              , us_info.status
              , us_info.resource_id
+             , us_info.status as "user_info_status"
+             , us_info.modify_by as "user_info_modify_by"
+             , us_info.modify_date as "user_info_modify_date"
+
              , u_role."id" as "role_id"
              , u_role."role" as "role"
+             , u_role.status as "role_status"
+             , u_role.modify_by	as "role_modify_by"
+             , u_role.modify_date as "role_modify_date"
         FROM role_authority r_aut
-                 INNER JOIN user_ u on u.role_id = r_aut.role_id
-                 INNER JOIN authority aut on aut."id" = r_aut.authority_id
-                 INNER JOIN user_info us_info on us_info.id = u.user_info_id
-                 INNER JOIN user_role u_role on u_role."id" = u.role_id
-        WHERE u.user_name = 'admin'
+        INNER JOIN user_ u on u.role_id = r_aut.role_id
+        INNER JOIN authority aut on aut."id" = r_aut.authority_id
+        INNER JOIN user_info us_info on us_info.id = u.user_info_id
+        INNER JOIN user_role u_role on u_role."id" = u.role_id
+        WHERE u.user_name = #{userName}
         UNION
         SELECT
-            u.id
+            u.id  as "credential_id"
+             , u.status     as "credential_status"
+             , u.modify_by  as "credential_modify_by"
+             , u.modify_date    as "credential_modify_date"
              , u.user_name
-             , u."password"
              , u.account_expired
              , u.account_locked
              , u.credentials_expired
@@ -76,6 +102,8 @@
              , u.user_info_id
              , au."name" as "authority_name"
              , au."id" as "authority_id"
+
+             , us_info."id" as "user_inf_id"
              , us_info.first_name
              , us_info.last_name
              , us_info.gender
@@ -84,14 +112,21 @@
              , us_info."desc"
              , us_info.status
              , us_info.resource_id
+             , us_info.status as "user_info_status"
+             , us_info.modify_by as "user_info_modify_by"
+             , us_info.modify_date as "user_info_modify_date"
+
              , u_role."id" as "role_id"
              , u_role."role" as "role"
+             , u_role.status as "role_status"
+             , u_role.modify_by	as "role_modify_by"
+             , u_role.modify_date as "role_modify_date"
         FROM user_ as u
-                 INNER JOIN users_authorities ua on u."id" = ua.user_id
-                 INNER JOIN authority au on au."id" = ua.authority_id
-                 INNER JOIN user_info us_info on us_info.id = u.user_info_id
-                 INNER JOIN user_role u_role on u_role."id" = u.role_id
-        WHERE user_name = 'admin'
+        INNER JOIN users_authorities ua on u."id" = ua.user_id
+        INNER JOIN authority au on au."id" = ua.authority_id
+        INNER JOIN user_info us_info on us_info.id = u.user_info_id
+        INNER JOIN user_role u_role on u_role."id" = u.role_id
+        WHERE u.user_name = #{userName}
         ORDER BY authority_id ASC;
     </select>
 
