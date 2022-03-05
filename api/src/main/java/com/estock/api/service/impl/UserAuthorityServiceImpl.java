@@ -25,7 +25,7 @@ public class UserAuthorityServiceImpl implements UserAuthorityService {
 
     @Override
     public UserAuthorityDTO loadUserAuthorityByUserName(String userName) throws CustomException{
-        log.info(key+"======== Start User Authority loadUserAuthorityByUserName ==========");
+        log.info("------------ Start Service Load User Authorization By User Name ---------------");
         try{
             if (userName.equals("") || userName == null) {
                 throw new CustomException("INVALID_USER_NAME", "Invalid user name.");
@@ -42,7 +42,7 @@ public class UserAuthorityServiceImpl implements UserAuthorityService {
 
     @Override
     public UserAuthorityDTO loadUserAuthorityByUserID(int userID) throws CustomException {
-        log.info(key+"======== Start User Authority loadUserAuthorityByUserID ==========");
+        log.info("------------ Start Service Load User Authorization By User ID ---------------");
         try{
             if (userID <= 0) {
                 throw new CustomException("INVALID_USER_ID", "Invalid user ID.");

@@ -18,6 +18,7 @@ public class LoadUserInfoServiceImpl implements LoadUserInfoService {
 
     @Override
     public LoadUserInfoDTO loadUserInfo(String userName) throws CustomException {
+        log.info("------------ Start Service Load User Information ---------------");
         try {
             if (userName.equals("") || userName == null) {
                 throw new CustomException(ServiceConstant.INVALID_USER_NAME.name(), ServiceConstant.INVALID_USER_NAME.getDesc());
