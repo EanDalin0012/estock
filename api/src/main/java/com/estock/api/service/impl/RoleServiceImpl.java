@@ -46,7 +46,9 @@ public class RoleServiceImpl implements RoleService {
         TransactionStatus transactionStatus = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
+            log.info("------------ User Role Request Vo Data => "+Utility.toJSON(userRoleRequestVO));
             UserRoleDTO userRoleDTO = UserRoleMapper.INSTANCE.userRoleMapper(userRoleRequestVO);
+            log.info("------------ User Role DTO Data => "+Utility.toJSON(userRoleDTO));
             int roleId = this.count();
             userRoleDTO.setId(roleId);
             List<UserRoleAuthorityDTO> userRoleAuthorities = new ArrayList<>();
@@ -56,8 +58,12 @@ public class RoleServiceImpl implements RoleService {
                     userRoleAuthorities.add(new UserRoleAuthorityDTO(roleId, authId));
                 }
             }
+            log.info("------------ List Of User Role Authority DTO Data => "+Utility.toJSON(userRoleAuthorities));
             int saveUserRole = this.userRoleDAO.addUserRole(userRoleDTO);
             int saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
+
+            log.info("------------ Save User Role Data => "+saveUserRole);
+            log.info("------------ Save User Role Authority Data => "+saveUserRoleAuthority);
             if (saveUserRole > 0 && saveUserRoleAuthority > 0) {
                 this.transactionManager.commit(transactionStatus);
                 return 1;
@@ -84,7 +90,7 @@ public class RoleServiceImpl implements RoleService {
         log.info("------------ Start Service Inquiry User Role ---------------");
         try {
             Collection<UserRoleDTO> userRoles = this.userRoleDAO.inquiryUserRole(StatusCode.ACTIVE.name());
-            log.info("UserRoles Data =>"+ Utility.toJSON(userRoles));
+            log.info("--------- UserRoles Data =>"+ Utility.toJSON(userRoles));
             return userRoles;
         }catch (Exception e) {
             e.printStackTrace();
