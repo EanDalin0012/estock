@@ -1,4 +1,5 @@
-export interface UserInfo {
+import { DataConstant } from './constant.data';
+export interface UserInfo extends DataConstant{
   id:number;
   firstName: string;
   lastName: string;
@@ -6,8 +7,5 @@ export interface UserInfo {
   dateBirth: string;
   phone: string;
   desc: string;
-  userID: string;
-  dateTime: string;
-  status: string;
-  remark: string
+  resourceID: number;
 }

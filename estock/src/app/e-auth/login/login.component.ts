@@ -1,8 +1,9 @@
+import { Authority } from './../../e-share/data/authority';
+import { LoadUserInfoResponse } from './../../e-share/data/response/load.user.info';
 import { TokenInfo } from './../../e-share/data/token.info';
 import { LoadUser } from './../../e-share/data/request/load.user';
 import { HTTPService } from './../../e-share/service/http.service';
 import { Credentails } from './../../e-share/data/credentail';
-import { UserAuthorizationServer } from './../../e-share/data/user.authorization.code';
 import { LOCAL_STORAGE } from './../../e-share/constants/common.const';
 import { Utils } from 'src/app/e-share/util/utils.static';
 import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
@@ -20,9 +21,11 @@ export class LoginComponent implements OnInit {
   credentails!: Credentails;
   loadUser!: LoadUser;
   tokenInfo!: TokenInfo;
+  loadUserInfoResponse!: LoadUserInfoResponse;
+  authorities: Authority[] = [];
 
   isFirstLogin = false;
-  userAuthorizationServer: UserAuthorizationServer[] = [];
+
   constructor(
     private authentcatiionService: AuthentcatiionService,
     private router: Router,
@@ -32,6 +35,7 @@ export class LoginComponent implements OnInit {
       this.credentails = {} as Credentails;
       this.loadUser = {} as LoadUser;
       this.tokenInfo = {} as TokenInfo;
+      this.loadUserInfoResponse = {} as LoadUserInfoResponse;
     }
 
   ngOnInit(): void {
@@ -60,39 +64,19 @@ export class LoginComponent implements OnInit {
           this.loadUser.userName = this.credentails.userName;
           this.authentcatiionService.loadUserByUserName(this.loadUser, this.tokenInfo).then(response=> {
             console.log('response', response);
-
-          });
-          this.userAuthorizationServer = [
-            {
-              id: 1,
-              userAuthorizationCode: 'SALE'
-            },
-            {
-              id: 2,
-              userAuthorizationCode: 'READ_USER'
-            },
-            {
-              id: 3,
-              userAuthorizationCode: 'ADD_USER'
-            },
-            {
-              id: 4,
-              userAuthorizationCode: 'EDIT_USER'
-            },
-            {
-              id: 5,
-              userAuthorizationCode: 'READ_ROLE'
-            },
-            {
-              id: 6,
-              userAuthorizationCode: 'ADD_ROLE'
-            },
-            {
-              id: 6,
-              userAuthorizationCode: 'EDIT_ROLE'
+            this.loadUserInfoResponse = response;
+            this.authorities = this.loadUserInfoResponse.authorities;
+            console.log('loadUserInfoResponse', this.loadUserInfoResponse);
+            console.log('authorities', this.authorities);
+            if(this.loadUserInfoResponse) {
+              Utils.setSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY, this.authorities);
+              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, this.loadUserInfoResponse.userInfo)
+              this.zone.run(() =>  this.router.navigate(['/dashboard'], { replaceUrl: true }));
             }
-          ];
-          Utils.setSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY, this.userAuthorizationServer);
+          });
+
+
+
           // this.zone.run(() =>  this.router.navigate(['/dashboard'], { replaceUrl: true }));
           // if(resp.result === false) {
           //   this.isValidLoading = false;

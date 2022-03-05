@@ -1,5 +1,5 @@
 import { AuthorizationServer } from './../data/authorization.server';
-export const authorizationServer: AuthorizationServer[] = [
+export const AuthorizationServerDataConstant: AuthorizationServer[] = [
   {
     url: '/sale',
     authorizationCode: 'SALE'

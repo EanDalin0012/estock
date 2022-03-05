@@ -154,28 +154,43 @@ export interface Data {
 export const stockDatas: Role[] = [
   {
     id: 1,
-    name: 'Admin',
-    desc: 'Manage Page roles and settings,Edit the Page and add apps,Create and delete posts as the Page,Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post'
+    role: 'Admin',
+    desc: 'Manage Page roles and settings,Edit the Page and add apps,Create and delete posts as the Page,Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post',
+    userID: 1,
+    dateTime: '',
+    status: ''
   },
   {
     id: 2,
-    name: 'Editor',
-    desc: 'Edit the Page and add apps,Create and delete posts as the Page,Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post'
+    role: 'Editor',
+    desc: 'Edit the Page and add apps,Create and delete posts as the Page,Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post',
+    userID: 1,
+    dateTime: '',
+    status: ''
   },
   {
     id: 3,
-    name: 'Moderator',
-    desc: 'Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post'
+    role: 'Moderator',
+    desc: 'Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page,Publish and manage jobs,Turn on job features for a post',
+    userID: 1,
+    dateTime: '',
+    status: ''
   },
   {
     id: 4,
-    name: 'Advertiser',
-    desc: 'Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page'
+    role: 'Advertiser',
+    desc: 'Send messages as the Page,Respond to and delete comments and posts to the Page,Remove and ban people from the Page,Create ads, promotions or boosted posts,View earnings insights,View other insights,View Page Quality tab,See who published as the Page',
+    userID: 1,
+    dateTime: '',
+    status: ''
   },
   {
     id: 5,
-    name: 'Analyst',
-    desc: 'View other insights,View Page Quality tab,See who published as the Page'
+    role: 'Analyst',
+    desc: 'View other insights,View Page Quality tab,See who published as the Page',
+    userID: 1,
+    dateTime: '',
+    status: ''
   },
 
 ];

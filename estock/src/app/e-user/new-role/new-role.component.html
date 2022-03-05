@@ -27,7 +27,7 @@
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Role</label>
-                        <input type="text" id="roleName" name="roleName" #roleName="ngModel" [(ngModel)]="role.name" placeholder="Enter your first name" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="roleName.invalid && (roleName.dirty || roleName.touched)">
+                        <input type="text" id="roleName" name="roleName" #roleName="ngModel" [(ngModel)]="role.role" placeholder="Enter your first name" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="roleName.invalid && (roleName.dirty || roleName.touched)">
                         <div *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)" class="invalid-feedback">
                           <div *ngIf="roleName.errors?.['required']">
                             This first name is required.

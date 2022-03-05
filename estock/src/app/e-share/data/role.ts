@@ -1,5 +1,6 @@
-export interface Role {
+import { DataConstant } from './constant.data';
+export interface Role  extends DataConstant{
   id: number;
-  name: string;
+  role: string;
   desc: string;
 }
