@@ -12,11 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class NewRoleComponent implements OnInit {
 
-  role: Role = {
-    id: 0,
-    name: '',
-    desc: ''
-  };
+  role!: Role;
   constructor(
     private dataService: DataService,
     private titleService: Title,
@@ -27,7 +23,7 @@ export class NewRoleComponent implements OnInit {
     this.dataService.visitParamRouterChange(url[4]);
     this.titleService.setTitle('Employee Request');
 
-    this.role as Role;
+    this.role = {} as Role;
   }
 
   ngOnInit(): void {
