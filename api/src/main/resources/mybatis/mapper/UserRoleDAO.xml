@@ -38,8 +38,8 @@
     <select id="inquiryUserRole" resultMap="userRoleDTO">
         SELECT
             id
-            ,role
-             , desc
+            , "role"
+             , "desc"
              , modify_date
              , modify_by
              , status

@@ -1,3 +1,4 @@
+import { HTTPService } from 'src/app/e-share/service/http.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -86,6 +87,7 @@ export class RoleComponent implements OnInit {
     private dataService: DataService,
     private titleService: Title,
     private router: Router,
+    private httpService: HTTPService
   ) {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[4]);
@@ -100,6 +102,10 @@ export class RoleComponent implements OnInit {
     //   .get<any[]>('https://www.ag-grid.com/example-assets/olympic-winners.json')
     //   .subscribe((data) => (this.rowData = data));
     this.rowData = stockDatas;
+    this.httpService.Get('/api/user-role-authority-detail/index').then(response=> {
+      console.log(response);
+
+    });
   }
 
   onBtnExport() {
