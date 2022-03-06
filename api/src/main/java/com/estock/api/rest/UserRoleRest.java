@@ -2,6 +2,7 @@ package com.estock.api.rest;
 
 import com.estock.api.common.constant.CommonConstant;
 import com.estock.api.common.exception.CustomException;
+import com.estock.api.dto.UserRoleDTO;
 import com.estock.api.service.UserRoleService;
 import com.estock.api.vo.ResponseVO;
 import com.estock.api.vo.request.UserRoleRequestVO;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping(value = "/api/user-role")
@@ -34,6 +37,26 @@ public class UserRoleRest {
                 response.setBody(false);
             }
             return response;
+        }catch (Exception e) {
+            e.printStackTrace();
+            response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());
+            response.setResultMessage(e.getMessage());
+        } catch (CustomException e) {
+            e.printStackTrace();
+            response.setResultCode(e.getMessageCode());
+            response.setResultMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping(value = "/inquiry")
+    public ResponseVO<Collection<UserRoleDTO>> inquiry() {
+        ResponseVO<Collection<UserRoleDTO>> response = new ResponseVO<>();
+        try {
+            Collection<UserRoleDTO> userRoles = this.userRoleService.inquiryUserRole();
+            response.setBody(userRoles);
+            response.setResultCode(CommonConstant.SUCCESS.name());
+            response.setResultMessage(CommonConstant.SUCCESS.name());
         }catch (Exception e) {
             e.printStackTrace();
             response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());

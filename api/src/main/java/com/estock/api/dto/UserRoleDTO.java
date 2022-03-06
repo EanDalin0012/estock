@@ -11,4 +11,5 @@ import lombok.*;
 public class UserRoleDTO extends CommonDTO {
     private int id;
     private String role;
+    private String desc;
 }

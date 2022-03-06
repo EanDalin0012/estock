@@ -14,6 +14,6 @@ public class CommonDTO {
     private String status;
 
     public CommonDTO() {
-        dateTime = SystemDateUtil.getLocalDate("dd-MM-yyyy hh:mm:ss");
+        dateTime = SystemDateUtil.getLocalDate("yyyyMMdd hh:mm:ss");
     }
 }
