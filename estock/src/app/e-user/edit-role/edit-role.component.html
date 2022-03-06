@@ -20,134 +20,219 @@
         <div class="card leave-box">
             <div  class="card-body">
               <div class="row clearfix">
-
+                <form #formUser="ngForm">
                 <div class="row">
 
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label>{{'role.label.role' | translate}}</label>
-                      <input type="text" placeholder="Enter role" class="form-control form-control-sm">
-                    </div>
-                  </div>
 
-                  <div class="col-md-6 col-sm-12">
-                    <div class="form-group">
-                      <label>Description</label>
-                      <input type="text" placeholder="Enter description" class="form-control form-control-sm">
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" id="roleName" name="roleName" #roleName="ngModel" [(ngModel)]="userRole.role" placeholder="Enter role" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="roleName.invalid && (roleName.dirty || roleName.touched)">
+                        <div *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)" class="invalid-feedback">
+                          <div *ngIf="roleName.errors?.['required']">
+                            This first name is required.
+                          </div>
+                          <div *ngIf="roleName.errors?.['minlength']">
+                            This first name must have at least 1 character.
+                          </div>
+                          <div *ngIf="roleName.errors?.['maxlength']">
+                            This first name must have at most 250 characters.
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="table-responsive m-t-15">
-                    <table class="table table-striped custom-table">
-                      <thead>
-                        <tr>
-                          <th>Module Permission</th>
-                          <th class="text-center">Read</th>
-                          <th class="text-center">Write</th>
-                          <th class="text-center">Create</th>
-                          <th class="text-center">Delete</th>
-                          <th class="text-center">Import</th>
-                          <th class="text-center">Export</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Employee</td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Holidays</td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Leaves</td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Events</td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                          <td class="text-center">
-                            <input checked="" type="checkbox">
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                    <div class="col-md-6 col-sm-12">
+                      <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control form-control-sm" id="desc" name="desc" #desc="ngModel" [(ngModel)]="userRole.desc" placeholder="Enter your description">
+                      </div>
+                    </div>
+
+                    <div class="table-responsive m-t-15">
+                      <table class="table table-striped custom-table">
+                        <thead>
+                          <tr>
+                            <th>Module Permission</th>
+                            <th class="text-center">Read</th>
+                            <th class="text-center">Add</th>
+                            <th class="text-center">Edit</th>
+                            <th class="text-center">Delete</th>
+                            <th class="text-center">Export</th>
+                            <th class="text-center">Assign Authority</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>User</td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkReadUser" (click)="btnCheck(1, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkAddUser" (click)="btnCheck(2, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkEditUser" (click)="btnCheck(3, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkDeleteUser" (click)="btnCheck(4, $event)">
+                            </td>
+
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkExportUser"  (click)="btnCheck(5, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input disabled type="checkbox">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Role</td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkReadRole" (click)="btnCheck(6, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkAddRole" (click)="btnCheck(7, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkEditRole" (click)="btnCheck(8, $event)">
+                            </td>
+                            <td class="text-center">
+                              <input type="checkbox" [checked] = "checkDeleteRole" (click)="btnCheck(9, $event)">
+                            </td>
+
+                            <td class="text-center">
+                              <input disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input disabled type="checkbox">
+                            </td>
+                          </tr>
+
+                          <!-- <tr>
+                            <td>User Assign Authority</td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                          </tr> -->
+                          <!-- <tr>
+                            <td>Stock</td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                          </tr> -->
+                          <!-- <tr>
+                            <td>Warehouse</td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                          </tr> -->
+
+                          <!-- <tr>
+                            <td>Product</td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                          </tr> -->
+                          <!-- <tr>
+                            <td>Import Product</td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+
+                            <td class="text-center">
+                              <input checked="" type="checkbox">
+                            </td>
+                            <td class="text-center">
+                              <input checked="" disabled type="checkbox">
+                            </td>
+                          </tr> -->
+                        </tbody>
+                      </table>
+                    </div>
 
                 </div>
 
                 <div class="row col-md-12 ">
                   <div class="task-assign form-group">
-                    <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);">
-                      <i class="las la-edit icon-color-01"></i> Edit
+                    <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" (click)="btnSave(formUser)">
+                      <i class="las la-save" style="color: #183153;margin-right: 5px;"></i> Save
                     </a>
                   </div>
                 </div>
+              </form>
 
               </div>
             </div>

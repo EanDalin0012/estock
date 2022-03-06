@@ -2,7 +2,6 @@ package com.estock.api.dto;
 
 import com.estock.api.common.dto.CommonDTO;
 import lombok.*;
-
 import java.util.Collection;
 
 @Data

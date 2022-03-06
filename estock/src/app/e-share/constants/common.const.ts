@@ -59,6 +59,9 @@ export enum AuthorizationModule {
 
 
 export enum LOCAL_STORAGE {
+
+  Edit_Role  = 'Edit_Role',
+
   DEVICE_INFO               = 'deviceInfo',
   MOVEI_Edit                  = 'Movei-edit',
   Setting_Movie_Add           = 'Setting-Movie-Add',

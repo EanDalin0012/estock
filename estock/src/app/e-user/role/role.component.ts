@@ -1,3 +1,5 @@
+import { LOCAL_STORAGE } from './../../e-share/constants/common.const';
+import { Utils } from 'src/app/e-share/util/utils.static';
 import { UserRoleAuthorityDetail } from './../../e-share/data/user.role.authority.detail';
 import { UserRoleAuthorityDetailResponse } from '../../e-share/data/response/user.role.authority.tetail.response';
 import { HTTPService } from 'src/app/e-share/service/http.service';
@@ -36,9 +38,16 @@ export class RoleComponent implements OnInit {
       headerCheckboxSelection: headerCheckboxSelection,
     },
     {
-      headerName: 'Name',
-      field: 'name',
+      headerName: 'Role',
+      field: 'role',
       minWidth: 100,
+    },
+    {
+      headerName: 'Authorization',
+      field: 'authorizationDisply',
+      tooltipField: 'authorizationDisply',
+      tooltipComponentParams: { color: '#ececec' },
+      minWidth: 300,
     },
     {
       headerName: 'Description',
@@ -83,9 +92,10 @@ export class RoleComponent implements OnInit {
   public tooltipShowDelay = 0;
   public tooltipHideDelay = 2000;
 
-  itemSelectedGride: any;
 
   userRoleAuthorityDetailResponse: UserRoleAuthorityDetailResponse[] = [];
+  selectedUserRoleAuthorityDetailResponse!: UserRoleAuthorityDetailResponse;
+
   userRoleAuthorityDetail: UserRoleAuthorityDetail[] = [];
   constructor(
     private dataService: DataService,
@@ -96,6 +106,7 @@ export class RoleComponent implements OnInit {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[4]);
     this.titleService.setTitle('Employee Request');
+    this.selectedUserRoleAuthorityDetailResponse = {} as UserRoleAuthorityDetailResponse;
   }
   ngOnInit(): void {
   }
@@ -105,9 +116,7 @@ export class RoleComponent implements OnInit {
     this.rowData = stockDatas;
     this.httpService.Get('/api/user-role-authority-detail/index').then(response=> {
       this.userRoleAuthorityDetailResponse = response;
-      console.log('userRoleAuthorityDetail-response', this.userRoleAuthorityDetailResponse);
       if(this.userRoleAuthorityDetailResponse.length > 0) {
-
         this.userRoleAuthorityDetailResponse.forEach((element,index )=> {
           this.userRoleAuthorityDetail.push(
             {
@@ -119,8 +128,6 @@ export class RoleComponent implements OnInit {
           );
           if(element.authorities && element.authorities.length > 0) {
             element.authorities.forEach((elem,i) => {
-              console.log(i);
-
               if(i === 0) {
                 this.userRoleAuthorityDetail[index].authorizationDisply += elem.authorizationCode;
               } else {
@@ -129,8 +136,8 @@ export class RoleComponent implements OnInit {
             });
           }
         });
-
-        console.log('userRoleAuthorityDetail',this.userRoleAuthorityDetail);
+        // console.log('userRoleAuthorityDetail',this.userRoleAuthorityDetail);
+        this.rowData = this.userRoleAuthorityDetail;
 
       }
     });
@@ -146,8 +153,18 @@ export class RoleComponent implements OnInit {
       this.disabled = true;
     } else {
       this.disabled = false;
-      this.itemSelectedGride = selectedRows[0];
+      const itemSelectedGride = selectedRows[0];
+
+      if (this.userRoleAuthorityDetailResponse.length > 0) {
+        this.userRoleAuthorityDetailResponse.forEach(element => {
+          if(itemSelectedGride.id === element.id) {
+            this.selectedUserRoleAuthorityDetailResponse = element;
+          }
+        });
+      }
     }
+
+    console.log(this.selectedUserRoleAuthorityDetailResponse);
 
     // (document.querySelector('#selectedRows') as any).innerHTML =
     //   selectedRows.length === 1 ? selectedRows[0].athlete : '';
@@ -158,13 +175,16 @@ export class RoleComponent implements OnInit {
   }
 
   btnEdit() {
-    this.router.navigate(['/user/role/edit']);
+    if(this.selectedUserRoleAuthorityDetailResponse.id > 0) {
+      Utils.setSecureStorage(LOCAL_STORAGE.Edit_Role, this.selectedUserRoleAuthorityDetailResponse);
+      this.router.navigate(['/user/role/edit']);
+    }
+
   }
   btnDelete() {
     if(this.disabled === false) {
-      alert(JSON.stringify(this.itemSelectedGride));
+      alert(JSON.stringify(this.selectedUserRoleAuthorityDetailResponse));
     }
-
   }
 
 }
