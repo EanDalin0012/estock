@@ -8,7 +8,7 @@ import com.estock.api.dao.UserRoleDAO;
 import com.estock.api.dto.UserRoleAuthorityDTO;
 import com.estock.api.dto.UserRoleDTO;
 import com.estock.api.mapper.UserRoleMapper;
-import com.estock.api.service.RoleService;
+import com.estock.api.service.UserRoleService;
 import com.estock.api.util.Utility;
 import com.estock.api.vo.request.UserRoleRequestVO;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class RoleServiceImpl implements RoleService {
+public class UserRoleServiceImpl implements UserRoleService {
     @Autowired
     private UserRoleDAO userRoleDAO;
     @Autowired

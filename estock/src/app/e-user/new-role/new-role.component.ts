@@ -1,9 +1,11 @@
+import { UserRole } from './../../e-share/data/user.role';
 import { Role } from './../../e-share/data/role';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/e-share/service/data.service';
 import { NgForm } from '@angular/forms';
+import { HTTPService } from 'src/app/e-share/service/http.service';
 
 @Component({
   selector: 'app-new-role',
@@ -12,20 +14,21 @@ import { NgForm } from '@angular/forms';
 })
 export class NewRoleComponent implements OnInit {
 
-  role!: Role;
   authorizations: number[] =[];
+  userRole!: UserRole;
 
   constructor(
     private dataService: DataService,
     private titleService: Title,
-    private router: Router
+    private router: Router,
+    private httpService: HTTPService
   ) {
     const url = (window.location.href).split('/');
     console.log(url)
     this.dataService.visitParamRouterChange(url[4]);
     this.titleService.setTitle('Employee Request');
 
-    this.role = {} as Role;
+    this.userRole = {} as UserRole;
   }
 
   ngOnInit(): void {
@@ -36,13 +39,19 @@ export class NewRoleComponent implements OnInit {
   }
 
   btnSave(form: NgForm) {
-    console.log(this.role);
-
     if (form.invalid) {
       for (const control of Object.keys(form.controls)) {
         form.controls[control].markAsTouched();
       }
       return;
+    } else {
+      this.userRole.authorities = this.authorizations;
+      console.log(this.userRole);
+
+      // this.httpService.Post('/api/user-role/save', {}).then(response => {
+      //   console.log('response', response);
+
+      // });
     }
   }
 
@@ -57,7 +66,9 @@ export class NewRoleComponent implements OnInit {
           this.authorizations.splice(index,1);
         }
       });
-    } else {
+    }
+
+    if(checked === true){
       this.authorizations.push(authorizationId);
     }
 

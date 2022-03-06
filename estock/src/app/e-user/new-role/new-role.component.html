@@ -27,7 +27,7 @@
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Role</label>
-                        <input type="text" id="roleName" name="roleName" #roleName="ngModel" [(ngModel)]="role.role" placeholder="Enter your first name" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="roleName.invalid && (roleName.dirty || roleName.touched)">
+                        <input type="text" id="roleName" name="roleName" #roleName="ngModel" [(ngModel)]="userRole.role" placeholder="Enter role" required minlength="1" maxlength="250" class="form-control form-control-sm" [class.is-invalid]="roleName.invalid && (roleName.dirty || roleName.touched)">
                         <div *ngIf="roleName.invalid && (roleName.dirty || roleName.touched)" class="invalid-feedback">
                           <div *ngIf="roleName.errors?.['required']">
                             This first name is required.
@@ -45,7 +45,7 @@
                     <div class="col-md-6 col-sm-12">
                       <div class="form-group">
                         <label>Description</label>
-                        <input type="text" placeholder="Enter description" class="form-control form-control-sm">
+                        <input type="text" class="form-control form-control-sm" id="desc" name="desc" #desc="ngModel" [(ngModel)]="userRole.desc" placeholder="Enter your description">
                       </div>
                     </div>
 
@@ -64,51 +64,51 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td>Role</td>
+                            <td>User</td>
                             <td class="text-center">
-                              <input checked="" type="checkbox" (click)="btnCheck(1, $event)">
+                              <input type="checkbox" (click)="btnCheck(1, $event)">
                             </td>
                             <td class="text-center">
                               <input type="checkbox" (click)="btnCheck(2, $event)">
                             </td>
-                            <td class="text-center">
-                              <input checked="" type="checkbox">
+                            <td class="text-center" (click)="btnCheck(3, $event)">
+                              <input type="checkbox">
                             </td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input type="checkbox" (click)="btnCheck(4, $event)">
                             </td>
 
                             <td class="text-center">
-                              <input checked="" disabled type="checkbox">
+                              <input type="checkbox"  (click)="btnCheck(5, $event)">
                             </td>
                             <td class="text-center">
-                              <input checked="" disabled type="checkbox">
+                              <input disabled type="checkbox">
                             </td>
                           </tr>
                           <tr>
-                            <td>User</td>
+                            <td>Role</td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input type="checkbox" (click)="btnCheck(6, $event)">
                             </td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input type="checkbox" (click)="btnCheck(7, $event)">
                             </td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input type="checkbox" (click)="btnCheck(8, $event)">
                             </td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input type="checkbox" (click)="btnCheck(9, $event)">
                             </td>
 
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input disabled type="checkbox">
                             </td>
                             <td class="text-center">
-                              <input checked="" disabled type="checkbox">
+                              <input disabled type="checkbox">
                             </td>
                           </tr>
 
-                          <tr>
+                          <!-- <tr>
                             <td>User Assign Authority</td>
                             <td class="text-center">
                               <input checked="" disabled type="checkbox">
@@ -129,8 +129,8 @@
                             <td class="text-center">
                               <input checked="" type="checkbox">
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> -->
+                          <!-- <tr>
                             <td>Stock</td>
                             <td class="text-center">
                               <input checked="" type="checkbox">
@@ -151,8 +151,8 @@
                             <td class="text-center">
                               <input checked="" disabled type="checkbox">
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> -->
+                          <!-- <tr>
                             <td>Warehouse</td>
                             <td class="text-center">
                               <input checked="" type="checkbox">
@@ -173,9 +173,9 @@
                             <td class="text-center">
                               <input checked="" disabled type="checkbox">
                             </td>
-                          </tr>
+                          </tr> -->
 
-                          <tr>
+                          <!-- <tr>
                             <td>Product</td>
                             <td class="text-center">
                               <input checked="" type="checkbox">
@@ -196,8 +196,8 @@
                             <td class="text-center">
                               <input checked="" disabled type="checkbox">
                             </td>
-                          </tr>
-                          <tr>
+                          </tr> -->
+                          <!-- <tr>
                             <td>Import Product</td>
                             <td class="text-center">
                               <input checked="" type="checkbox">
@@ -218,7 +218,7 @@
                             <td class="text-center">
                               <input checked="" disabled type="checkbox">
                             </td>
-                          </tr>
+                          </tr> -->
                         </tbody>
                       </table>
                     </div>

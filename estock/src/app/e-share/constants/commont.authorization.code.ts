@@ -16,19 +16,22 @@ export const AuthorizationCodeDataConstant: AuthorizationCode[] = [
   {
     id: 4,
     authorizationCode: 'DELETE_USER'
+  },  {
+    id: 5,
+    authorizationCode: 'EXPORT_USER'
   }
    // User Role Authorzation Code
   , {
-    id: 5,
+    id: 6,
     authorizationCode: 'READ_ROLE'
   }, {
-    id: 6,
+    id: 7,
     authorizationCode: 'ADD_ROLE'
   }, {
-    id: 7,
+    id: 8,
     authorizationCode: 'EDIT_ROLE'
   }, {
-    id: 8,
+    id: 9,
     authorizationCode: 'DELETE_ROLE'
-  }
+  },
 ];
