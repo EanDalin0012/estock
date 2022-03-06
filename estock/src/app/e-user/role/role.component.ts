@@ -1,3 +1,5 @@
+import { UserRoleAuthorityDetail } from './../../e-share/data/user.role.authority.detail';
+import { UserRoleAuthorityDetailResponse } from '../../e-share/data/response/user.role.authority.tetail.response';
 import { HTTPService } from 'src/app/e-share/service/http.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -83,6 +85,8 @@ export class RoleComponent implements OnInit {
 
   itemSelectedGride: any;
 
+  userRoleAuthorityDetailResponse: UserRoleAuthorityDetailResponse[] = [];
+  userRoleAuthorityDetail: UserRoleAuthorityDetail[] = [];
   constructor(
     private dataService: DataService,
     private titleService: Title,
@@ -98,13 +102,37 @@ export class RoleComponent implements OnInit {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-    // this.http
-    //   .get<any[]>('https://www.ag-grid.com/example-assets/olympic-winners.json')
-    //   .subscribe((data) => (this.rowData = data));
     this.rowData = stockDatas;
     this.httpService.Get('/api/user-role-authority-detail/index').then(response=> {
-      console.log(response);
+      this.userRoleAuthorityDetailResponse = response;
+      console.log('userRoleAuthorityDetail-response', this.userRoleAuthorityDetailResponse);
+      if(this.userRoleAuthorityDetailResponse.length > 0) {
 
+        this.userRoleAuthorityDetailResponse.forEach((element,index )=> {
+          this.userRoleAuthorityDetail.push(
+            {
+              id: element.id,
+              role: element.role,
+              desc: element.desc,
+              authorizationDisply: ''
+            }
+          );
+          if(element.authorities && element.authorities.length > 0) {
+            element.authorities.forEach((elem,i) => {
+              console.log(i);
+
+              if(i === 0) {
+                this.userRoleAuthorityDetail[index].authorizationDisply += elem.authorizationCode;
+              } else {
+                this.userRoleAuthorityDetail[index].authorizationDisply += ","+elem.authorizationCode;
+              }
+            });
+          }
+        });
+
+        console.log('userRoleAuthorityDetail',this.userRoleAuthorityDetail);
+
+      }
     });
   }
 
