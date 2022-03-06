@@ -1,4 +1,4 @@
-import { UserRole } from './../../e-share/data/user.role';
+import { UserRoleRequest } from '../../e-share/data/request/user.role.request';
 import { Role } from './../../e-share/data/role';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
@@ -15,7 +15,7 @@ import { HTTPService } from 'src/app/e-share/service/http.service';
 export class NewRoleComponent implements OnInit {
 
   authorizations: number[] =[];
-  userRole!: UserRole;
+  userRole!: UserRoleRequest;
 
   constructor(
     private dataService: DataService,
@@ -28,7 +28,7 @@ export class NewRoleComponent implements OnInit {
     this.dataService.visitParamRouterChange(url[4]);
     this.titleService.setTitle('Employee Request');
 
-    this.userRole = {} as UserRole;
+    this.userRole = {} as UserRoleRequest;
   }
 
   ngOnInit(): void {
