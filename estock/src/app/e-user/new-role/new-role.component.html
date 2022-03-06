@@ -66,10 +66,10 @@
                           <tr>
                             <td>Role</td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input checked="" type="checkbox" (click)="btnCheck(1, $event)">
                             </td>
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input type="checkbox" (click)="btnCheck(2, $event)">
                             </td>
                             <td class="text-center">
                               <input checked="" type="checkbox">
@@ -79,7 +79,7 @@
                             </td>
 
                             <td class="text-center">
-                              <input checked="" type="checkbox">
+                              <input checked="" disabled type="checkbox">
                             </td>
                             <td class="text-center">
                               <input checked="" disabled type="checkbox">

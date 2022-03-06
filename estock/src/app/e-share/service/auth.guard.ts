@@ -1,3 +1,4 @@
+import { AuthorizationServer } from './../data/authorization.server';
 import { Authority } from './../data/authority';
 
 import { AuthorizationServerDataConstant } from './../constants/common.const.authority';
@@ -14,8 +15,11 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   authorities: Authority[] = [];
 
-  dataAuthorites: any[] = [];
+  authorizationServer: AuthorizationServer[] = [];
+  constructor() {
+    this.authorizationServer = AuthorizationServerDataConstant;
 
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -26,7 +30,7 @@ export class AuthGuard implements CanActivate {
       }
       if( this.authorities && this.authorities.length > 0 ) {
         let code = 'NA';
-        AuthorizationServerDataConstant.forEach(element => {
+        this.authorizationServer.forEach(element => {
            if(element.url === state.url) {
               code = element.authorizationCode;
            }

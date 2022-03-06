@@ -13,6 +13,8 @@ import { NgForm } from '@angular/forms';
 export class NewRoleComponent implements OnInit {
 
   role!: Role;
+  authorizations: number[] =[];
+
   constructor(
     private dataService: DataService,
     private titleService: Title,
@@ -42,6 +44,36 @@ export class NewRoleComponent implements OnInit {
       }
       return;
     }
+  }
+
+  btnCheck(authorizationId: number, event: any) {
+    const checked = event.target.checked;
+    // console.log(this.authorizations);
+
+
+    if(checked === false) {
+      this.authorizations.forEach((element, index) => {
+        if(element === authorizationId) {
+          this.authorizations.splice(index,1);
+        }
+      });
+    } else {
+      this.authorizations.push(authorizationId);
+    }
+
+    console.log(this.authorizations);
+
+    // this.authorizations.push(authorizationId);
+    // console.log(event, event.target.checked);
+    // if(this.authorizations.length > 0) {
+    //   this.authorizations.forEach((element, index) => {
+    //     console.log(element, this.authorizations.splice(index));
+
+    //   });
+
+    // }
+    // console.log('authorizations', this.authorizations);
+
   }
 
 }

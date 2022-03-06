@@ -120,11 +120,11 @@ export class RoleComponent implements OnInit {
   }
 
   btnNew() {
-    this.router.navigate(['/user/new-role']);
+    this.router.navigate(['/user/role/add']);
   }
 
   btnEdit() {
-    this.router.navigate(['/user/edit-role']);
+    this.router.navigate(['/user/role/edit']);
   }
   btnDelete() {
     if(this.disabled === false) {
