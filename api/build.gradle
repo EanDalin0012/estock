@@ -9,6 +9,15 @@ group = 'com.estock'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
+
 repositories {
 	mavenCentral()
 }
@@ -54,26 +63,9 @@ dependencies {
 	implementation group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '3.17'
 	implementation group: 'org.apache.xmlbeans', name: 'xmlbeans', version: '2.6.0'
 	// log4j
-
-//	implementation 'org.apache.logging.log4j:log4j-core:2.17.0'
-//	implementation 'org.apache.logging.log4j:log4j-api:2.17.0'
-//	implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
-//	testImplementation group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.17.1'
-//	implementation group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.17.1'
-//	testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
-	testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.10'
-	implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.30'
-	implementation group: 'org.logback-extensions', name: 'logback-ext-spring', version: '0.1.4'
-	implementation group: 'org.codehaus.janino', name: 'janino', version: '3.1.6'
-//
-//	compile 'ch.qos.logback:logback-classic'
-//	compile 'org.slf4j:jcl-over-slf4j'
-//	compile "org.logback-extensions:logback-ext-spring:0.1.4"
-//	compile 'org.codehaus.janino:janino'
-
-//	implementation group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.30'
-//	implementation group: 'log4j', name: 'log4j', version: '1.2.17'
-//	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.4'
+	implementation group: 'com.lmax', name: 'disruptor', version: '3.4.4'
 
 	implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
 	implementation group: 'javax.activation', name: 'activation', version: '1.1.1'

@@ -45,17 +45,21 @@ export class EditRoleComponent implements OnInit, OnDestroy {
     this.userRole = {} as UserRoleRequest;
     this.userRoleAuthorityDetail = {} as UserRoleAuthorityDetailResponse;
     this.userRoleAuthorityDetail = Utils.getSecureStorage(LOCAL_STORAGE.Edit_Role);
+    console.log(this.userRoleAuthorityDetail);
+
     if(this.userRoleAuthorityDetail) {
       this.authorities = this.userRoleAuthorityDetail.authorities;
       this.authorities.forEach(element => {
+        this.authorizations.push(element.id);
         this.checkAuthorizationCode(element.authorizationCode);
       });
       this.userRole.id = this.userRoleAuthorityDetail.id;
       this.userRole.role = this.userRoleAuthorityDetail.role;
       this.userRole.desc = this.userRoleAuthorityDetail.desc;
     }
-
+    console.log(this.authorizations);
   }
+
   ngOnDestroy(): void {
     Utils.removeSecureStorage(LOCAL_STORAGE.Edit_Role);
   }
@@ -66,8 +70,6 @@ export class EditRoleComponent implements OnInit, OnDestroy {
   btnCheck(authorizationId: number, event: any) {
     const checked = event.target.checked;
     // console.log(this.authorizations);
-
-
     if(checked === false) {
       this.authorizations.forEach((element, index) => {
         if(element === authorizationId) {
@@ -115,7 +117,6 @@ export class EditRoleComponent implements OnInit, OnDestroy {
   checkAuthorizationCode(authorizationCode:string) {
 
     switch(authorizationCode) {
-
       case this.authorizationCodeDataConstant[0].authorizationCode:
         this.checkReadUser = true;
         break;
