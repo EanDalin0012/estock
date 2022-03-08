@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
             console.log('response', response);
             this.loadUserInfoResponse = response;
             this.authorities = this.loadUserInfoResponse.authorities;
-            console.log('loadUserInfoResponse', this.loadUserInfoResponse);
             console.log('authorities', this.authorities);
             if(this.loadUserInfoResponse) {
               Utils.setSecureStorage(LOCAL_STORAGE.CONSTANT_AUTHORITY, this.authorities);

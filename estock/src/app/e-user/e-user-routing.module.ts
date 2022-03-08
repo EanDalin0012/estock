@@ -1,3 +1,4 @@
+import { AuthGuard } from './../e-share/service/auth.guard';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,7 +11,7 @@ import { EditRoleComponent } from './edit-role/edit-role.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: '', canActivateChild: [ AuthGuard ],
     component: EUserComponent,
     children: [
       { path: '',

@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./e-home/e-home.module').then(m => m.EHomeModule)
   },
   {
-    path: 'user', canActivate: [ AuthGuard ], component: ELayoutComponent,
+    path: 'user', component: ELayoutComponent,
     loadChildren: () => import('./e-user/e-user.module').then(m => m.EUserModule)
   },{
     path: 'employee-request', canActivate: [ AuthGuard ], component: ELayoutComponent,
