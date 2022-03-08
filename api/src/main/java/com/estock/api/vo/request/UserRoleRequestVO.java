@@ -12,5 +12,6 @@ import lombok.ToString;
 public class UserRoleRequestVO {
     private int id;
     private String role;
+    private String desc;
     private int [] authorities;
 }

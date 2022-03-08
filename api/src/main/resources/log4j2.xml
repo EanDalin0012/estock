@@ -2,7 +2,7 @@
 <Configuration status="WARN" monitorInterval="30">
     <Properties>
         <Property name="LOG_PATTERN">
-            %d{dd-MM-yyyy HH:mm:ss.SSS} [%level] %logger{50} %L - %m%n
+            %d{dd-MM-yyyy hh:mm:ss.SSS} [%level] %logger{50} %L - %m%n
         </Property>
     </Properties>
 

@@ -11,5 +11,6 @@ public interface UserRoleMapper {
     UserRoleMapper INSTANCE = Mappers.getMapper(UserRoleMapper.class);
     @Mapping(source = "id", target = "id")
     @Mapping(source = "role", target = "role")
+    @Mapping(source = "desc", target = "desc")
     UserRoleDTO userRoleMapper(UserRoleRequestVO userRoleRequestVO);
 }

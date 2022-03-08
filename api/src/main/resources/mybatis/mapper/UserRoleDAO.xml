@@ -35,6 +35,17 @@
         );
     </insert>
 
+    <update id="editUserRole">
+        UPDATE user_role
+        SET
+            "role"      = #{role}
+          , "desc"      = #{desc}
+          , modify_date = #{dateTime}
+          , modify_by   = #{userID}
+          , status      = #{status}
+        WHERE id        = #{id};
+    </update>
+
     <select id="inquiryUserRole" resultMap="userRoleDTO">
         SELECT
             id
@@ -48,6 +59,6 @@
     </select>
     <select id="count" resultType="java.lang.Integer">
         SELECT coalesce(MAX(id), 0)
-        FROM authority;
+        FROM user_role;
     </select>
 </mapper>

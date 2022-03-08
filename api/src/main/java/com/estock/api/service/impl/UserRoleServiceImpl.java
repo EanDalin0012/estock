@@ -49,7 +49,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         try {
             log.info("------------ User Role Request Vo Data -> {} "+Utility.toJSON(userRoleRequestVO));
 
-            if (userRoleRequestVO.getRole().equals("") || userRoleRequestVO.getRole() != null) {
+            if (userRoleRequestVO.getRole().equals("") || userRoleRequestVO.getRole() == null) {
                 throw new CustomException(UserRoleConstant.INVALID_ROLE_NAME.name(), UserRoleConstant.INVALID_ROLE_NAME.getDesc());
             }
 
@@ -96,7 +96,7 @@ public class UserRoleServiceImpl implements UserRoleService {
             if (userRoleRequestVO.getId() <= 0) {
                 throw new CustomException(UserRoleConstant.INVALID_ROLE_ID.name(), UserRoleConstant.INVALID_ROLE_ID.getDesc());
             }
-            if (userRoleRequestVO.getRole().equals("") || userRoleRequestVO.getRole() != null) {
+            if (userRoleRequestVO.getRole().equals("") || userRoleRequestVO.getRole() == null) {
                 throw new CustomException(UserRoleConstant.INVALID_ROLE_NAME.name(), UserRoleConstant.INVALID_ROLE_NAME.getDesc());
             }
             UserRoleDTO userRoleDTO = UserRoleMapper.INSTANCE.userRoleMapper(userRoleRequestVO);
@@ -115,10 +115,12 @@ public class UserRoleServiceImpl implements UserRoleService {
             int deleteUserRoleAuthority = this.userRoleAuthorityDAO.deleteUserRoleAuthority(userRoleDTO.getId());
             int saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
             if (editUserRole > 0 || (editUserRole > 0 && length > 0 && saveUserRoleAuthority> 0)) {
+                this.transactionManager.commit(transactionStatus);
                 return 1;
             }
         }catch (Exception e) {
             e.printStackTrace();
+            this.transactionManager.rollback(transactionStatus);
             throw new CustomException(CommonConstant.GENERAL_FAIL_EXCEPTION.name(), CommonConstant.GENERAL_FAIL_EXCEPTION.getDesc());
         }
         return 0;

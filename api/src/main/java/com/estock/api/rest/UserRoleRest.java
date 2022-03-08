@@ -24,16 +24,7 @@ public class UserRoleRest {
         ResponseVO<Boolean> response = new ResponseVO<>();
         try {
             int save = this.userRoleService.save(userRoleRequest, userId);
-            if (save > 0) {
-                response.setResultCode(CommonConstant.SUCCESS.name());
-                response.setResultMessage(CommonConstant.SUCCESS.name());
-                response.setBody(true);
-            } else {
-                response.setResultCode(CommonConstant.FAIL.name());
-                response.setResultMessage(CommonConstant.FAIL.name());
-                response.setBody(false);
-            }
-            return response;
+            return getBooleanResponseVO(response, save);
         }catch (Exception e) {
             e.printStackTrace();
             response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());
@@ -42,6 +33,37 @@ public class UserRoleRest {
             e.printStackTrace();
             response.setResultCode(e.getMessageCode());
             response.setResultMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping(value = "/edit")
+    public ResponseVO<Boolean> edit(@RequestBody UserRoleRequestVO userRoleRequest, @RequestParam("userId") int userId) {
+        ResponseVO<Boolean> response = new ResponseVO<>();
+        try {
+            int edit = this.userRoleService.edit(userRoleRequest, userId);
+            return getBooleanResponseVO(response, edit);
+        }catch (Exception e) {
+            e.printStackTrace();
+            response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());
+            response.setResultMessage(e.getMessage());
+        } catch (CustomException e) {
+            e.printStackTrace();
+            response.setResultCode(e.getMessageCode());
+            response.setResultMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    private ResponseVO<Boolean> getBooleanResponseVO(ResponseVO<Boolean> response, int edit) {
+        if (edit > 0) {
+            response.setResultCode(CommonConstant.SUCCESS.name());
+            response.setResultMessage(CommonConstant.SUCCESS.name());
+            response.setBody(true);
+        } else {
+            response.setResultCode(CommonConstant.FAIL.name());
+            response.setResultMessage(CommonConstant.FAIL.name());
+            response.setBody(false);
         }
         return response;
     }
