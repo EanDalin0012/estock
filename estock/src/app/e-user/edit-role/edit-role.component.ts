@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { HTTPService } from './../../e-share/service/http.service';
 import { AuthorizationCode } from './../../e-share/data/authorization';
 import { AuthorizationCodeDataConstant } from './../../e-share/constants/commont.authorization.code';
 import { Authority } from './../../e-share/data/authority';
@@ -38,6 +40,8 @@ export class EditRoleComponent implements OnInit, OnDestroy {
   constructor(
     private dataService: DataService,
     private titleService: Title,
+    private httpService: HTTPService,
+    private router: Router
   ) {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[4]);
@@ -45,8 +49,6 @@ export class EditRoleComponent implements OnInit, OnDestroy {
     this.userRole = {} as UserRoleRequest;
     this.userRoleAuthorityDetail = {} as UserRoleAuthorityDetailResponse;
     this.userRoleAuthorityDetail = Utils.getSecureStorage(LOCAL_STORAGE.Edit_Role);
-    console.log(this.userRoleAuthorityDetail);
-
     if(this.userRoleAuthorityDetail) {
       this.authorities = this.userRoleAuthorityDetail.authorities;
       this.authorities.forEach(element => {
@@ -57,7 +59,6 @@ export class EditRoleComponent implements OnInit, OnDestroy {
       this.userRole.role = this.userRoleAuthorityDetail.role;
       this.userRole.desc = this.userRoleAuthorityDetail.desc;
     }
-    console.log(this.authorizations);
   }
 
   ngOnDestroy(): void {
@@ -65,6 +66,7 @@ export class EditRoleComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
   }
 
   btnCheck(authorizationId: number, event: any) {
@@ -81,8 +83,6 @@ export class EditRoleComponent implements OnInit, OnDestroy {
     if(checked === true){
       this.authorizations.push(authorizationId);
     }
-
-    console.log(this.authorizations);
 
     // this.authorizations.push(authorizationId);
     // console.log(event, event.target.checked);
@@ -105,12 +105,11 @@ export class EditRoleComponent implements OnInit, OnDestroy {
       return;
     } else {
       this.userRole.authorities = this.authorizations;
-      console.log(this.userRole);
-
-      // this.httpService.Post('/api/user-role/save', {}).then(response => {
-      //   console.log('response', response);
-
-      // });
+      this.httpService.Post('/api/user-role/edit', this.userRole).then(response => {
+        if(response === true) {
+            this.router.navigate(['/user/role']);
+        }
+      });
     }
   }
 

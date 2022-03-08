@@ -24,7 +24,6 @@ export class NewRoleComponent implements OnInit {
     private httpService: HTTPService
   ) {
     const url = (window.location.href).split('/');
-    console.log(url)
     this.dataService.visitParamRouterChange(url[4]);
     this.titleService.setTitle('Employee Request');
 
@@ -46,11 +45,10 @@ export class NewRoleComponent implements OnInit {
       return;
     } else {
       this.userRole.authorities = this.authorizations;
-      console.log(this.userRole);
-
       this.httpService.Post('/api/user-role/save', this.userRole).then(response => {
-        console.log('response', response);
-
+        if(response === true) {
+            this.router.navigate(['/user/role']);
+        }
       });
     }
   }
@@ -58,8 +56,6 @@ export class NewRoleComponent implements OnInit {
   btnCheck(authorizationId: number, event: any) {
     const checked = event.target.checked;
     // console.log(this.authorizations);
-
-
     if(checked === false) {
       this.authorizations.forEach((element, index) => {
         if(element === authorizationId) {
@@ -71,8 +67,6 @@ export class NewRoleComponent implements OnInit {
     if(checked === true){
       this.authorizations.push(authorizationId);
     }
-
-    console.log(this.authorizations);
 
     // this.authorizations.push(authorizationId);
     // console.log(event, event.target.checked);
