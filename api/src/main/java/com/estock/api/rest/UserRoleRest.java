@@ -20,10 +20,10 @@ public class UserRoleRest {
     private UserRoleService userRoleService;
 
     @PostMapping(value = "/save")
-    public ResponseVO<Boolean> save(@RequestBody UserRoleRequestVO userRoleRequest) {
+    public ResponseVO<Boolean> save(@RequestBody UserRoleRequestVO userRoleRequest, @RequestParam("userId") int userId) {
         ResponseVO<Boolean> response = new ResponseVO<>();
         try {
-            int save = this.userRoleService.save(userRoleRequest);
+            int save = this.userRoleService.save(userRoleRequest, userId);
             if (save > 0) {
                 response.setResultCode(CommonConstant.SUCCESS.name());
                 response.setResultMessage(CommonConstant.SUCCESS.name());

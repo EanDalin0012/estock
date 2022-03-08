@@ -2,9 +2,10 @@ package com.estock.api.dao;
 
 import com.estock.api.dto.UserRoleAuthorityDTO;
 import org.apache.ibatis.annotations.Mapper;
-import java.util.List;
+import java.util.Collection;
 
 @Mapper
 public interface UserRoleAuthorityDAO {
-    int addUserRoleAuthority(List<UserRoleAuthorityDTO> userRoleAuthorities);
+    int addUserRoleAuthority(Collection<UserRoleAuthorityDTO> userRoleAuthorities);
+    int deleteUserRoleAuthority(int roleId);
 }

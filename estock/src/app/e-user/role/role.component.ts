@@ -26,7 +26,8 @@ import { data } from 'jquery';
 })
 export class RoleComponent implements OnInit {
 
-  selectionChanged = false;
+  selectionChanged: boolean = false;
+  selectionRowChanged: boolean = false;
 
   private gridApi!: GridApi;
 
@@ -165,12 +166,22 @@ export class RoleComponent implements OnInit {
 
   onSelectionChanged(event: any) {
     const selectedRows = this.gridApi.getSelectedRows();
+    console.log('selectedRows[0]', selectedRows[0]);
     if(selectedRows.length === 0) {
       this.selectionChanged = false;
+      this.selectionRowChanged = false;
       this.selectedUserRoleAuthorityDetailResponse = {} as UserRoleAuthorityDetailResponse;
+      console.log('selectedRows[0]', selectedRows[0]);
+      console.log('selectedUserRoleAuthorityDetailResponse', this.selectedUserRoleAuthorityDetailResponse);
+      console.log(this.selectionRowChanged);
     } else {
-      this.selectionChanged = true;
+      this.selectionChanged  = true;
       this.itemSelectedGride = selectedRows[0];
+      this.selectionRowChanged = false;
+
+      console.log('selectedRows[0]', selectedRows[0]);
+      console.log('selectedUserRoleAuthorityDetailResponse', this.selectedUserRoleAuthorityDetailResponse);
+
       if (this.userRoleAuthorityDetailResponse.length > 0) {
         this.userRoleAuthorityDetailResponse.forEach(element => {
           if(this.itemSelectedGride.id === element.id) {
@@ -178,17 +189,20 @@ export class RoleComponent implements OnInit {
           }
         });
       }
+
     }
-    // (document.querySelector('#selectedRows') as any).innerHTML =
-    //   selectedRows.length === 1 ? selectedRows[0].athlete : '';
+
   }
 
   onCellClicked(event: any) {
-    if(this.selectionChanged === true) {
-        this.gridApi.forEachNode(function (node) {
-          node.setSelected(node.data === undefined);
-        });
-    }
+    // console.log("onCellClicked", event.data);
+    // this.itemSelectedGride  = event.data;
+    // if(this.selectionChanged === true) {
+    //   // this.selectionChanged  = false;
+    //     this.gridApi.forEachNode(function (node) {
+    //       node.setSelected(node.data === undefined);
+    //     });
+    // }
   }
 
   btnNew() {

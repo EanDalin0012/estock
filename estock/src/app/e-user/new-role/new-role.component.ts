@@ -48,10 +48,10 @@ export class NewRoleComponent implements OnInit {
       this.userRole.authorities = this.authorizations;
       console.log(this.userRole);
 
-      // this.httpService.Post('/api/user-role/save', {}).then(response => {
-      //   console.log('response', response);
+      this.httpService.Post('/api/user-role/save', this.userRole).then(response => {
+        console.log('response', response);
 
-      // });
+      });
     }
   }
 

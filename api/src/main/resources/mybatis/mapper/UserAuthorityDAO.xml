@@ -47,9 +47,9 @@
                  , us_info.modify_date
                  , us_info.modify_by
             FROM users_authorities u_auth
-                     INNER JOIN authority auth on auth."id" = u_auth.authority_id
-                     INNER JOIN user_ us on us."id" = u_auth.user_id
-                     INNER JOIN user_info us_info on us_info."id" = us.user_info_id
+            INNER JOIN authority auth on auth."id" = u_auth.authority_id
+            INNER JOIN user_ us on us."id" = u_auth.user_id
+            INNER JOIN user_info us_info on us_info."id" = us.user_info_id
             WHERE us.user_name = #{userName};
         ]]>
     </select>
@@ -75,9 +75,9 @@
              , us_info.modify_date
              , us_info.modify_by
         FROM users_authorities u_auth
-                 INNER JOIN authority auth on auth."id" = u_auth.authority_id
-                 INNER JOIN user_ us on us."id" = u_auth.user_id
-                 INNER JOIN user_info us_info on us_info."id" = us.user_info_id
+        INNER JOIN authority auth on auth."id" = u_auth.authority_id
+        INNER JOIN user_ us on us."id" = u_auth.user_id
+        INNER JOIN user_info us_info on us_info."id" = us.user_info_id
         WHERE us."id" = #{userID};
         ]]>
     </select>

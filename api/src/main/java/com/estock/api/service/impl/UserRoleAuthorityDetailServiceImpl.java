@@ -24,7 +24,7 @@ public class UserRoleAuthorityDetailServiceImpl implements UserRoleAuthorityDeta
     public Collection<UserRoleAuthorityDetailDTO> inquiry() throws CustomException {
         log.info("-------------------- Start Service User Role Authority Detail -------------------");
         try {
-            Collection<UserRoleAuthorityDetailDTO> userRoleAuthorityDetails = this.userRoleAuthorityDetail.inquiry(StatusCode.ACTIVE.name());
+            Collection<UserRoleAuthorityDetailDTO> userRoleAuthorityDetails = this.userRoleAuthorityDetail.inquiry(StatusCode.DELETED.name());
             log.info("------------- UserRoleAuthorityDetail Data =>"+ Utility.toJSON(userRoleAuthorityDetails));
             return userRoleAuthorityDetails;
         }catch (Exception e) {

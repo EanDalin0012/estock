@@ -24,14 +24,14 @@
          , status
          )
         VALUES(
-               0
-               , ''
-               , ''
-               , ''
-               , 0
-               , ''
-               , 0
-               , ''
+            #{id}
+           , #{role}
+           , #{desc}
+           , #{dateTime}
+           , #{userID}
+           , #{dateTime}
+           , #{userID}
+           , #{status}
         );
     </insert>
 
@@ -45,5 +45,9 @@
              , status
         FROM user_role
         WHERE status = #{status};
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT coalesce(MAX(id), 0)
+        FROM authority;
     </select>
 </mapper>

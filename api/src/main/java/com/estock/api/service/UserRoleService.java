@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserRoleService {
     List<UserRoleDTO> userRoles() throws CustomException;
-    int save(UserRoleRequestVO userRoleRequestVO) throws CustomException;
-    int edit(UserRoleRequestVO userRoleRequestVO) throws CustomException;
+    int save(UserRoleRequestVO userRoleRequestVO, int userId) throws CustomException;
+    int edit(UserRoleRequestVO userRoleRequestVO, int userId) throws CustomException;
     Collection<UserRoleDTO> inquiryUserRole() throws CustomException;
 }

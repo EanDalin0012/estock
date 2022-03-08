@@ -33,7 +33,7 @@
         FROM role_authority role_auth
         RIGHT JOIN authority auth on auth."id" = role_auth.authority_id
         RIGHT JOIN user_role us_role on us_role."id" = role_auth.role_id
-        WHERE us_role.status = #{status}
+        WHERE us_role.status != #{status}
         ORDER BY us_role."id" ASC;
     </select>
 </mapper>

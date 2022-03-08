@@ -9,6 +9,7 @@ import com.estock.api.dto.UserRoleAuthorityDTO;
 import com.estock.api.dto.UserRoleDTO;
 import com.estock.api.mapper.UserRoleMapper;
 import com.estock.api.service.UserRoleService;
+import com.estock.api.service.constant.UserRoleConstant;
 import com.estock.api.util.Utility;
 import com.estock.api.vo.request.UserRoleRequestVO;
 import lombok.extern.slf4j.Slf4j;
@@ -41,14 +42,21 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     @PreAuthorize("hasAuthority('ADD_ROLE')")
-    public int save(UserRoleRequestVO userRoleRequestVO) throws CustomException {
+    public int save(UserRoleRequestVO userRoleRequestVO, int userId) throws CustomException {
         log.info("------------ Start Service Insert User Role ---------------");
         TransactionStatus transactionStatus = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
-            log.info("------------ User Role Request Vo Data => "+Utility.toJSON(userRoleRequestVO));
+            log.info("------------ User Role Request Vo Data -> {} "+Utility.toJSON(userRoleRequestVO));
+
+            if (userRoleRequestVO.getRole().equals("") || userRoleRequestVO.getRole() != null) {
+                throw new CustomException(UserRoleConstant.INVALID_ROLE_NAME.name(), UserRoleConstant.INVALID_ROLE_NAME.getDesc());
+            }
+
             UserRoleDTO userRoleDTO = UserRoleMapper.INSTANCE.userRoleMapper(userRoleRequestVO);
-            log.info("------------ User Role DTO Data => "+Utility.toJSON(userRoleDTO));
+            userRoleDTO.setUserID(userId);
+            userRoleDTO.setStatus(StatusCode.ACTIVE.name());
+            log.info("------------ User Role DTO Data -> {} "+Utility.toJSON(userRoleDTO));
             int roleId = this.count();
             userRoleDTO.setId(roleId);
             List<UserRoleAuthorityDTO> userRoleAuthorities = new ArrayList<>();
@@ -58,13 +66,13 @@ public class UserRoleServiceImpl implements UserRoleService {
                     userRoleAuthorities.add(new UserRoleAuthorityDTO(roleId, authId));
                 }
             }
-            log.info("------------ List Of User Role Authority DTO Data => "+Utility.toJSON(userRoleAuthorities));
+            log.info("------------ List Of User Role Authority DTO Data -> {} "+Utility.toJSON(userRoleAuthorities));
             int saveUserRole = this.userRoleDAO.addUserRole(userRoleDTO);
             int saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
 
-            log.info("------------ Save User Role Data => "+saveUserRole);
-            log.info("------------ Save User Role Authority Data => "+saveUserRoleAuthority);
-            if (saveUserRole > 0 && saveUserRoleAuthority > 0) {
+            log.info("------------ Save User Role Data -> {} "+saveUserRole);
+            log.info("------------ Save User Role Authority Data -> {} "+saveUserRoleAuthority);
+            if (saveUserRole > 0 || (saveUserRole > 0 && length > 0 && saveUserRoleAuthority> 0)) {
                 this.transactionManager.commit(transactionStatus);
                 return 1;
             } else {
@@ -80,8 +88,39 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     @PreAuthorize("hasAuthority('EDIT_ROLE')")
-    public int edit(UserRoleRequestVO userRoleRequestVO) throws CustomException {
+    public int edit(UserRoleRequestVO userRoleRequestVO, int userId) throws CustomException {
         log.info("------------ Start Service Update User Role ---------------");
+        TransactionStatus transactionStatus = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
+        try {
+            log.info("------------ Edit User Role Request Vo Data -> {} "+Utility.toJSON(userRoleRequestVO));
+            if (userRoleRequestVO.getId() <= 0) {
+                throw new CustomException(UserRoleConstant.INVALID_ROLE_ID.name(), UserRoleConstant.INVALID_ROLE_ID.getDesc());
+            }
+            if (userRoleRequestVO.getRole().equals("") || userRoleRequestVO.getRole() != null) {
+                throw new CustomException(UserRoleConstant.INVALID_ROLE_NAME.name(), UserRoleConstant.INVALID_ROLE_NAME.getDesc());
+            }
+            UserRoleDTO userRoleDTO = UserRoleMapper.INSTANCE.userRoleMapper(userRoleRequestVO);
+            userRoleDTO.setStatus(StatusCode.EDIT.name());
+            log.info("------------ User Role DTO Data -> {} "+Utility.toJSON(userRoleDTO));
+
+            List<UserRoleAuthorityDTO> userRoleAuthorities = new ArrayList<>();
+            int length = userRoleRequestVO.getAuthorities().length;
+            if (length > 0) {
+                for (int authId: userRoleRequestVO.getAuthorities()) {
+                    userRoleAuthorities.add(new UserRoleAuthorityDTO(userRoleDTO.getId(), authId));
+                }
+            }
+            log.info("------------ List Of User Role Authority DTO Data -> {} "+Utility.toJSON(userRoleAuthorities));
+            int editUserRole = this.userRoleDAO.editUserRole(userRoleDTO);
+            int deleteUserRoleAuthority = this.userRoleAuthorityDAO.deleteUserRoleAuthority(userRoleDTO.getId());
+            int saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
+            if (editUserRole > 0 || (editUserRole > 0 && length > 0 && saveUserRoleAuthority> 0)) {
+                return 1;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(CommonConstant.GENERAL_FAIL_EXCEPTION.name(), CommonConstant.GENERAL_FAIL_EXCEPTION.getDesc());
+        }
         return 0;
     }
 
