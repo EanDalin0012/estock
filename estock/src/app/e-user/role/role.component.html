@@ -26,13 +26,13 @@
         </div>
 
         <div class="task-assign form-group" style="margin-left: 15px;">
-          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled': disabled === true}" (click)="btnEdit()">
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled': selectionChanged !== true}" (click)="btnEdit()">
             <i class="fa-solid fa-square-plus icon-color-01"></i> Edit
           </a>
         </div>
 
         <div class="task-assign form-group" style="margin-left: 15px;" >
-          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled-delete': disabled === true,'disabled-delete-remove': disabled === false }" (click)="btnDelete()">
+          <a class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" [ngClass]="{'disabled-delete': selectionChanged !== true,'disabled-delete-remove': selectionChanged === true }" (click)="btnDelete()">
             <i class="las la-trash icon-color-01"></i> Delete
           </a>
         </div>
@@ -69,6 +69,7 @@
     [rowData]="rowData"
     (gridReady)="onGridReady($event)"
     (selectionChanged)="onSelectionChanged($event)"
+    (cellClicked)="onCellClicked($event)"
   ></ag-grid-angular>
   </div>
 </div>

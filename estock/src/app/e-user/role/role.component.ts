@@ -17,6 +17,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Role } from 'src/app/e-share/data/role';
 import { DataService } from 'src/app/e-share/service/data.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-role',
@@ -25,7 +26,7 @@ import { DataService } from 'src/app/e-share/service/data.service';
 })
 export class RoleComponent implements OnInit {
 
-  disabled = true;
+  selectionChanged = false;
 
   private gridApi!: GridApi;
 
@@ -34,8 +35,8 @@ export class RoleComponent implements OnInit {
       headerName: '#',
       field: 'id',
       minWidth: 40,
-      checkboxSelection: checkboxSelection,
-      headerCheckboxSelection: headerCheckboxSelection,
+      checkboxSelection: this.checkboxSelection,
+      headerCheckboxSelection: this.headerCheckboxSelection,
     },
     {
       headerName: 'Role',
@@ -92,11 +93,25 @@ export class RoleComponent implements OnInit {
   public tooltipShowDelay = 0;
   public tooltipHideDelay = 2000;
 
+//   gridOptions = {
+//     columnDefs: this.columnDefs,
+//     rowData: null,
+//     rowSelection: 'multiple',
+//     groupSelectsChildren: true,
+//     suppressRowClickSelection: true,
+//     autoGroupColumnDef: {headerName: "Athlete", field: "role", width: 200,
+//         cellRenderer:'agGroupCellRenderer',
+//         cellRendererParams: {
+//             checkbox: true
+//         }}
+// };
 
   userRoleAuthorityDetailResponse: UserRoleAuthorityDetailResponse[] = [];
   selectedUserRoleAuthorityDetailResponse!: UserRoleAuthorityDetailResponse;
 
   userRoleAuthorityDetail: UserRoleAuthorityDetail[] = [];
+  itemSelectedGride: any;
+
   constructor(
     private dataService: DataService,
     private titleService: Title,
@@ -116,6 +131,7 @@ export class RoleComponent implements OnInit {
     this.rowData = stockDatas;
     this.httpService.Get('/api/user-role-authority-detail/index').then(response=> {
       this.userRoleAuthorityDetailResponse = response;
+
       if(this.userRoleAuthorityDetailResponse.length > 0) {
         this.userRoleAuthorityDetailResponse.forEach((element,index )=> {
           this.userRoleAuthorityDetail.push(
@@ -129,9 +145,9 @@ export class RoleComponent implements OnInit {
           if(element.authorities && element.authorities.length > 0) {
             element.authorities.forEach((elem,i) => {
               if(i === 0) {
-                this.userRoleAuthorityDetail[index].authorizationDisply += elem.authorizationCode;
+                this.userRoleAuthorityDetail[index].authorizationDisply += elem.desc;
               } else {
-                this.userRoleAuthorityDetail[index].authorizationDisply += ","+elem.authorizationCode;
+                this.userRoleAuthorityDetail[index].authorizationDisply += ","+elem.desc;
               }
             });
           }
@@ -150,55 +166,70 @@ export class RoleComponent implements OnInit {
   onSelectionChanged(event: any) {
     const selectedRows = this.gridApi.getSelectedRows();
     if(selectedRows.length === 0) {
-      this.disabled = true;
+      this.selectionChanged = false;
+      this.selectedUserRoleAuthorityDetailResponse = {} as UserRoleAuthorityDetailResponse;
     } else {
-      this.disabled = false;
-      const itemSelectedGride = selectedRows[0];
-
+      this.selectionChanged = true;
+      this.itemSelectedGride = selectedRows[0];
       if (this.userRoleAuthorityDetailResponse.length > 0) {
         this.userRoleAuthorityDetailResponse.forEach(element => {
-          if(itemSelectedGride.id === element.id) {
+          if(this.itemSelectedGride.id === element.id) {
             this.selectedUserRoleAuthorityDetailResponse = element;
           }
         });
       }
     }
-
-    console.log(this.selectedUserRoleAuthorityDetailResponse);
-
     // (document.querySelector('#selectedRows') as any).innerHTML =
     //   selectedRows.length === 1 ? selectedRows[0].athlete : '';
   }
 
+  onCellClicked(event: any) {
+    if(this.selectionChanged === true) {
+        this.gridApi.forEachNode(function (node) {
+          node.setSelected(node.data === undefined);
+        });
+    }
+  }
+
   btnNew() {
+
     this.router.navigate(['/user/role/add']);
   }
 
   btnEdit() {
-    if(this.selectedUserRoleAuthorityDetailResponse.id > 0) {
+    console.log(this.selectedUserRoleAuthorityDetailResponse);
+
+    if(this.selectionChanged === true && this.selectedUserRoleAuthorityDetailResponse.id > 0) {
       Utils.setSecureStorage(LOCAL_STORAGE.Edit_Role, this.selectedUserRoleAuthorityDetailResponse);
       this.router.navigate(['/user/role/edit']);
     }
 
   }
   btnDelete() {
-    if(this.disabled === false) {
+    if(this.selectionChanged === true) {
       alert(JSON.stringify(this.selectedUserRoleAuthorityDetailResponse));
     }
   }
 
+  checkboxSelection(params: CheckboxSelectionCallbackParams) {
+    return params.columnApi.getRowGroupColumns().length === 0;
+  }
+  headerCheckboxSelection(params: HeaderCheckboxSelectionCallbackParams) {
+    return params.columnApi.getRowGroupColumns().length === 0;
+  }
+
 }
 
-var checkboxSelection = function (params: CheckboxSelectionCallbackParams) {
-  // we put checkbox on the name if we are not doing grouping
-  return params.columnApi.getRowGroupColumns().length === 0;
-};
-var headerCheckboxSelection = function (
-  params: HeaderCheckboxSelectionCallbackParams
-) {
-  // we put checkbox on the name if we are not doing grouping
-  return params.columnApi.getRowGroupColumns().length === 0;
-};
+// var checkboxSelection = function (params: CheckboxSelectionCallbackParams) {
+//   // we put checkbox on the name if we are not doing grouping
+//   return params.columnApi.getRowGroupColumns().length === 0;
+// };
+// var headerCheckboxSelection = function (
+//   params: HeaderCheckboxSelectionCallbackParams
+// ) {
+//   // we put checkbox on the name if we are not doing grouping
+//   return params.columnApi.getRowGroupColumns().length === 0;
+// };
 export interface Data {
   id: number;
   warehouse: string;

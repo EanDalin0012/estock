@@ -13,7 +13,7 @@
 
         <!-- Rolling File Appender -->
         <RollingFile name="FileAppender" fileName="logs/log4j2-demo.log"
-                     filePattern="logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
+                     filePattern="logs/log4j2-demo-%d{yyyy-MM-dd hh}.log">
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
             </PatternLayout>

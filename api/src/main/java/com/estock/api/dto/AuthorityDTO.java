@@ -8,4 +8,5 @@ import lombok.*;
 public class AuthorityDTO {
     private int id;
     private String authorizationCode;
+    private String desc;
 }

@@ -15,6 +15,7 @@
     <resultMap type="AuthorityDTO" id="authority">
         <id property="id" column="authority_id"/>
         <result property="authorizationCode" column="authority_code"/>
+        <result property="desc" column="authority_desc"/>
     </resultMap>
 
     <select id="inquiry" resultMap="userRoleAuthorityDetailDTO">
@@ -28,9 +29,10 @@
 
              , auth."id" as "authority_id"
              , auth.name as "authority_code"
+             , auth."desc" as "authority_desc"
         FROM role_authority role_auth
-                 RIGHT JOIN authority auth on auth."id" = role_auth.authority_id
-                 RIGHT JOIN user_role us_role on us_role."id" = role_auth.role_id
+        RIGHT JOIN authority auth on auth."id" = role_auth.authority_id
+        RIGHT JOIN user_role us_role on us_role."id" = role_auth.role_id
         WHERE us_role.status = #{status}
         ORDER BY us_role."id" ASC;
     </select>
