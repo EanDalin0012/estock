@@ -17,8 +17,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import { Role } from 'src/app/e-share/data/role';
 import { DataService } from 'src/app/e-share/service/data.service';
-import { data } from 'jquery';
-
+declare const $: any;
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
@@ -221,6 +220,7 @@ export class RoleComponent implements OnInit {
   }
   btnDelete() {
     if(this.selectionChanged === true) {
+      $("#add_movie_type").modal("show");
       alert(JSON.stringify(this.selectedUserRoleAuthorityDetailResponse));
     }
   }

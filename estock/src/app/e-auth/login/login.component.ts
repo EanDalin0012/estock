@@ -8,7 +8,7 @@ import { LOCAL_STORAGE } from './../../e-share/constants/common.const';
 import { Utils } from 'src/app/e-share/util/utils.static';
 import { Component, ElementRef, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, AbstractControl, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { AuthentcatiionService } from 'src/app/e-share/service/authentcatiion.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   authorities: Authority[] = [];
 
   isFirstLogin = false;
+  isRequestLogin = false;
 
   constructor(
     private authentcatiionService: AuthentcatiionService,
@@ -57,6 +58,7 @@ export class LoginComponent implements OnInit {
       }
       return;
     } else {
+      this.isRequestLogin = true;
       this.authentcatiionService.login(this.credentails).then(resp => {
         console.log('resp', resp);
         this.tokenInfo = resp;

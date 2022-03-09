@@ -82,14 +82,14 @@ export class AuthentcatiionService {
 
       const date = moment().format('YYYYMMDD hh:mm:ss');
       const uri = this.baseUrl + '/api/load-user/index?lang=' + lang;
-      $('div.loading').removeClass('none');
-      $('body').removeClass('loaded');
+      // $('div.loading').removeClass('none');
+      // $('body').removeClass('loaded');
 
       this.httpClient.post(uri, JSON.stringify(loaduser), {
         headers: new HttpHeaders(httpOptionsObj)
       }).subscribe( res => {
-          $('body').addClass('loaded');
-          $('div.loading').addClass('none');
+          // $('body').addClass('loaded');
+          // $('div.loading').addClass('none');
           const responseData = res as any;
           console.log('responseData', responseData);
 
@@ -101,8 +101,8 @@ export class AuthentcatiionService {
             alert(responseData.resultMessage);
           }
       }, error => {
-        $('body').addClass('loaded');
-        $('div.loading').addClass('none');
+        // $('body').addClass('loaded');
+        // $('div.loading').addClass('none');
         console.log('error', error);
       });
     });
@@ -191,8 +191,8 @@ export class AuthentcatiionService {
           }
 
         },error => {
-          $('body').addClass('loaded');
-          $('div.loading').addClass('none');
+          // $('body').addClass('loaded');
+          // $('div.loading').addClass('none');
           console.log('error', error);
         });
     });

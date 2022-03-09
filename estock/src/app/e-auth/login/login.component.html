@@ -53,14 +53,23 @@
                     </div>
                   </div>
 
-                  <div class="form-group text-center">
-                    <button class="btn btn-primary account-btn btn-login" type="button" (click)="btnLogin(form)">
-                      <!-- <span class = "scroll-load-vd login" *ngIf = "submitted && password && userName">
-                        <img src="assets/img/loading.gif" alt="" style = "width: 9%;height: 100%;">
-                      </span> -->
-                      <span>Login</span>
-                      <i class="fa fa-sign-in i-con" aria-hidden="true"></i>
-                    </button>
+                  <div class="row col-md-12 ">
+                    <div class="task-assign form-group">
+
+                      <a  (click)="btnLogin(form)" class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" style="width: 100%;background: linear-gradient(to right, #f43b48 0%, #453a94 100%);">
+                        <ng-container *ngIf="isRequestLogin === true">
+                          <div class="loadersmall" style="margin: 0 auto;width: 25px;height: 25px;"></div>
+                        </ng-container>
+
+                        <ng-container *ngIf="isRequestLogin === false">
+                           <span>Login</span>
+                          <i class="las la-sign-in-alt"></i>
+                          <!-- <i class="las la-save" style="color: #183153;margin-right: 5px;"></i> -->
+
+                        </ng-container>
+
+                      </a>
+                    </div>
                   </div>
                 </form>
                 <!-- /Account Form -->
