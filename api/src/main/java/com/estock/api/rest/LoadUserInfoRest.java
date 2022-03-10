@@ -4,7 +4,6 @@ import com.estock.api.common.constant.CommonConstant;
 import com.estock.api.common.exception.CustomException;
 import com.estock.api.dto.LoadUserInfoDTO;
 import com.estock.api.service.LoadUserInfoService;
-import com.estock.api.service.constant.ServiceConstant;
 import com.estock.api.vo.ResponseVO;
 import com.estock.api.vo.request.LoadUserRequestVO;
 import lombok.extern.slf4j.Slf4j;

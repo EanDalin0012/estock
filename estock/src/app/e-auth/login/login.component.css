@@ -1,0 +1,38 @@
+.gl-spinner.gl-spinner-md {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 3px;
+  transform-origin: 50% 50% calc((1.5rem / 2) + 3px);
+  animation: spin 1s linear infinite;
+}
+
+.gl-spinner {
+  animation-name: spin;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  transform-origin: 50% 50%;
+}
+
+.gl-spinner {
+  position: relative;
+  display: inline-flex;
+  border-radius: 50%;
+  border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  animation-name: gl-spinner-rotate;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  width: 1rem;
+  height: 1rem;
+  border-width: 2px;
+  transform-origin: 50% 50% calc((1rem / 2) + 2px);
+  /* border-color: rgba(82,82,82,0.25); */
+  border-color: rgb(247 247 247);
+  border-top-color: #525252;
+}
