@@ -30,6 +30,8 @@ export class RoleComponent implements OnInit {
 
   private gridApi!: GridApi;
 
+  roleName: string = '';
+
   public columnDefs: ColDef[] = [
     {
       headerName: '#',
@@ -128,7 +130,10 @@ export class RoleComponent implements OnInit {
 
   onGridReady(params: GridReadyEvent) {
     this.gridApi = params.api;
-    this.rowData = stockDatas;
+    this.inquiry('inquiry');
+  }
+
+  inquiry(note: string) {
     this.httpService.Get('/api/user-role-authority-detail/index').then(response=> {
       this.userRoleAuthorityDetailResponse = response;
 
@@ -152,8 +157,12 @@ export class RoleComponent implements OnInit {
             });
           }
         });
-        // console.log('userRoleAuthorityDetail',this.userRoleAuthorityDetail);
-        this.rowData = this.userRoleAuthorityDetail;
+        if(note === 'delete') {
+          this.rowData = this.userRoleAuthorityDetail;
+          const selectedData = this.gridApi.getSelectedRows();
+        } else {
+          this.rowData = this.userRoleAuthorityDetail;
+        }
 
       }
     });
@@ -205,13 +214,10 @@ export class RoleComponent implements OnInit {
   }
 
   btnNew() {
-
     this.router.navigate(['/user/role/add']);
   }
 
   btnEdit() {
-    console.log(this.selectedUserRoleAuthorityDetailResponse);
-
     if(this.selectionChanged === true && this.selectedUserRoleAuthorityDetailResponse.id > 0) {
       Utils.setSecureStorage(LOCAL_STORAGE.Edit_Role, this.selectedUserRoleAuthorityDetailResponse);
       this.router.navigate(['/user/role/edit']);
@@ -220,8 +226,8 @@ export class RoleComponent implements OnInit {
   }
   btnDelete() {
     if(this.selectionChanged === true) {
+      this.roleName = this.selectedUserRoleAuthorityDetailResponse.role;
       $("#add_movie_type").modal("show");
-      alert(JSON.stringify(this.selectedUserRoleAuthorityDetailResponse));
     }
   }
 
@@ -230,6 +236,19 @@ export class RoleComponent implements OnInit {
   }
   headerCheckboxSelection(params: HeaderCheckboxSelectionCallbackParams) {
     return params.columnApi.getRowGroupColumns().length === 0;
+  }
+
+  btnYes() {
+    if(this.selectedUserRoleAuthorityDetailResponse) {
+      this.httpService.Post('/api/user-role/delete', {id: this.selectedUserRoleAuthorityDetailResponse.id}).then(reponse => {
+        if(reponse === true) {
+          this.inquiry('delete');
+          $("#add_movie_type").modal("hide");
+          // this.gridApi.removeItems();
+          this.gridApi.applyTransaction({ remove: this.itemSelectedGride })!;
+        }
+      });
+    }
   }
 
 }

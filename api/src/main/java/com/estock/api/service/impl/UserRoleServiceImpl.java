@@ -68,7 +68,11 @@ public class UserRoleServiceImpl implements UserRoleService {
             }
             log.info("------------ List Of User Role Authority DTO Data -> {} "+Utility.toJSON(userRoleAuthorities));
             int saveUserRole = this.userRoleDAO.addUserRole(userRoleDTO);
-            int saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
+            int saveUserRoleAuthority = 0 ;
+            if (userRoleAuthorities.size() > 0 ) {
+                saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
+            }
+
 
             log.info("------------ Save User Role Data -> {} "+saveUserRole);
             log.info("------------ Save User Role Authority Data -> {} "+saveUserRoleAuthority);
@@ -113,7 +117,10 @@ public class UserRoleServiceImpl implements UserRoleService {
             log.info("------------ List Of User Role Authority DTO Data -> {} "+Utility.toJSON(userRoleAuthorities));
             int editUserRole = this.userRoleDAO.editUserRole(userRoleDTO);
             int deleteUserRoleAuthority = this.userRoleAuthorityDAO.deleteUserRoleAuthority(userRoleDTO.getId());
-            int saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
+            int saveUserRoleAuthority = 0 ;
+            if (userRoleAuthorities.size() > 0 ) {
+                saveUserRoleAuthority = this.userRoleAuthorityDAO.addUserRoleAuthority(userRoleAuthorities);
+            }
             if (editUserRole > 0 || (editUserRole > 0 && length > 0 && saveUserRoleAuthority> 0)) {
                 this.transactionManager.commit(transactionStatus);
                 return 1;
@@ -122,6 +129,24 @@ public class UserRoleServiceImpl implements UserRoleService {
             e.printStackTrace();
             this.transactionManager.rollback(transactionStatus);
             throw new CustomException(CommonConstant.GENERAL_FAIL_EXCEPTION.name(), CommonConstant.GENERAL_FAIL_EXCEPTION.getDesc());
+        }
+        return 0;
+    }
+
+    @Override
+    public int delete(int roleId) throws CustomException {
+        try {
+            if (roleId <= 0) {
+                throw new CustomException(UserRoleConstant.INVALID_ROLE_ID.name(), UserRoleConstant.INVALID_ROLE_ID.getDesc());
+            }
+            int delete = this.userRoleAuthorityDAO.deleteUserRoleAuthority(roleId);
+            int deleteUserRole = this.userRoleDAO.deleteUserRole(roleId);
+            if (deleteUserRole > 0) {
+                return 1;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(CommonConstant.GENERAL_FAIL_EXCEPTION.name(), e.getMessage());
         }
         return 0;
     }

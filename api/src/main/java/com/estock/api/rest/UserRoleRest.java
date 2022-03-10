@@ -4,12 +4,13 @@ import com.estock.api.common.constant.CommonConstant;
 import com.estock.api.common.exception.CustomException;
 import com.estock.api.dto.UserRoleDTO;
 import com.estock.api.service.UserRoleService;
+import com.estock.api.util.Utility;
 import com.estock.api.vo.ResponseVO;
+import com.estock.api.vo.request.DeleteByIDRequestVO;
 import com.estock.api.vo.request.UserRoleRequestVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 @RestController
@@ -21,10 +22,13 @@ public class UserRoleRest {
 
     @PostMapping(value = "/save")
     public ResponseVO<Boolean> save(@RequestBody UserRoleRequestVO userRoleRequest, @RequestParam("userId") int userId) {
+        log.info("-----------Start UserRoleRest Save ----------");
         ResponseVO<Boolean> response = new ResponseVO<>();
         try {
             int save = this.userRoleService.save(userRoleRequest, userId);
-            return getBooleanResponseVO(response, save);
+            ResponseVO<Boolean> booleanResponseVO =  getBooleanResponseVO(response, save);
+            log.info("Response Save User Role To Client <- {} "+ Utility.toJSON(booleanResponseVO));
+            return booleanResponseVO;
         }catch (Exception e) {
             e.printStackTrace();
             response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());
@@ -39,10 +43,34 @@ public class UserRoleRest {
 
     @PostMapping(value = "/edit")
     public ResponseVO<Boolean> edit(@RequestBody UserRoleRequestVO userRoleRequest, @RequestParam("userId") int userId) {
+        log.info("-----------Start UserRoleRest Edit ----------");
         ResponseVO<Boolean> response = new ResponseVO<>();
         try {
             int edit = this.userRoleService.edit(userRoleRequest, userId);
-            return getBooleanResponseVO(response, edit);
+            ResponseVO<Boolean> booleanResponseVO =  getBooleanResponseVO(response, edit);
+            log.info("Response Edit User Role To Client <- {} "+ Utility.toJSON(booleanResponseVO));
+            return booleanResponseVO;
+        }catch (Exception e) {
+            e.printStackTrace();
+            response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());
+            response.setResultMessage(e.getMessage());
+        } catch (CustomException e) {
+            e.printStackTrace();
+            response.setResultCode(e.getMessageCode());
+            response.setResultMessage(e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping(value = "/delete")
+    public ResponseVO<Boolean> delete(@RequestBody DeleteByIDRequestVO deleteByIDRequestVO, @RequestParam("userId") int userId) {
+        log.info("-----------Start UserRoleRest Delete ----------");
+        ResponseVO<Boolean> response = new ResponseVO<>();
+        try {
+            int delete = this.userRoleService.delete(deleteByIDRequestVO.getId());
+            ResponseVO<Boolean> booleanResponseVO =  getBooleanResponseVO(response, delete);
+            log.info("Response Delete User Role To Client <- {} "+ Utility.toJSON(booleanResponseVO));
+            return booleanResponseVO;
         }catch (Exception e) {
             e.printStackTrace();
             response.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());

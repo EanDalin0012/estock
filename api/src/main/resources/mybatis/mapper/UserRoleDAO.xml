@@ -46,6 +46,11 @@
         WHERE id        = #{id};
     </update>
 
+    <delete id="deleteUserRole">
+        DELETE FROM user_role
+        WHERE id= #{roleId};
+    </delete>
+
     <select id="inquiryUserRole" resultMap="userRoleDTO">
         SELECT
             id

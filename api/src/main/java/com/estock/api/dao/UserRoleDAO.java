@@ -9,6 +9,7 @@ import java.util.Collection;
 public interface UserRoleDAO {
     int addUserRole(UserRoleDTO roleDTO);
     int editUserRole(UserRoleDTO roleDTO);
+    int deleteUserRole(int roleId);
     Collection<UserRoleDTO> inquiryUserRole(String Status);
     int count();
 }

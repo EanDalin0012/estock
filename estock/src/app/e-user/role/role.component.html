@@ -88,16 +88,16 @@
           <div class="modal-body">
 
 
-            <h5 class="modal-title" style="text-align: center;">Do you want to delete role ?</h5>
+            <h5 class="modal-title" style="text-align: center;">Do you want to delete role {{roleName}} ?</h5>
             <div class="submit-section">
-              <button class="btn btn-sm btn-primary float-right" style="margin-left: 15px;">
+              <button class="btn btn-sm btn-primary float-right" data-dismiss="modal" aria-label="Close" style="margin-left: 15px;">
                 <i class="las la-times-circle"></i>
                No
               </button>
             </div>
 
             <div class="submit-section">
-              <button class="btn btn-sm btn-primary float-right" style="background-color:#0ca940">
+              <button class="btn btn-sm btn-primary float-right" style="background-color:#0ca940" (click)="btnYes()">
                 <i class="las la-check-circle &#xf058;"></i>
                 Yes
               </button>
