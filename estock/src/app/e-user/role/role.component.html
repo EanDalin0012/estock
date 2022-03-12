@@ -43,10 +43,16 @@
           </a>
         </div>
 
+        <!-- <div class="task-assign form-group">
+          <a class="task-complete-btn task-completed float-right" href="javascript:void(0);" (click)="onBtnUpdate()" style="margin-left: 15px;">
+            <i class="lar la-file-excel" style="color: #183153;margin-right: 5px;"></i> Update Data
+          </a>
+        </div> -->
+
         <div style="width: 300px;" class="float-right">
-          <input type="text" class="form-control form-control-sm"  placeholder="{{'common.label.searchNameThere' | translate}} ...">
+          <input type="text" style="height: 34px;" [ngClass]="search? 'active-input' : ''" class="form-control" [(ngModel)]="search" (ngModelChange)="onChangeSearch($event)" placeholder="Search role here ...">
       </div>
-        <label class="col-form-label float-right" style="width: 80px;">{{'common.label.search' | translate}} :</label>
+        <!-- <label class="col-form-label float-right" style="width: 80px;">{{'common.label.search' | translate}} :</label> -->
       </div>
     </div>
   </div>

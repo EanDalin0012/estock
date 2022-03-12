@@ -58,23 +58,21 @@
 
                       <a  (click)="btnLogin(form)" class="task-complete-btn task-completed float-right btn-save" href="javascript:void(0);" style="width: 100%;background: linear-gradient(to right, #f43b48 0%, #453a94 100%);">
 
-                        <div class="square s24 h-auto d-flex-center gl-mr-3">
-                          <div class="mr-widget-icon gl-display-inline-flex">
-                            <div class="gl-spinner-container mr-loading-icon gl-display-inline-flex">
-                              <span aria-label="Loading" class="align-text-bottom gl-spinner gl-spinner-dark gl-spinner-md"></span>
+                        <ng-container *ngIf="isRequestLogin === true">
+                          <div class="square s24 h-auto d-flex-center gl-mr-3">
+                            <div class="mr-widget-icon gl-display-inline-flex">
+                              <div class="gl-spinner-container mr-loading-icon gl-display-inline-flex">
+                                <span aria-label="Loading" class="align-text-bottom gl-spinner gl-spinner-dark gl-spinner-md"></span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-
-                        <!-- <ng-container *ngIf="isRequestLogin === true">
-                          <div class="loadersmall" style="margin: 0 auto;width: 25px;height: 25px;"></div>
                         </ng-container>
 
                         <ng-container *ngIf="isRequestLogin === false">
                            <span>Login</span>
                           <i class="las la-sign-in-alt"></i>
 
-                        </ng-container> -->
+                        </ng-container>
 
                       </a>
                     </div>

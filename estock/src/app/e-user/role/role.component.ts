@@ -11,7 +11,8 @@ import {
   ColDef,
   GridReadyEvent,
   HeaderCheckboxSelectionCallbackParams,
-  GridApi
+  GridApi,
+  RowNodeTransaction
 } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -113,7 +114,7 @@ export class RoleComponent implements OnInit {
 
   userRoleAuthorityDetail: UserRoleAuthorityDetail[] = [];
   itemSelectedGride: any;
-
+  search: string = '';
   constructor(
     private dataService: DataService,
     private titleService: Title,
@@ -132,6 +133,7 @@ export class RoleComponent implements OnInit {
     this.gridApi = params.api;
     this.inquiry('inquiry');
   }
+
 
   inquiry(note: string) {
     this.httpService.Get('/api/user-role-authority-detail/index').then(response=> {
@@ -157,13 +159,7 @@ export class RoleComponent implements OnInit {
             });
           }
         });
-        if(note === 'delete') {
-          this.rowData = this.userRoleAuthorityDetail;
-          const selectedData = this.gridApi.getSelectedRows();
-        } else {
-          this.rowData = this.userRoleAuthorityDetail;
-        }
-
+        this.rowData = this.userRoleAuthorityDetail;
       }
     });
   }
@@ -174,22 +170,14 @@ export class RoleComponent implements OnInit {
 
   onSelectionChanged(event: any) {
     const selectedRows = this.gridApi.getSelectedRows();
-    console.log('selectedRows[0]', selectedRows[0]);
     if(selectedRows.length === 0) {
       this.selectionChanged = false;
       this.selectionRowChanged = false;
       this.selectedUserRoleAuthorityDetailResponse = {} as UserRoleAuthorityDetailResponse;
-      console.log('selectedRows[0]', selectedRows[0]);
-      console.log('selectedUserRoleAuthorityDetailResponse', this.selectedUserRoleAuthorityDetailResponse);
-      console.log(this.selectionRowChanged);
     } else {
       this.selectionChanged  = true;
       this.itemSelectedGride = selectedRows[0];
       this.selectionRowChanged = false;
-
-      console.log('selectedRows[0]', selectedRows[0]);
-      console.log('selectedUserRoleAuthorityDetailResponse', this.selectedUserRoleAuthorityDetailResponse);
-
       if (this.userRoleAuthorityDetailResponse.length > 0) {
         this.userRoleAuthorityDetailResponse.forEach(element => {
           if(this.itemSelectedGride.id === element.id) {
@@ -202,6 +190,23 @@ export class RoleComponent implements OnInit {
 
   }
 
+
+  onChangeSearch(event:any) {
+    let searchResult = this.userRoleAuthorityDetail.filter(data => data.role.toLowerCase().includes(event));
+    this.gridApi.setRowData(searchResult);
+
+  }
+
+  onBtnUpdate() {
+    let mData:any[] = [];
+    mData.push({
+      id: this.userRoleAuthorityDetail[0].id,
+      role: this.userRoleAuthorityDetail[0].role,
+      desc: this.userRoleAuthorityDetail[0].desc,
+      authorizationDisply: this.userRoleAuthorityDetail[0].authorizationDisply
+    });
+    this.gridApi.setRowData(mData);
+  }
   onCellClicked(event: any) {
     // console.log("onCellClicked", event.data);
     // this.itemSelectedGride  = event.data;
@@ -239,14 +244,33 @@ export class RoleComponent implements OnInit {
   }
 
   btnYes() {
+    const selectedData = this.gridApi.getSelectedRows();
     if(this.selectedUserRoleAuthorityDetailResponse) {
       this.httpService.Post('/api/user-role/delete', {id: this.selectedUserRoleAuthorityDetailResponse.id}).then(reponse => {
         if(reponse === true) {
-          this.inquiry('delete');
           $("#add_movie_type").modal("hide");
-          // this.gridApi.removeItems();
-          this.gridApi.applyTransaction({ remove: this.itemSelectedGride })!;
+          this.gridApi.applyTransaction({remove: selectedData});
+          this.roleName = '';
         }
+      });
+    }
+  }
+
+  printResult(res: RowNodeTransaction) {
+    console.log('---------------------------------------');
+    if (res.add) {
+      res.add.forEach(function (rowNode) {
+        console.log('Added Row Node', rowNode);
+      });
+    }
+    if (res.remove) {
+      res.remove.forEach(function (rowNode) {
+        console.log('Removed Row Node', rowNode);
+      });
+    }
+    if (res.update) {
+      res.update.forEach(function (rowNode) {
+        console.log('Updated Row Node', rowNode);
       });
     }
   }
