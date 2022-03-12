@@ -13,31 +13,22 @@
         <result property="dateTime" column="modify_date"/>
         <result property="userID" column="modify_by"/>
         <result property="createdBy" column="create_by"/>
-        <association property="credentials" resultMap="credentials" javaType="Collection"/>
-        <association property="userRole" resultMap="userRoleDTO" javaType="UserRoleDTO"/>
+        <association property="credentials" resultMap="credentialDetailDTO" javaType="Collection"/>
     </resultMap>
 
-    <resultMap type="CredentialDTO" id="credentials">
+    <resultMap type="CredentialDetailDTO" id="credentialDetailDTO">
         <id property="id" column="credential_id"/>
         <result property="userName" column="user_name"/>
         <result property="accountExpired" column="account_expired"/>
         <result property="accountLocked" column="account_locked"/>
         <result property="credentialsExpired" column="credentials_expired"/>
         <result property="enabled" column="enabled"/>
+        <result property="roleId" column="credential_role_id"/>
+        <result property="roleName" column="credential_role"/>
         <result property="status" column="credential_status"/>
         <result property="userID" column="credential_modify_by"/>
         <result property="dateTime" column="credential_modify_date"/>
         <result property="createdBy" column="credential_create_by"/>
-    </resultMap>
-
-    <resultMap type="UserRoleDTO" id="userRoleDTO">
-        <id property="id" column="role_id"/>
-        <result property="role" column="role_name"/>
-        <result property="status" column="role_status"/>
-        <result property="desc" column="role_desc"/>
-        <result property="userID" column="role_modify_by"/>
-        <result property="dateTime" column="role_modify_date"/>
-        <result property="createdBy" column="role_create_by"/>
     </resultMap>
 
     <resultMap type="UserInfoDTO" id="userInfoDTO">
@@ -126,7 +117,7 @@
              , us_fo.resource_id
              , (SELECT CONCAT(u.first_name,' ', u.last_name)  FROM user_info u WHERE u.id = us_fo.create_by) as "create_by"
 
-             , us.id as "credential_id"
+             ,  us.id as "credential_id"
              , us.account_expired
              , us.account_locked
              , us.credentials_expired
@@ -136,18 +127,11 @@
              , us.modify_by as "credential_modify_by"
              , us.modify_date as "credential_modify_date"
              , (SELECT CONCAT(u.first_name,' ', u.last_name)  FROM user_info u WHERE u.id = us_fo.create_by) as "credential_create_by"
-
-             , us_r."id" as "role_id"
-             , us_r."role" as "role_name"
-             , us_r.status as "role_status"
-             , us_r."desc" as "role_desc"
-             , us_r.modify_by as "role_modify_by"
-             ,us_r.modify_date as "role_modify_date"
-             , (SELECT CONCAT(u.first_name,' ', u.last_name)  FROM user_info u WHERE u.id = us_r.create_by) as "role_create_by"
+             , us.role_id as "credential_role_id"
+             , (SELECT us_role."role" FROM user_role us_role WHERE us_role.id = us.role_id) as "credential_role"
 
         FROM user_info us_fo
-         LEFT JOIN user_ us on us.user_info_id = us_fo."id"
-         INNER JOIN user_role us_r on us_r."id" = us.role_id
+        LEFT JOIN user_ us on us.user_info_id = us_fo."id"
         WHERE us_fo.status  != #{status};
     </select>
 

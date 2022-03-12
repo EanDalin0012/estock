@@ -15,4 +15,5 @@ public class CredentialDTO extends CommonDTO {
     private boolean accountLocked;
     private boolean credentialsExpired;
     private boolean enabled;
+    private int roleId;
 }

@@ -19,6 +19,5 @@ public class UserInfoDetailDTO extends CommonDTO {
     private String phone;
     private String desc;
     private int resourceID;
-    List<CredentialDTO> credentials;
-    UserRoleDTO userRole;
+    List<CredentialDetailDTO> credentials;
 }
