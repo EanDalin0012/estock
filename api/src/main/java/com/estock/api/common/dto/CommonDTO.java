@@ -10,9 +10,9 @@ import lombok.ToString;
 @ToString
 public class CommonDTO {
     private int userID;
+    private String createdBy;
     private String dateTime;
     private String status;
-
     public CommonDTO() {
         dateTime = SystemDateUtil.getLocalDate("yyyyMMdd hh:mm:ss");
     }

@@ -41,7 +41,8 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inquiry();
+    // this.inquiry();
+    this.loadAllUser();
     this.columnDefs = [
       {
         headerName: '#',
@@ -158,6 +159,13 @@ export class UserComponent implements OnInit {
     const api = '/api/user-info';
     this.hTTPService.Get(TemplateAPI.USER_INFO.URL).then(response =>{
       console.log("response", response)
+      this.rowData = response;
+    });
+  }
+
+  loadAllUser() {
+    this.hTTPService.Get('/api/user-info/index').then(response =>{
+      console.log("response index", response)
       this.rowData = response;
     });
   }

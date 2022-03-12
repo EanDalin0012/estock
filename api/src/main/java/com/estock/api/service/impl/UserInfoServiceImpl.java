@@ -1,9 +1,12 @@
 package com.estock.api.service.impl;
 
+import com.estock.api.common.constant.CommonConstant;
+import com.estock.api.common.constant.StatusCode;
 import com.estock.api.common.exception.CustomException;
 import com.estock.api.dao.UserInfoDAO;
 import com.estock.api.dto.UserDTO;
 import com.estock.api.dto.UserInfoDTO;
+import com.estock.api.dto.UserInfoDetailDTO;
 import com.estock.api.service.AuthenticationService;
 import com.estock.api.service.UserInfoService;
 import com.estock.api.service.constant.UserInfoConstant;
@@ -11,6 +14,8 @@ import com.estock.api.util.Utility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -54,6 +59,19 @@ public class UserInfoServiceImpl  implements UserInfoService {
         }catch (Exception e) {
             e.printStackTrace();
             throw e;
+        }
+    }
+
+    @Override
+    public List<UserInfoDetailDTO> inquiry() throws CustomException {
+        log.info("-------- Start Service Inquiry User Info --------");
+        try {
+            List<UserInfoDetailDTO> lists = this.userInfoDAO.inquiry(StatusCode.DELETED.name());
+            log.info("--------- User Info List <-- {} "+Utility.toJSON(lists));
+            return lists;
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException(CommonConstant.GENERAL_FAIL_EXCEPTION.name(), e.getMessage());
         }
     }
 }

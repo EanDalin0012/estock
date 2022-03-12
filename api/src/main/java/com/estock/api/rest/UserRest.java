@@ -1,8 +1,10 @@
 package com.estock.api.rest;
 
+import com.estock.api.common.constant.CommonConstant;
 import com.estock.api.common.constant.ResponseCode;
 import com.estock.api.common.exception.CustomException;
 import com.estock.api.dto.UserInfoDTO;
+import com.estock.api.dto.UserInfoDetailDTO;
 import com.estock.api.service.UserInfoService;
 import com.estock.api.util.Utility;
 import com.estock.api.vo.ResponseVO;
@@ -83,5 +85,26 @@ public class UserRest {
         userInfoDTOResponseVO.setResultMessage(ResponseCode.SUCCESS.name());
         return userInfoDTOResponseVO;
     }
+
+    @GetMapping(value = "/index")
+    public ResponseVO<List<UserInfoDetailDTO>> inquiry() {
+        log.info("-------- Start API Inquiry User Info -------");
+        ResponseVO<List<UserInfoDetailDTO>> listResponse = new ResponseVO<>();
+        try{
+            List<UserInfoDetailDTO> userInfoDTOS = this.userInfoService.inquiry();
+            listResponse.setResultMessage(ResponseCode.SUCCESS.name());
+            listResponse.setResultMessage(ResponseCode.SUCCESS.name());
+            listResponse.setBody(userInfoDTOS);
+        }catch (Exception e) {
+            e.printStackTrace();
+            listResponse.setResultCode(CommonConstant.GENERAL_FAIL_EXCEPTION.name());
+            listResponse.setResultMessage(CommonConstant.GENERAL_FAIL_EXCEPTION.getDesc());
+        } catch (CustomException e) {
+            e.printStackTrace();
+            listResponse.setResultCode(e.getMessageCode());
+            listResponse.setResultMessage(e.getMessage());
+        }
+        return listResponse;
+    };
 
 }

@@ -2,6 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.estock.api.dao.UserInfoDAO">
 
+    <resultMap type="UserInfoDetailDTO" id="userInfoDetailDTO">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="dateBirth" column="date_birth"/>
+        <result property="gender" column="gender"/>
+        <result property="phone" column="desc"/>
+        <result property="desc" column="desc"/>
+        <result property="dateTime" column="modify_date"/>
+        <result property="userID" column="modify_by"/>
+        <result property="createdBy" column="create_by"/>
+        <association property="credentials" resultMap="credentials" javaType="Collection"/>
+        <association property="userRole" resultMap="userRoleDTO" javaType="UserRoleDTO"/>
+    </resultMap>
+
+    <resultMap type="CredentialDTO" id="credentials">
+        <id property="id" column="credential_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="accountExpired" column="account_expired"/>
+        <result property="accountLocked" column="account_locked"/>
+        <result property="credentialsExpired" column="credentials_expired"/>
+        <result property="enabled" column="enabled"/>
+        <result property="status" column="credential_status"/>
+        <result property="userID" column="credential_modify_by"/>
+        <result property="dateTime" column="credential_modify_date"/>
+        <result property="createdBy" column="credential_create_by"/>
+    </resultMap>
+
+    <resultMap type="UserRoleDTO" id="userRoleDTO">
+        <id property="id" column="role_id"/>
+        <result property="role" column="role_name"/>
+        <result property="status" column="role_status"/>
+        <result property="desc" column="role_desc"/>
+        <result property="userID" column="role_modify_by"/>
+        <result property="dateTime" column="role_modify_date"/>
+        <result property="createdBy" column="role_create_by"/>
+    </resultMap>
+
     <resultMap type="UserInfoDTO" id="userInfoDTO">
         <id property="id" column="id"/>
         <result property="firstName" column="first_name"/>
@@ -71,6 +109,46 @@
                  INNER JOIN user_role u_role on u_role."id" = u.role_id
         WHERE user_name = 'admin'
         ORDER BY authority_id ASC;
+    </select>
+
+    <select id="inquiry" resultMap="userInfoDetailDTO">
+        SELECT
+            us_fo.id
+             , us_fo.first_name
+             , us_fo.last_name
+             , us_fo.gender
+             , us_fo.date_birth
+             , us_fo.phone
+             , us_fo."desc"
+             , us_fo.status
+             , us_fo.modify_date
+             , us_fo.modify_by
+             , us_fo.resource_id
+             , (SELECT CONCAT(u.first_name,' ', u.last_name)  FROM user_info u WHERE u.id = us_fo.create_by) as "create_by"
+
+             , us.id as "credential_id"
+             , us.account_expired
+             , us.account_locked
+             , us.credentials_expired
+             , us.enabled
+             , us.user_name
+             , us.status as "credential_status"
+             , us.modify_by as "credential_modify_by"
+             , us.modify_date as "credential_modify_date"
+             , (SELECT CONCAT(u.first_name,' ', u.last_name)  FROM user_info u WHERE u.id = us_fo.create_by) as "credential_create_by"
+
+             , us_r."id" as "role_id"
+             , us_r."role" as "role_name"
+             , us_r.status as "role_status"
+             , us_r."desc" as "role_desc"
+             , us_r.modify_by as "role_modify_by"
+             ,us_r.modify_date as "role_modify_date"
+             , (SELECT CONCAT(u.first_name,' ', u.last_name)  FROM user_info u WHERE u.id = us_r.create_by) as "role_create_by"
+
+        FROM user_info us_fo
+         LEFT JOIN user_ us on us.user_info_id = us_fo."id"
+         INNER JOIN user_role us_r on us_r."id" = us.role_id
+        WHERE us_fo.status  != #{status};
     </select>
 
 </mapper>
